@@ -5,20 +5,18 @@
  */
 package miinaharavaz.miinaharava.z;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author ezaalto
  */
-public class MainTest {
+public class MiinojenluojaTest {
     
-    public MainTest() {
+    public MiinojenluojaTest() {
     }
     
     @BeforeClass
@@ -28,9 +26,6 @@ public class MainTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    /**
-     * Test of main method, of class Main.
-     */
     
     @Test
     public void amIReal() {

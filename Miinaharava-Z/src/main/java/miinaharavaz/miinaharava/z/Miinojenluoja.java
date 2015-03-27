@@ -5,14 +5,10 @@
  */
 package miinaharavaz.miinaharava.z;
 
-
 /**
  *
  * @author ezaalto
  */
-public class Main {
-   
-    public static void main(String[] args) {
-        Lauta lauta1 = new Lauta();
-    }
+public class Miinojenluoja {
+    
 }
