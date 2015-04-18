@@ -30,7 +30,7 @@ public class Miinaluokka {
         int w = 0;
         
         while (w <= 40) {
-            int miina = satunnainenLukuValilta(1, 256);
+            int miina = satunnainenLukuValilta(0, 255);
             if (!(lista.get(miina).equals(ensimmainen))) {
                 this.miinat.put(lista.get(miina), true);
                 w++;   
