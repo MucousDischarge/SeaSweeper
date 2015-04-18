@@ -41,3 +41,6 @@ Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei 
 
 ###19.04.2015
 Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella numerolla 1-256, vaikka sen tietenkin pitäisi olla 0-255. 
+
+###19.04.2015
+Korjasin yhden toisen exceptionin, joka johtui -1, -2, 16 ja 17 -arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.

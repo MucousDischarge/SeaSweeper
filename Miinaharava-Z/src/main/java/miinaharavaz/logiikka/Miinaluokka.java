@@ -44,7 +44,7 @@ public class Miinaluokka {
         
         for (int a = 0; a < 16; a++) {
             for (int b = 0; b < 16; b++) {
-                nykyinen = "" + a + "-" + b;
+                nykyinen = "" + a + ":" + b;
                 this.miinat.put(nykyinen, false);
                 this.lista.add(nykyinen);
                 nykyinen = "";
@@ -53,7 +53,11 @@ public class Miinaluokka {
     }
     
     public boolean onkoMiina(String ruutu) {
-        if (this.miinat.get(ruutu)) {
+        System.out.println(ruutu);
+        String[] osat = ruutu.split(":");
+        if (!(Integer.parseInt(osat[0]) <= 15 && Integer.parseInt(osat[0]) >= 0 && Integer.parseInt(osat[1]) <= 15 && Integer.parseInt(osat[1]) >= 0)) {
+            return false;
+        } else if (this.miinat.get(ruutu)) {
             return true;
         }
         

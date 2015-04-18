@@ -38,3 +38,6 @@ Lisäksi unohdin mainita ajankäytön: 4 tuntia.
 
 ###19.04.2015
 Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei muutaman minuutin... Nyt ongelmana enää lähinnä tuo ärsyttävä exception, joka tapahtuu välillä.
+
+###19.04.2015
+Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella numerolla 1-256, vaikka sen tietenkin pitäisi olla 0-255. 

@@ -76,7 +76,7 @@ public class Lauta extends JFrame {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < k; b++) {
                     if (e.getSource() == napisto[a][b]) {
-                        String ruutu = "" + a + "-" + b;
+                        String ruutu = "" + a + ":" + b;
                         if (!(onkoEnsimmainenKlikkaus)) {
                             onkoEnsimmainenKlikkaus = true;
                             miinaluokka.luoMiinat(ruutu);
@@ -100,7 +100,7 @@ public class Lauta extends JFrame {
         public void Rajahti() {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < k; y++) {
-                    String miinakohta = "" + x + "-" + y;
+                    String miinakohta = "" + x + ":" + y;
                     if (miinaluokka.onkoMiina(miinakohta)) {
                         napisto[x][y].setIcon(miina);
                     }
@@ -110,90 +110,93 @@ public class Lauta extends JFrame {
 
         public void Raivaaja(int a, int b, boolean liianKaukainen) {
             int luku = 0;
-            if (miinaluokka.onkoMiina("" + (a) + "-" + (b - 1))) {
+            if (miinaluokka.onkoMiina("" + a + ":" + (b - 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja(a, (b - 1), true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a) + "-" + (b + 1))) {
+            if (miinaluokka.onkoMiina("" + a + ":" + (b + 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja(a, (b + 1), true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b))) {
+            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + b)) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), b, true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b))) {
+            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + b)) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), b, true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b - 1))) {
+            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + (b - 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), (b - 1), true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b + 1))) {
+            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + (b + 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), (b + 1), true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b - 1))) {
+            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + (b - 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), (b - 1), true);
             }
 
-            if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b + 1))) {
+            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + (b + 1))) {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), (b + 1), true);
             }
             
-            if (luku == 0) {
-                napisto[a][b].setIcon(nolla);
+            String ruutu = "" + a + ":" + b;
+            String[] osat = ruutu.split(":");
+            if (Integer.parseInt(osat[0]) <= 15 && Integer.parseInt(osat[0]) >= 0 && Integer.parseInt(osat[1]) <= 15 && Integer.parseInt(osat[1]) >= 0) {
+                if (luku == 0) {
+                    napisto[a][b].setIcon(nolla);
+                }
+
+                if (luku == 1) {
+                    napisto[a][b].setIcon(yksi);
+                }
+
+                if (luku == 2) {
+                    napisto[a][b].setIcon(kaksi);
+                }
+
+                if (luku == 3) {
+                    napisto[a][b].setIcon(kolme);
+                }
+
+                if (luku == 4) {
+                    napisto[a][b].setIcon(nelja);
+                }
+
+                if (luku == 5) {
+                    napisto[a][b].setIcon(viisi);
+                }
+
+                if (luku == 6) {
+                    napisto[a][b].setIcon(kuusi);
+                }
+
+                if (luku == 7) {
+                    napisto[a][b].setIcon(seitseman);
+                }
+
+                if (luku == 8) {
+                    napisto[a][b].setIcon(kahdeksan);
+                }
             }
-            
-            if (luku == 1) {
-                napisto[a][b].setIcon(yksi);
-            }
-            
-            if (luku == 2) {
-                napisto[a][b].setIcon(kaksi);
-            }
-            
-            if (luku == 3) {
-                napisto[a][b].setIcon(kolme);
-            }
-            
-            if (luku == 4) {
-                napisto[a][b].setIcon(nelja);
-            }
-            
-            if (luku == 5) {
-                napisto[a][b].setIcon(viisi);
-            }
-            
-            if (luku == 6) {
-                napisto[a][b].setIcon(kuusi);
-            }
-            
-            if (luku == 7) {
-                napisto[a][b].setIcon(seitseman);
-            }
-            
-            if (luku == 8) {
-                napisto[a][b].setIcon(kahdeksan);
-            }
-            
         }
     }
 }
