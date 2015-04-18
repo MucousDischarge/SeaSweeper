@@ -22,6 +22,7 @@ public class Lauta extends JFrame {
     Miinaluokka miinaluokka;
     boolean onkoEnsimmainenKlikkaus;
     ImageIcon miina = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/miina.png");
+    ImageIcon nolla = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/0.png");
     ImageIcon yksi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/1.png");
     ImageIcon kaksi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/2.png");
     ImageIcon kolme = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/3.png");
@@ -155,6 +156,10 @@ public class Lauta extends JFrame {
                 luku++;
             } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), (b + 1), true);
+            }
+            
+            if (luku == 0) {
+                napisto[a][b].setIcon(nolla);
             }
             
             if (luku == 1) {

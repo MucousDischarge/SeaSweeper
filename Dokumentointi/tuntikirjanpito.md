@@ -35,3 +35,6 @@ Sain tehtyä kuvasysteemin, jolla päästään jo kohta pelaamaan. Jostain syyst
 Hups, jäi Raivaaja-metodissa yksinkertaisesti tuplayhtäsuuruusmerkit uupumaan, jolloinka ohjelma ei käy lävitse numeroiden virusmaista leviämistä.
 
 Lisäksi unohdin mainita ajankäytön: 4 tuntia.
+
+###19.04.2015
+Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei muutaman minuutin... Nyt ongelmana enää lähinnä tuo ärsyttävä exception, joka tapahtuu välillä.
