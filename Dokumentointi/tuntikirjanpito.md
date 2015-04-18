@@ -17,3 +17,16 @@ Muokkasin luokkia huomattavasti. Pistin kuuntelijan samaan luokkaa kuin lauta, k
 
 ###10.04.2015
 Jäsentelin projektia labtoolista löytyneiden ohjeiden mukaisesti, joita en ollut aiemmin huomannut. Loin erilliset alapaketit, ja siistin pom.xml:ää. Poistin vihoitelleen hiiriklikkaustestin... Muokkasin luokkakaavion uuden mukaiseksi - ja olen unohtanut mikä oli aiemmin käyttämäni fontti... Lisäsin uuden logiikkaluokan itse projektiin. Tutustuin Javadocciin, ja luulen tajunneeni idean. Suurin osa ajasta kului pelilogiikkaa luodessa. Olin kirjoittanut sitä aiemmin mukavammalle, isommalle näytölle erilliselle koneelle, ja en nyt kiireessä ehtinyt siistimään että siirtämään ja muovaamaan sopivaksi projektiin. Ei se ole vielä toimivakaan. Tiedän ettei tällä ole mitään merkitystä pisteisiin, mutta ajattelin vain ilmoittaa, ettei huolta. 2 tuntia käytetty.
+
+###18.04.2015
+Peli on jo melkein koossa pelilogiikallisesti; jäljellä lähinnä miinoja lähellä olemattomat ruudut ja niiden raivautuminen virusmaisesti, pelin voittaminen ja pelin häviäminen. Sen jälkeen testit ja koodin puhdistus. Sitten myös tietenkin pelivalinnat ja paremmat grafiikat. Jäljellä on kyllä vielä joku harmittava ongelma jossain, joka valittaa välillä jotain ruutua klikatessa exceptionista. Kai se löytyy helposti. 
+
+Toistoa on aika paljon, koska tuli tosiaan taas aika kiire. Se puhdistuu varmasti myös hyvin nopeasti.
+
+--
+
+Miinaluokka oli helpoin pelilogiikan osa, joten aloitin siitä. Sitä luodessani päätin vain generoida satunnaisesti miinat yksinkertaiseen listaan, jossa arvoilla on totuusarvo. Tähän sopi siis erinomaisesti hyvä ystäväni HashMap, jonka ensimmäiseen string-avaimeen voi pistää sijainnin, ja arvoksi booleanin. Käytän stringiä, koska kaksiarvoisten array-arvojen tuonti toisesta luokasta tuotti vaikeuksia. Mahdollisesti tutustun tähän ja muutan täksi. HashMappia ei ollut helppo käydä lävitse satunnaisella numerolla, joten loin ArrayListin, jota voi ja jossa on HashMapin avaimet. En tunne LinkedHashMapia kovin hyvin. Miinat luodaan vasta ensimmäisen klikkauksen jälkeen. En osaa satunnaisjuttuja vielä kovin hyvin, joten kävin hakemassa satunnaisnumeroiden generoijan halutulta väliltä. 
+
+Miinaluokka oli valmis, mutta testaillessani sain todeta HashMapissa olevan vain 250 paria. Tämä johtuu siitä, että esim. 1 14 on sama kuin 11 4. Heitin siis näiden kahden luvun väliin viivan. Helpointa olisi, jos osaisi käyttää tuota kaksiarvoista arrayta. 
+
+Sain tehtyä kuvasysteemin, jolla päästään jo kohta pelaamaan. Jostain syystä ohjelma ei tunnistanut kuin aivan täyttä tiedoston sijaintia tietokoneessa. Mikään /home/:a pienemmästä alkava sijainti ei kelvannut. Kuvat ovat placeholdereita, jotka väänsin hetkessä.
