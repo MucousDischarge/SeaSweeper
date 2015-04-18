@@ -111,49 +111,49 @@ public class Lauta extends JFrame {
             int luku = 0;
             if (miinaluokka.onkoMiina("" + (a) + "-" + (b - 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja(a, (b - 1), true);
             }
 
             if (miinaluokka.onkoMiina("" + (a) + "-" + (b + 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja(a, (b + 1), true);
             }
 
             if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), b, true);
             }
 
             if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), b, true);
             }
 
             if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b - 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), (b - 1), true);
             }
 
             if (miinaluokka.onkoMiina("" + (a - 1) + "-" + (b + 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a - 1), (b + 1), true);
             }
 
             if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b - 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), (b - 1), true);
             }
 
             if (miinaluokka.onkoMiina("" + (a + 1) + "-" + (b + 1))) {
                 luku++;
-            } else if (liianKaukainen = false) {
+            } else if (liianKaukainen == false) {
                 Raivaaja((a + 1), (b + 1), true);
             }
             

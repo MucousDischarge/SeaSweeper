@@ -30,3 +30,8 @@ Miinaluokka oli helpoin pelilogiikan osa, joten aloitin siitä. Sitä luodessani
 Miinaluokka oli valmis, mutta testaillessani sain todeta HashMapissa olevan vain 250 paria. Tämä johtuu siitä, että esim. 1 14 on sama kuin 11 4. Heitin siis näiden kahden luvun väliin viivan. Helpointa olisi, jos osaisi käyttää tuota kaksiarvoista arrayta. 
 
 Sain tehtyä kuvasysteemin, jolla päästään jo kohta pelaamaan. Jostain syystä ohjelma ei tunnistanut kuin aivan täyttä tiedoston sijaintia tietokoneessa. Mikään /home/:a pienemmästä alkava sijainti ei kelvannut. Kuvat ovat placeholdereita, jotka väänsin hetkessä.
+
+###19.04.2015
+Hups, jäi Raivaaja-metodissa yksinkertaisesti tuplayhtäsuuruusmerkit uupumaan, jolloinka ohjelma ei käy lävitse numeroiden virusmaista leviämistä.
+
+Lisäksi unohdin mainita ajankäytön: 4 tuntia.
