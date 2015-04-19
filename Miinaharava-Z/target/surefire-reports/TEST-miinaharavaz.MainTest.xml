@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.057" errors="0" skipped="0" tests="1" name="miinaharavaz.MainTest">
+<testsuite failures="0" time="0.05" errors="0" skipped="0" tests="1" name="miinaharavaz.MainTest">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64"/>
@@ -31,7 +31,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="3.13.0-48-generic"/>
+    <property name="os.version" value="3.13.0-49-generic"/>
     <property name="user.home" value="/home/ezaalto"/>
     <property name="user.timezone" value="Europe/Helsinki"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.001" classname="miinaharavaz.MainTest" name="amIReal"/>
+  <testcase time="0" classname="miinaharavaz.MainTest" name="amIReal"/>
 </testsuite>

@@ -31,16 +31,20 @@ Miinaluokka oli valmis, mutta testaillessani sain todeta HashMapissa olevan vain
 
 Sain tehtyä kuvasysteemin, jolla päästään jo kohta pelaamaan. Jostain syystä ohjelma ei tunnistanut kuin aivan täyttä tiedoston sijaintia tietokoneessa. Mikään /home/:a pienemmästä alkava sijainti ei kelvannut. Kuvat ovat placeholdereita, jotka väänsin hetkessä.
 
-###19.04.2015
+###19.04.2015 00:08
 Hups, jäi Raivaaja-metodissa yksinkertaisesti tuplayhtäsuuruusmerkit uupumaan, jolloinka ohjelma ei käy lävitse numeroiden virusmaista leviämistä.
 
 Lisäksi unohdin mainita ajankäytön: 4 tuntia.
 
-###19.04.2015
+###19.04.2015 00:15
 Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei muutaman minuutin... Nyt ongelmana enää lähinnä tuo ärsyttävä exception, joka tapahtuu välillä.
-
-###19.04.2015
+ 
+###19.04.2015 00:19
 Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella numerolla 1-256, vaikka sen tietenkin pitäisi olla 0-255. 
 
-###19.04.2015
-Korjasin yhden toisen exceptionin, joka johtui -1, -2, 16 ja 17 -arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.
+###19.04.2015 00:58
+Korjasin yhden toisen exceptionin, joka johtui -1-, -2-, 16- ja 17-arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.
+
+
+###19.04.2014 03:59
+Korjaan nämä saman päivän päivitykset yhdeksi kokonaisuudeksi myöhemmin. Sain siistittyä koodia aika lailla. Vähän nollat vielä junnaavat supermassiivisissa kööreissä, mutta ratkon sitä myöhemmin...

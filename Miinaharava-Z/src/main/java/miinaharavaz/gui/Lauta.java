@@ -9,11 +9,16 @@ package miinaharavaz.gui;
  * Luokka suorittaa pelilaudan ja sen kuuntelun (ja todennäköisesti myös kutsuu
  * pelilogiikan henkiin)
  */
-import miinaharavaz.logiikka.Miinaluokka;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import miinaharavaz.logiikka.Miinaluokka;
+import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class Lauta extends JFrame {
 
@@ -21,28 +26,28 @@ public class Lauta extends JFrame {
     final int k = 16;
     Miinaluokka miinaluokka;
     boolean onkoEnsimmainenKlikkaus;
-    ImageIcon miina = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/miina.png");
-    ImageIcon nolla = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/0.png");
-    ImageIcon yksi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/1.png");
-    ImageIcon kaksi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/2.png");
-    ImageIcon kolme = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/3.png");
-    ImageIcon nelja = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/4.png");
-    ImageIcon viisi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/5.png");
-    ImageIcon kuusi = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/6.png");
-    ImageIcon seitseman = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/7.png");
-    ImageIcon kahdeksan = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/8.png");
+    ImageIcon kuvat[];
+    ImageIcon miina;
+    ArrayList<String> raivattujenLista;
+    String osoite;
 
     /**
      * Metodi luo graafisen laudan kutsuttuna mainista (ja todennäköisesti
      * suorittaa pelilogiikat)
      */
     public Lauta() {
+        kuvat = new ImageIcon[9];
+        for (int i = 0; i < 9; i++) {
+            kuvat[i] = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/" + i + ".png");
+        }
+        miina = new ImageIcon("/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/resources/icons/miina.png");
+
         this.setLayout(new GridLayout(k, k));
         napisto = new JButton[k][k];
         for (int a = 0; a < k; a++) {
             for (int b = 0; b < k; b++) {
                 napisto[a][b] = new JButton();
-                napisto[a][b].addActionListener(new Lautakuuntelija());
+                napisto[a][b].addActionListener((ActionListener) new Lautakuuntelija());
                 add(napisto[a][b]);
             }
         }
@@ -54,10 +59,7 @@ public class Lauta extends JFrame {
         setVisible(true);
         miinaluokka = new Miinaluokka();
         onkoEnsimmainenKlikkaus = false;
-    }
-
-    private ImageIcon createImageIcon(String iconsmiinapng) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        raivattujenLista = new ArrayList<String>();
     }
 
     /**
@@ -109,94 +111,81 @@ public class Lauta extends JFrame {
         }
 
         public void Raivaaja(int a, int b, boolean liianKaukainen) {
-            int luku = 0;
-            if (miinaluokka.onkoMiina("" + a + ":" + (b - 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja(a, (b - 1), true);
-            }
-
-            if (miinaluokka.onkoMiina("" + a + ":" + (b + 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja(a, (b + 1), true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + b)) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a - 1), b, true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + b)) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a + 1), b, true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + (b - 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a - 1), (b - 1), true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a - 1) + ":" + (b + 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a - 1), (b + 1), true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + (b - 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a + 1), (b - 1), true);
-            }
-
-            if (miinaluokka.onkoMiina("" + (a + 1) + ":" + (b + 1))) {
-                luku++;
-            } else if (liianKaukainen == false) {
-                Raivaaja((a + 1), (b + 1), true);
-            }
-            
             String ruutu = "" + a + ":" + b;
             String[] osat = ruutu.split(":");
             if (Integer.parseInt(osat[0]) <= 15 && Integer.parseInt(osat[0]) >= 0 && Integer.parseInt(osat[1]) <= 15 && Integer.parseInt(osat[1]) >= 0) {
-                if (luku == 0) {
-                    napisto[a][b].setIcon(nolla);
+                ArrayList raivaajalista = new ArrayList<String>();
+                
+                if ((b - 1) <= 15 && (b - 1) >= 0) {
+                    raivaajalista.add(("" + a + ":" + (b - 1)));
+                    if ((a - 1) <= 15 && (a - 1) >= 0) {
+                        raivaajalista.add(("" + (a - 1) + ":" + (b - 1)));
+                    }
+                    
+                    if ((a + 1) <= 15 && (a + 1) >= 0) {
+                        raivaajalista.add(("" + (a + 1) + ":" + (b - 1)));
+                    }
+                }
+                
+                if ((b + 1) <= 15 && (b + 1) >= 0) {
+                    raivaajalista.add(("" + a + ":" + (b + 1)));
+                    if ((a - 1) <= 15 && (a - 1) >= 0) {
+                        raivaajalista.add(("" + (a - 1) + ":" + (b + 1)));
+                    }
+                    if ((a + 1) <= 15 && (a + 1) >= 0) {
+                        raivaajalista.add(("" + (a + 1) + ":" + (b + 1)));
+                    }
+                }
+                if ((a - 1) <= 15 && (a - 1) >= 0) {
+                    raivaajalista.add(("" + (a - 1) + ":" + b));
+                } 
+                        
+                if ((a + 1) <= 15 && (a + 1) >= 0) {    
+                    raivaajalista.add(("" + (a + 1) + ":" + b));
+                }
+                
+                int luku = 0;
+
+                for (int i = 0; i < raivaajalista.size(); i++) {
+                    if (miinaluokka.onkoMiina(raivaajalista.get(i).toString())) {
+                        luku++;
+                    }
                 }
 
-                if (luku == 1) {
-                    napisto[a][b].setIcon(yksi);
+                for (int i = 0; i < 8; i++) {
+                    if (luku == i) {
+                        napisto[a][b].setIcon(kuvat[i]);
+                    }
+                }
+                raivattujenLista.add(ruutu);
+                if (!(raivaajalista.isEmpty())) {
+
+                    for (int i = 0; i < raivaajalista.size(); i++) {
+                        boolean raivattuko = false;
+                        String raivaaja = raivaajalista.get(i).toString();
+                        if (!(miinaluokka.onkoMiina(raivaaja)) && liianKaukainen == false) {
+                            String[] uudetOsat = raivaaja.split(":");
+                            for (int o = 0; o < raivattujenLista.size(); o++) {
+                                String raivattu = raivattujenLista.get(o);
+                                if (raivaaja.equals(raivattu)) {
+                                    raivattuko = true;
+                                }
+                            }
+                            if (!(raivattuko)) {
+                                if (luku == 0) {
+                                    Raivaaja(Integer.parseInt(uudetOsat[0]), Integer.parseInt(uudetOsat[1]), false);
+                                } else {
+                                    Raivaaja(Integer.parseInt(uudetOsat[0]), Integer.parseInt(uudetOsat[1]), true);
+                                }
+                            }
+
+                        }
+
+                    }
                 }
 
-                if (luku == 2) {
-                    napisto[a][b].setIcon(kaksi);
-                }
-
-                if (luku == 3) {
-                    napisto[a][b].setIcon(kolme);
-                }
-
-                if (luku == 4) {
-                    napisto[a][b].setIcon(nelja);
-                }
-
-                if (luku == 5) {
-                    napisto[a][b].setIcon(viisi);
-                }
-
-                if (luku == 6) {
-                    napisto[a][b].setIcon(kuusi);
-                }
-
-                if (luku == 7) {
-                    napisto[a][b].setIcon(seitseman);
-                }
-
-                if (luku == 8) {
-                    napisto[a][b].setIcon(kahdeksan);
-                }
             }
         }
+
     }
 }

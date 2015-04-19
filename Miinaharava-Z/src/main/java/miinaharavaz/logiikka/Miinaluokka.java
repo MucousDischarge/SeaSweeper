@@ -53,11 +53,7 @@ public class Miinaluokka {
     }
     
     public boolean onkoMiina(String ruutu) {
-        System.out.println(ruutu);
-        String[] osat = ruutu.split(":");
-        if (!(Integer.parseInt(osat[0]) <= 15 && Integer.parseInt(osat[0]) >= 0 && Integer.parseInt(osat[1]) <= 15 && Integer.parseInt(osat[1]) >= 0)) {
-            return false;
-        } else if (this.miinat.get(ruutu)) {
+        if (this.miinat.get(ruutu)) {
             return true;
         }
         
