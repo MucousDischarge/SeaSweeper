@@ -46,4 +46,5 @@ Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella 
 Korjasin yhden toisen exceptionin, joka johtui -1-, -2-, 16- ja 17-arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.
 
 
-Korjaan nämä saman päivän päivitykset yhdeksi kokonaisuudeksi myöhemmin.
+###19.04.2014 03:59
+Korjaan nämä saman päivän päivitykset yhdeksi kokonaisuudeksi myöhemmin. Sain siistittyä koodia aika lailla. Vähän nollat vielä junnaavat supermassiivisissa kööreissä, mutta ratkon sitä myöhemmin...

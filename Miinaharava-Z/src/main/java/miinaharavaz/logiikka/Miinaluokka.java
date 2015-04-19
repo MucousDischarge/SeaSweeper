@@ -19,20 +19,29 @@ import java.util.Random;
 public class Miinaluokka {
     final Map<String, Boolean> miinat;
     final ArrayList<String> lista;
+    final ArrayList<Integer> pistetyt;
         
     public Miinaluokka() {
         this.miinat = new HashMap<String, Boolean>();
         this.lista = new ArrayList<String>();
+        this.pistetyt = new ArrayList<Integer>();
     }
     
     public void luoMiinat(String ensimmainen) {
         luoListat();
         int w = 0;
         
-        while (w <= 40) {
+        while (w < 40) {
+            boolean onko = false;
             int miina = satunnainenLukuValilta(0, 255);
-            if (!(lista.get(miina).equals(ensimmainen))) {
+            for (int i = 0; i < pistetyt.size(); i++) {
+                if (pistetyt.get(i) == miina) {
+                    onko = true;
+                }
+            }
+            if (!(lista.get(miina).equals(ensimmainen)) && !(onko)) {
                 this.miinat.put(lista.get(miina), true);
+                pistetyt.add(miina);
                 w++;   
             }
         }
