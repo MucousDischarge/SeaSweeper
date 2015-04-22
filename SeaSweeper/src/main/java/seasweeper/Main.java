@@ -10,11 +10,11 @@ import seasweeper.gui.Lauta;
 
 /**
  *
- * @author ezaalto
+ * @author ez
  */
 public class Main {
    
     public static void main(String[] args) {
-        Lauta lauta = new Lauta();
+        Lauta lauta = new Lauta("Keskitaso");
     }
 }

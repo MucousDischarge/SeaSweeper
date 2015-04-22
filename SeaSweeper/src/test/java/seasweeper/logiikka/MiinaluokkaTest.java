@@ -12,11 +12,12 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author ezaalto
+ * @author ez
  */
 public class MiinaluokkaTest {
-    
+    Miinaluokka miinaluokka;
     public MiinaluokkaTest() {
+        this.miinaluokka = new Miinaluokka(16);
     }
     
     @BeforeClass
@@ -26,10 +27,31 @@ public class MiinaluokkaTest {
     @AfterClass
     public static void tearDownClass() {
     }
+
+    /**
+     * Test of onkoMiina method, of class Miinaluokka.
+     */
+    @Test
+    public void testOnkoMiinaNolla() {
+        assertTrue(miinaluokka.onkoMiina(0, 0, 40));
+    }
     
     @Test
-    public void amIReal() {
-        assertTrue(true);
+    public void testOnkoMiinaYksiOmituisellaMiinamaaralla() {
+        assertFalse(miinaluokka.onkoMiina(1, 1, 16));
+    }
+
+    /**
+     * Test of satunnainenLukuValilta method, of class Miinaluokka.
+     */
+    @Test
+    public void testSatunnainenLukuValilta0() {
+        System.out.println("satunnainenLukuValilta");
+        int minimi = 0;
+        int maksimi = 0;
+        int expResult = 0;
+        int result = Miinaluokka.satunnainenLukuValilta(minimi, maksimi);
+        assertEquals(expResult, result);
     }
     
 }

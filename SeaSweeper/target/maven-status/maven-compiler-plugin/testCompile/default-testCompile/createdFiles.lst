@@ -1,3 +1,6 @@
+seasweeper/gui/LautakuuntelijaTest.class
 seasweeper/logiikka/MiinaluokkaTest.class
+seasweeper/logiikka/PeruslogiikkaTest.class
 seasweeper/gui/LautaTest.class
+seasweeper/gui/MenukuuntelijaTest.class
 seasweeper/MainTest.class

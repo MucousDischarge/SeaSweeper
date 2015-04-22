@@ -5,6 +5,7 @@
  */
 package seasweeper.gui;
 
+import java.awt.event.ActionEvent;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,12 +13,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author ezaalto
+ * @author ez
  */
-public class LautaTest {
-    private Lauta lauta;
-    public LautaTest() {
-       this.lauta = new Lauta("Keskitaso"); 
+public class MenukuuntelijaTest {
+    
+    public MenukuuntelijaTest() {
     }
     
     @BeforeClass
@@ -28,9 +28,11 @@ public class LautaTest {
     public static void tearDownClass() {
     }
 
+    /**
+     * Test of actionPerformed method, of class Menukuuntelija.
+     */
     @Test
-    public void testSomeMethod() {
-        
+    public void testActionPerformed() {
         
     }
     

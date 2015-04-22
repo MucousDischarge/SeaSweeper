@@ -49,3 +49,6 @@ Lisäksi unohdin mainita ajankäytön: 4 tuntia.
 
 ###22.04.2015
 Siirsin pienempiä toimintoja omiin luokkiinsa. Poistin huonot ArrayListit ja HashMapit; korvasin vanhalla tupla-arraylla. Tein paremmat grafiikat ilmaismateriaalista. Peli pyörii nyt täydellisesti. Uudelleennimesin. 7 tuntia käytetty.
+
+###23.04.2015
+Loin eri vaikeustasot, ja siistin taas vähän koodia. Lisäsin ajanpidon. Jostain syystä ikkunan koko heittelee välillä aivan hitusen, vaikka sen ei pitäisi. 4 tuntia käytetty.

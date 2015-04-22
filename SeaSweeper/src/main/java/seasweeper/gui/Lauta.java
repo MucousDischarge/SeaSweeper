@@ -10,9 +10,7 @@ package seasweeper.gui;
  * pelilogiikan henkiin)
  */
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import seasweeper.logiikka.Miinaluokka;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,21 +21,43 @@ import seasweeper.logiikka.Peruslogiikka;
 
 public class Lauta extends JFrame {
 
-    final JButton napisto[][];
+    private JFrame jfraami;
+    private final JButton napisto[][];
     private int k;
-    private Miinaluokka miinaluokka;
-    private Peruslogiikka peruslogiikka;
-    private ImageIcon kuvat[];
-    private ImageIcon miina;
-    private ImageIcon lippu;
-    private ImageIcon tummavesi;
+    private int l;
+    private final Peruslogiikka peruslogiikka;
+    private final ImageIcon kuvat[];
+    private final ImageIcon miina;
+    private final ImageIcon lippu;
+    private final ImageIcon tummavesi;
 
     /**
      * Metodi luo graafisen laudan kutsuttuna mainista
+     * @param vaikeustaso
      */
-    public Lauta() {
-        JFrame jfraami = new JFrame();
-        this.k = 16;
+    public Lauta(String vaikeustaso) {
+        this.jfraami = new JFrame();
+        
+        switch (vaikeustaso) {
+            case "Helppo":
+                this.k = 8;
+                this.l = 8;
+                break;
+            case "Vaikea":
+                this.k = 16;
+                this.l = 30;
+                break;
+            default:
+                this.k = 16;
+                this.l = 16;
+                break;
+        }
+        jfraami.setSize((l*22), (k*25));
+        jfraami.setTitle("SeaSweeper");
+        jfraami.setLocationRelativeTo(null);
+        jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jfraami.setResizable(false);
+        
         kuvat = new ImageIcon[9];
         for (int i = 0; i < 9; i++) {
             kuvat[i] = new ImageIcon("/home/ezaalto/SeaSweeper/SeaSweeper/src/main/resources/icons/" + i + ".png");
@@ -46,36 +66,34 @@ public class Lauta extends JFrame {
         this.lippu = new ImageIcon("/home/ezaalto/SeaSweeper/SeaSweeper/src/main/resources/icons/lippu.png");
         this.tummavesi = new ImageIcon("/home/ezaalto/SeaSweeper/SeaSweeper/src/main/resources/icons/tummavesi.png");
 
-        jfraami.setLayout(new GridLayout(k, k));
-        this.napisto = new JButton[k][k];
-        this.miinaluokka = new Miinaluokka();
-        this.peruslogiikka = new Peruslogiikka(miinaluokka, k, napisto, miina, lippu, tummavesi, kuvat);
+        jfraami.setLayout(new GridLayout(k, l));
+        this.napisto = new JButton[k][l];
+        this.peruslogiikka = new Peruslogiikka(k, l, napisto, miina, lippu, tummavesi, kuvat);
         for (int a = 0; a < k; a++) {
-            for (int b = 0; b < k; b++) {
+            for (int b = 0; b < l; b++) {
                 this.napisto[a][b] = new JButton();
                 this.napisto[a][b].setIcon(this.tummavesi);
                 this.napisto[a][b].addMouseListener((MouseListener) new Lautakuuntelija(peruslogiikka));
                 jfraami.add(this.napisto[a][b]);
             }
         }
+        Menukuuntelija menukuuntelija = new Menukuuntelija(jfraami, vaikeustaso);
         JMenuBar valikko = new JMenuBar();
-        JMenu vaikeustaso = new JMenu("Vaikeustaso");
-        valikko.add(vaikeustaso);
+        JMenu vaikeusvalinta = new JMenu("Vaikeustaso");
+        valikko.add(vaikeusvalinta);
         JMenuItem helppo = new JMenuItem("Helppo");
         JMenuItem keskitaso = new JMenuItem("Keskitaso");
         JMenuItem vaikea = new JMenuItem("Vaikea");
-        vaikeustaso.add(helppo);
-        vaikeustaso.add(keskitaso);
-        vaikeustaso.add(vaikea);
+        vaikeusvalinta.add(helppo);
+        vaikeusvalinta.add(keskitaso);
+        vaikeusvalinta.add(vaikea);
+        helppo.addActionListener(menukuuntelija);
+        keskitaso.addActionListener(menukuuntelija);
+        vaikea.addActionListener(menukuuntelija);
         JMenuItem reset = new JMenuItem("Reset");
         valikko.add(reset);
-        reset.addActionListener((ActionListener) new Menukuuntelija(jfraami));
+        reset.addActionListener(menukuuntelija);
         jfraami.setJMenuBar(valikko);
-        jfraami.setTitle("SeaSweeper");
-        jfraami.setSize(400, 400);
-        jfraami.setLocationRelativeTo(null);
-        jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jfraami.setResizable(false);
         jfraami.setVisible(true);
     }
 }

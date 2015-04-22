@@ -11,13 +11,15 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author ezaalto
+ * @author ez
  */
 public class Menukuuntelija implements ActionListener {
-    private JFrame jfraami;
+    private final JFrame jfraami;
+    private final String vaikeustaso;
     
-    public Menukuuntelija(JFrame jfraami) {
+    public Menukuuntelija(JFrame jfraami, String vaikeustaso) {
         this.jfraami = jfraami;
+        this.vaikeustaso = vaikeustaso;
     }
     /**
      *
@@ -26,7 +28,22 @@ public class Menukuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         jfraami.dispose();
-        Lauta lauta = new Lauta();
+        
+        switch (e.getActionCommand()) {
+            case "Helppo":
+                Lauta lauta1 = new Lauta("Helppo");
+                break;
+            case "Keskitaso":
+                Lauta lauta2 = new Lauta("Keskitaso");
+                break;
+            case "Vaikea":
+                Lauta lauta3 = new Lauta("Vaikea");
+                break;
+            default:
+                Lauta lauta4 = new Lauta(vaikeustaso);
+                break;
+        }
+
     }
     
 }
