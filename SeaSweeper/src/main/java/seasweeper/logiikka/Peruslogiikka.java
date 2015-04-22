@@ -208,11 +208,11 @@ public class Peruslogiikka {
                 for (int y = 0; y < k; y++) {
                     if (miinaluokka.onkoMiina(x, y)) {
                         napisto[x][y].setIcon(lippu);
-                        System.out.println("Voitit!");
                     }
                 }
             }
             
+            System.out.println("Voitit!");
             this.pelipaattynyt = true;
         }
     }

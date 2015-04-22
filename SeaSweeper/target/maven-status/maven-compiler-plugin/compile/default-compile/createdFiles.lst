@@ -1,6 +1,6 @@
-miinaharavaz/gui/Lauta.class
-miinaharavaz/logiikka/Miinaluokka.class
-miinaharavaz/Main.class
-miinaharavaz/gui/Menukuuntelija.class
-miinaharavaz/logiikka/Peruslogiikka.class
-miinaharavaz/gui/Lautakuuntelija.class
+seasweeper/logiikka/Peruslogiikka.class
+seasweeper/logiikka/Miinaluokka.class
+seasweeper/gui/Lauta.class
+seasweeper/gui/Menukuuntelija.class
+seasweeper/Main.class
+seasweeper/gui/Lautakuuntelija.class

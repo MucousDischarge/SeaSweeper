@@ -1,6 +1,6 @@
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/Main.java
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/logiikka/Peruslogiikka.java
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/gui/Lautakuuntelija.java
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/gui/Lauta.java
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/logiikka/Miinaluokka.java
-/home/ezaalto/Miinaharava-Z/Miinaharava-Z/src/main/java/miinaharavaz/gui/Menukuuntelija.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Lautakuuntelija.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Menukuuntelija.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Peruslogiikka.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Miinaluokka.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/Main.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Lauta.java
