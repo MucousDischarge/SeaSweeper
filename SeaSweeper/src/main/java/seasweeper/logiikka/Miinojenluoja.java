@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seasweeper.logiikka;
 
 import java.util.Random;
@@ -11,22 +6,11 @@ import java.util.Random;
  *
  * @author ez
  */
-public class Miinaluokka {
+public class Miinojenluoja {
+    private final Ruutu[][] ruudukko;
 
-    private final int[][] miinat;
-
-    public Miinaluokka(int l) {
-        switch (l) {
-            case 8:
-                this.miinat = new int[10][2];
-                break;
-            case 30:
-                this.miinat = new int[99][2];
-                break;
-            default:
-                this.miinat = new int[40][2];
-                break;
-        }
+    public Miinojenluoja(Ruutu[][] ruudukko) {
+        this.ruudukko = ruudukko;
     }
 
     public void luoMiinat(int a, int b, int miinamaara) {
@@ -53,9 +37,8 @@ public class Miinaluokka {
             }
 
             if (!(miinaY == a && miinaX == b)) {
-                if (!(onkoMiina(miinaY, miinaX, miinamaara))) {
-                    this.miinat[w][0] = miinaY;
-                    this.miinat[w][1] = miinaX;
+                if (!(ruudukko[miinaY][miinaX].onkoMiina())) {
+                    ruudukko[miinaY][miinaX].laitaMiina();
                     w++;
                 }
             }
@@ -63,11 +46,9 @@ public class Miinaluokka {
         }
     }
 
-    public boolean onkoMiina(int a, int b, int miinamaara) {
-        for (int i = 0; i < miinamaara; i++) {
-            if (this.miinat[i][0] == a && this.miinat[i][1] == b) {
-                return true;
-            }
+    public boolean onkoRuutuMiina(Ruutu ruutu) {
+        if (ruutu.onkoMiina()) {
+            return true;
         }
 
         return false;
@@ -80,5 +61,11 @@ public class Miinaluokka {
         int satunnainenLuku = randomi.nextInt((maksimi - minimi) + 1) + minimi;
 
         return satunnainenLuku;
+    }
+    
+    // TESTEJÄ VARTEN OLEVAT METODIT
+    
+    public Ruutu[][] getRuudukko() {
+        return ruudukko;
     }
 }

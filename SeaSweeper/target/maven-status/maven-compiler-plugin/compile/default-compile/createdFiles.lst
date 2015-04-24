@@ -1,6 +1,9 @@
-seasweeper/logiikka/Peruslogiikka.class
-seasweeper/logiikka/Miinaluokka.class
-seasweeper/gui/Lauta.class
-seasweeper/gui/Menukuuntelija.class
+seasweeper/gui/Lautakuuntelija2.class
+seasweeper/logiikka/AlempiLogiikka.class
+seasweeper/logiikka/Miinojenluoja.class
+seasweeper/gui/Menukuuntelija2.class
+seasweeper/gui/Kuvaluokka.class
+seasweeper/logiikka/Ruutu.class
+seasweeper/gui/Ikkuna.class
+seasweeper/logiikka/YlempiLogiikka.class
 seasweeper/Main.class
-seasweeper/gui/Lautakuuntelija.class

@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seasweeper.logiikka;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import seasweeper.gui.Kuvaluokka;
 
 /**
  *
  * @author ez
  */
-public class Peruslogiikka {
+public class AlempiLogiikka {
 
     private boolean onkoEnsimmainenKlikkaus;
-    private final Miinaluokka miinaluokka;
+    private final Miinojenluoja miinojenluoja;
     private final int k;
     private final int l;
-    private final JButton[][] napisto;
+    private final Ruutu[][] ruudukko;
+    private JButton[][] napisto;
     private final ImageIcon miina;
     private final ImageIcon lippu;
     private final ImageIcon tummavesi;
@@ -26,23 +23,28 @@ public class Peruslogiikka {
     private final Boolean[][] raivattujenlista;
     private final Boolean[][] lippulista;
     private Boolean pelipaattynyt;
-    private int miinojenmaara;
+    private final int miinojenmaara;
     private long alkuaika;
+    private final Kuvaluokka kuvaluokka;
 
-    public Peruslogiikka(int k, int l, JButton[][] napisto, ImageIcon miina, ImageIcon lippu, ImageIcon tummavesi, ImageIcon[] kuvat) {
-        this.onkoEnsimmainenKlikkaus = false;
+    public AlempiLogiikka(Ruutu[][] ruudukko, int k, int l) {
+        this.onkoEnsimmainenKlikkaus = true;
         this.k = k;
         this.l = l;
+        this.ruudukko = ruudukko;
+        this.kuvaluokka = new Kuvaluokka();
         this.raivattujenlista = new Boolean[k][l];
         this.lippulista = new Boolean[k][l];
-        this.miinaluokka = new Miinaluokka(l);
-        this.napisto = napisto;
-        this.miina = miina;
-        this.lippu = lippu;
-        this.tummavesi = tummavesi;
-        this.kuvat = kuvat;
+        this.miinojenluoja = new Miinojenluoja(ruudukko);
+        this.napisto = new JButton[k][l];
+        this.miina = kuvaluokka.getKuva("miina.png");
+        this.lippu = kuvaluokka.getKuva("lippu.png");
+        this.tummavesi = kuvaluokka.getKuva("tummavesi.png");
+        this.kuvat = new ImageIcon[9];
+        for (int i = 0; i < 9; i++) {
+            kuvat[i] = kuvaluokka.getKuva(i + ".png");
+        }
         this.pelipaattynyt = false;
-        this.miinojenmaara = 8;
         if (l == 8) {
             miinojenmaara = 10;
         } else if (l == 16) {
@@ -57,13 +59,13 @@ public class Peruslogiikka {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < l; b++) {
                     if (source == napisto[a][b] && !(oikeako)) {
-                        if (!(onkoEnsimmainenKlikkaus)) {
+                        if (onkoEnsimmainenKlikkaus) {
                             alkuaika = System.currentTimeMillis();
-                            onkoEnsimmainenKlikkaus = true;
-                            miinaluokka.luoMiinat(a, b, miinojenmaara);
+                            onkoEnsimmainenKlikkaus = false;
+                            miinojenluoja.luoMiinat(a, b, miinojenmaara);
                         }
 
-                        if (miinaluokka.onkoMiina(a, b, miinojenmaara)) {
+                        if (miinojenluoja.onkoRuutuMiina(ruudukko[a][b])) {
                             System.out.println("Osuit miinaan...");
                             Rajahti();
                             //kaikki miinat paljastuvat ruudulla
@@ -73,14 +75,15 @@ public class Peruslogiikka {
 
                         }
                     } else if (source == napisto[a][b]) {
-                        if (raivattujenlista[a][b] != null) {
-                            if (!(raivattujenlista[a][b])) {
-                                napinpainalluksenSiistija(a, b);
+                        if (!(ruudukko[a][b].onkoRaivattu())) {
+                            if (ruudukko[a][b].onkoLippu()) {
+                                napisto[a][b].setIcon(tummavesi);
+                                ruudukko[a][b].poistaLippu();
+                            } else {
+                                napisto[a][b].setIcon(lippu);
+                                ruudukko[a][b].lisaaLippu();
                             }
-                        } else {
-                            napinpainalluksenSiistija(a, b);
                         }
-
                     }
                 }
             }
@@ -91,7 +94,7 @@ public class Peruslogiikka {
     public void Rajahti() {
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
-                if (miinaluokka.onkoMiina(x, y, miinojenmaara)) {
+                if (miinojenluoja.onkoRuutuMiina(ruudukko[x][y])) {
                     napisto[x][y].setIcon(miina);
                 }
             }
@@ -106,18 +109,19 @@ public class Peruslogiikka {
 
             napisto[a][b].setIcon(kuvat[luku]);
 
-            raivattujenlista[a][b] = true;
+            ruudukko[a][b].onRaivattu();
 
             if (!(liianKaukainen || luku > 0)) {
                 for (int i = 0; i < 8; i++) {
-                    if (tarkista(lista[i][0], lista[i][1]) && !(miinaluokka.onkoMiina(lista[i][0], lista[i][1], miinojenmaara))) {
+                    if (tarkista(lista[i][0], lista[i][1]) && !(ruudukko[lista[i][0]][lista[i][1]].onkoMiina())) {
 
-                        if (raivattujenlista[lista[i][0]][lista[i][1]] != null) {
-                            if (!(raivattujenlista[lista[i][0]][lista[i][1]])) {
-                                raivaajaSiistija(i, lista);
+                        if (!(ruudukko[lista[i][0]][lista[i][1]].onkoRaivattu())) {
+                            int[][] uusiLista = luoLista(lista[i][0], lista[i][1]);
+                            if (laskeLuku(uusiLista) == 0) {
+                                Raivaaja(lista[i][0], lista[i][1], false);
+                            } else {
+                                Raivaaja(lista[i][0], lista[i][1], true);
                             }
-                        } else {
-                            raivaajaSiistija(i, lista);
                         }
 
                     }
@@ -154,7 +158,7 @@ public class Peruslogiikka {
 
         for (int i = 0; i < 8; i++) {
             if (tarkista(lista[i][0], lista[i][1])) {
-                if (miinaluokka.onkoMiina(lista[i][0], lista[i][1], miinojenmaara)) {
+                if (ruudukko[lista[i][0]][lista[i][1]].onkoMiina()) {
                     luku++;
                 }
             }
@@ -176,10 +180,8 @@ public class Peruslogiikka {
 
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
-                if (raivattujenlista[x][y] != null) {
-                    if (raivattujenlista[x][y]) {
-                        raivattujenmaara++;
-                    }
+                if (ruudukko[x][y].onkoRaivattu()) {
+                    raivattujenmaara++;
                 }
             }
         }
@@ -187,7 +189,7 @@ public class Peruslogiikka {
         if ((k * l) - raivattujenmaara == miinojenmaara) {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < l; y++) {
-                    if (miinaluokka.onkoMiina(x, y, miinojenmaara)) {
+                    if (ruudukko[x][y].onkoMiina()) {
                         napisto[x][y].setIcon(lippu);
                     }
                 }
@@ -197,28 +199,26 @@ public class Peruslogiikka {
             this.pelipaattynyt = true;
         }
     }
-
-    public void napinpainalluksenSiistija(int a, int b) {
-        if (lippulista[a][b] != null) {
-            if (lippulista[a][b]) {
-                napisto[a][b].setIcon(tummavesi);
-                lippulista[a][b] = false;
-            } else {
-                napisto[a][b].setIcon(lippu);
-                lippulista[a][b] = true;
-            }
-        } else {
-            napisto[a][b].setIcon(lippu);
-            lippulista[a][b] = true;
-        }
+    
+    public JButton[][] getNapisto() {
+        return napisto;
     }
-
-    public void raivaajaSiistija(int i, int[][] lista) {
-        int[][] uusiLista = luoLista(lista[i][0], lista[i][1]);
-        if (laskeLuku(uusiLista) == 0) {
-            Raivaaja(lista[i][0], lista[i][1], false);
-        } else {
-            Raivaaja(lista[i][0], lista[i][1], true);
-        }
+    
+    // TESTEJÄ VARTEN OLEVAT METODIT
+    
+    public boolean getOnkoEnsimmainenKlikkaus() {
+        return onkoEnsimmainenKlikkaus;
+    }
+    
+    public int getK() {
+        return k;
+    }
+    
+    public int getL() {
+        return l;
+    }
+    
+    public boolean getPeliPaattynyt() {
+        return pelipaattynyt;
     }
 }

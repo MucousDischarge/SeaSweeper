@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seasweeper.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import seasweeper.logiikka.YlempiLogiikka;
 
 /**
  *
@@ -31,19 +27,25 @@ public class Menukuuntelija implements ActionListener {
         
         switch (e.getActionCommand()) {
             case "Helppo":
-                Lauta lauta1 = new Lauta("Helppo");
+                YlempiLogiikka lauta1 = new YlempiLogiikka("Helppo");
                 break;
             case "Keskitaso":
-                Lauta lauta2 = new Lauta("Keskitaso");
+                YlempiLogiikka lauta2 = new YlempiLogiikka("Keskitaso");
                 break;
             case "Vaikea":
-                Lauta lauta3 = new Lauta("Vaikea");
+                YlempiLogiikka lauta3 = new YlempiLogiikka("Vaikea");
                 break;
             default:
-                Lauta lauta4 = new Lauta(vaikeustaso);
+                YlempiLogiikka lauta4 = new YlempiLogiikka(vaikeustaso);
                 break;
         }
 
+    }
+    
+    // TESTEJÄ VARTEN OLEVAT METODIT
+    
+    public String getVaikeustaso() {
+        return vaikeustaso;
     }
     
 }
