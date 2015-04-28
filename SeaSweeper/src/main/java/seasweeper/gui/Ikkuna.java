@@ -83,6 +83,10 @@ public class Ikkuna {
         return this.napisto;
     }
     
+    public void kuva(String kuva, int a, int b) {
+        napisto[a][b].setIcon(kuvaluokka.getKuva(kuva));
+    }
+    
     // TESTEJÄ VARTEN OLEVAT METODIT
     
     

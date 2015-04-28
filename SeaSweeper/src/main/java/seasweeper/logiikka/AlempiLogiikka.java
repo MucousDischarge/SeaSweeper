@@ -2,6 +2,7 @@ package seasweeper.logiikka;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import seasweeper.gui.Ikkuna;
 import seasweeper.gui.Kuvaluokka;
 
 /**
@@ -16,14 +17,13 @@ public class AlempiLogiikka {
     private int l;
     private Ruutu[][] ruudukko;
     private YlempiLogiikka ylempilogiikka;
+    private Ikkuna ikkuna;
     private Boolean pelipaattynyt;
     private int miinojenmaara;
     private long alkuaika;
-    private final Kuvaluokka kuvaluokka;
     private JButton[][] napisto;
 
     public AlempiLogiikka(YlempiLogiikka ylempilogiikka) {
-        this.kuvaluokka = new Kuvaluokka();
         this.ylempilogiikka = ylempilogiikka;
     }
 
@@ -52,10 +52,10 @@ public class AlempiLogiikka {
                     } else if (source == napisto[a][b]) {
                         if (!(ruudukko[a][b].onkoRaivattu())) {
                             if (ruudukko[a][b].onkoLippu()) {
-                                napisto[a][b].setIcon(kuvaluokka.getKuva("tummavesi"));
+                                ikkuna.kuva("tummavesi", a, b);
                                 ruudukko[a][b].poistaLippu();
                             } else {
-                                napisto[a][b].setIcon(kuvaluokka.getKuva("lippu"));
+                                ikkuna.kuva("lippu", a, b);
                                 ruudukko[a][b].lisaaLippu();
                             }
                         }
@@ -70,7 +70,7 @@ public class AlempiLogiikka {
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
                 if (miinojenluoja.onkoRuutuMiina(ruudukko[x][y])) {
-                    napisto[x][y].setIcon(kuvaluokka.getKuva("miina"));
+                    ikkuna.kuva("miina", x, y);
                 }
             }
         }
@@ -82,7 +82,7 @@ public class AlempiLogiikka {
             int[][] lista = luoLista(a, b);
             int luku = laskeLuku(lista);
 
-            napisto[a][b].setIcon(kuvaluokka.getKuva(String.valueOf(luku)));
+            ikkuna.kuva(String.valueOf(luku), a, b);
 
             ruudukko[a][b].onRaivattu();
 
@@ -165,7 +165,7 @@ public class AlempiLogiikka {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < l; y++) {
                     if (ruudukko[x][y].onkoMiina()) {
-                        napisto[x][y].setIcon(kuvaluokka.getKuva("lippu"));
+                        ikkuna.kuva("lippu", x, y);
                     }
                 }
             }
@@ -176,7 +176,8 @@ public class AlempiLogiikka {
     }
     
     public void asetaNapistoJaRuudukko() {
-        this.napisto = ylempilogiikka.getNapisto();
+        this.ikkuna = ylempilogiikka.getIkkuna();
+        this.napisto = ikkuna.getNapisto();
         this.ruudukko = ylempilogiikka.getRuudukko();
         this.k = this.ruudukko.length;
         this.l = this.ruudukko[0].length;
