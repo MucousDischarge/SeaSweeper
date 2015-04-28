@@ -46,14 +46,6 @@ public class Miinojenluoja {
         }
     }
 
-    public boolean onkoRuutuMiina(Ruutu ruutu) {
-        if (ruutu.onkoMiina()) {
-            return true;
-        }
-
-        return false;
-    }
-
     public static int satunnainenLukuValilta(int minimi, int maksimi) {
 
         Random randomi = new Random();

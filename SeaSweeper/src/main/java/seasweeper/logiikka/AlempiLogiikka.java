@@ -41,7 +41,7 @@ public class AlempiLogiikka {
                             miinojenluoja.luoMiinat(a, b, miinojenmaara);
                         }
 
-                        if (miinojenluoja.onkoRuutuMiina(ruudukko[a][b])) {
+                        if (ruudukko[a][b].onkoMiina()) {
                             System.out.println("Osuit miinaan...");
                             Rajahti();
                             //kaikki miinat paljastuvat ruudulla
@@ -69,7 +69,7 @@ public class AlempiLogiikka {
     public void Rajahti() {
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
-                if (miinojenluoja.onkoRuutuMiina(ruudukko[x][y])) {
+                if (ruudukko[x][y].onkoMiina()) {
                     ikkuna.kuva("miina", x, y);
                 }
             }
