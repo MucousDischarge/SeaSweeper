@@ -24,15 +24,14 @@ public class Kuvaluokka {
     
     public ImageIcon getKuva(String kuva) { 
         switch (kuva) {
-            case "miina.png":
+            case "miina":
                 return miina;
-            case "lippu.png":
+            case "lippu":
                 return lippu;
-            case "tummavesi.png":
+            case "tummavesi":
                 return tummavesi;
             default:
-                String[] osat = kuva.split("\\.");
-                return kuvat[Integer.parseInt(osat[0])];
+                return kuvat[Integer.parseInt(kuva)];
         }
     }
 }

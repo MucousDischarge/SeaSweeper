@@ -38,11 +38,11 @@ public class LautakuuntelijaTest {
     }
     
     @Test
-    public void testLeftClick() {
+    public void testFirstClick() {
         this.nappi = new JButton();
         nappi.addMouseListener(lautakuuntelija);
         nappi.doClick();
-        assertEquals(false, alempilogiikka.getOnkoEnsimmainenKlikkaus());
+        assertEquals(true, alempilogiikka.getOnkoEnsimmainenKlikkaus());
     }
     
     @Test

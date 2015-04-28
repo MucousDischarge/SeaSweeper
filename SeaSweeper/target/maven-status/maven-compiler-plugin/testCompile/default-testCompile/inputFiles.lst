@@ -1,6 +1,9 @@
-/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/gui/LautaTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/RuutuTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/YlempiLogiikkaTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/gui/KuvaluokkaTest.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/gui/LautakuuntelijaTest.java
-/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/PeruslogiikkaTest.java
-/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/MiinaluokkaTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/gui/IkkunaTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/MiinojenluojaTest.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/logiikka/AlempiLogiikkaTest.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/gui/MenukuuntelijaTest.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/test/java/seasweeper/MainTest.java

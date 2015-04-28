@@ -26,8 +26,7 @@ public class AlempiLogiikkaTest {
     }
     
     @Test
-    public void getNapisto() {
-        assertEquals(8, alempilogiikka.getNapisto().length);
+    public void setNapisto() {
     }
     
     @Test

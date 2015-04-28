@@ -50,7 +50,7 @@ public class Ikkuna {
         jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfraami.setResizable(false);
         jfraami.setLayout(new GridLayout(k, l));
-        this.napisto = alempilogiikka.getNapisto();
+        this.napisto = new JButton[k][l];
         JMenuBar valikko = new JMenuBar();
         JMenu vaikeusvalinta = new JMenu("Vaikeustaso");
         valikko.add(vaikeusvalinta);
@@ -69,11 +69,12 @@ public class Ikkuna {
         valikko.add(reset);
         reset.addActionListener(menukuuntelija);
         jfraami.setJMenuBar(valikko);
+        alempilogiikka.setNapisto(napisto);
     }
 
     public JButton luoNappi(int i, int j) {
         this.napisto[i][j] = new JButton();
-        this.napisto[i][j].setIcon(kuvaluokka.getKuva("tummavesi.png"));
+        this.napisto[i][j].setIcon(kuvaluokka.getKuva("tummavesi"));
         this.napisto[i][j].addMouseListener(lautakuuntelija);
         jfraami.add(this.napisto[i][j]);
         return this.napisto[i][j];
@@ -85,10 +86,6 @@ public class Ikkuna {
     
     public void visible() {
         jfraami.setVisible(true);
-    }
-    
-    public JButton[][] getNapisto() {
-        return this.napisto;
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT

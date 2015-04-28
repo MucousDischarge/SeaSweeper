@@ -16,12 +16,6 @@ public class AlempiLogiikka {
     private final int l;
     private final Ruutu[][] ruudukko;
     private JButton[][] napisto;
-    private final ImageIcon miina;
-    private final ImageIcon lippu;
-    private final ImageIcon tummavesi;
-    private final ImageIcon kuvat[];
-    private final Boolean[][] raivattujenlista;
-    private final Boolean[][] lippulista;
     private Boolean pelipaattynyt;
     private final int miinojenmaara;
     private long alkuaika;
@@ -33,17 +27,8 @@ public class AlempiLogiikka {
         this.l = l;
         this.ruudukko = ruudukko;
         this.kuvaluokka = new Kuvaluokka();
-        this.raivattujenlista = new Boolean[k][l];
-        this.lippulista = new Boolean[k][l];
         this.miinojenluoja = new Miinojenluoja(ruudukko);
         this.napisto = new JButton[k][l];
-        this.miina = kuvaluokka.getKuva("miina.png");
-        this.lippu = kuvaluokka.getKuva("lippu.png");
-        this.tummavesi = kuvaluokka.getKuva("tummavesi.png");
-        this.kuvat = new ImageIcon[9];
-        for (int i = 0; i < 9; i++) {
-            kuvat[i] = kuvaluokka.getKuva(i + ".png");
-        }
         this.pelipaattynyt = false;
         if (l == 8) {
             miinojenmaara = 10;
@@ -77,10 +62,10 @@ public class AlempiLogiikka {
                     } else if (source == napisto[a][b]) {
                         if (!(ruudukko[a][b].onkoRaivattu())) {
                             if (ruudukko[a][b].onkoLippu()) {
-                                napisto[a][b].setIcon(tummavesi);
+                                napisto[a][b].setIcon(kuvaluokka.getKuva("tummavesi"));
                                 ruudukko[a][b].poistaLippu();
                             } else {
-                                napisto[a][b].setIcon(lippu);
+                                napisto[a][b].setIcon(kuvaluokka.getKuva("lippu"));
                                 ruudukko[a][b].lisaaLippu();
                             }
                         }
@@ -95,23 +80,23 @@ public class AlempiLogiikka {
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
                 if (miinojenluoja.onkoRuutuMiina(ruudukko[x][y])) {
-                    napisto[x][y].setIcon(miina);
+                    napisto[x][y].setIcon(kuvaluokka.getKuva("miina"));
                 }
             }
         }
         this.pelipaattynyt = true;
     }
 
-    public void Raivaaja(int a, int b, boolean liianKaukainen) {
+    public void Raivaaja(int a, int b, boolean alaLevia) {
         if (tarkista(a, b)) {
             int[][] lista = luoLista(a, b);
             int luku = laskeLuku(lista);
 
-            napisto[a][b].setIcon(kuvat[luku]);
+            napisto[a][b].setIcon(kuvaluokka.getKuva(String.valueOf(luku)));
 
             ruudukko[a][b].onRaivattu();
 
-            if (!(liianKaukainen || luku > 0)) {
+            if (!(alaLevia || luku > 0)) {
                 for (int i = 0; i < 8; i++) {
                     if (tarkista(lista[i][0], lista[i][1]) && !(ruudukko[lista[i][0]][lista[i][1]].onkoMiina())) {
 
@@ -190,7 +175,7 @@ public class AlempiLogiikka {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < l; y++) {
                     if (ruudukko[x][y].onkoMiina()) {
-                        napisto[x][y].setIcon(lippu);
+                        napisto[x][y].setIcon(kuvaluokka.getKuva("lippu"));
                     }
                 }
             }
@@ -200,8 +185,8 @@ public class AlempiLogiikka {
         }
     }
     
-    public JButton[][] getNapisto() {
-        return napisto;
+    public void setNapisto(JButton[][] napisto) {
+        this.napisto = napisto;
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT
