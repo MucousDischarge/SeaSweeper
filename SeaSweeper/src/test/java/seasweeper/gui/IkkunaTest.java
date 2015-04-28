@@ -18,7 +18,6 @@ public class IkkunaTest {
     private AlempiLogiikka alempilogiikka;
     
     public IkkunaTest() {
-        this.alempilogiikka = new AlempiLogiikka(new Ruutu[16][16], 16, 16);
     }
     
     @BeforeClass
@@ -38,50 +37,31 @@ public class IkkunaTest {
     
     @Test
     public void testHelppoK() {
-        this.ikkuna = new Ikkuna("Helppo", alempilogiikka);
-        int luku = ikkuna.getK();
-        assertEquals(8, luku);
     }
     
     @Test
     public void testHelppoL() {
-        this.ikkuna = new Ikkuna("Helppo", alempilogiikka);
-        int luku = ikkuna.getL();
-        assertEquals(8, luku);
     }
     
     @Test
     public void testKeskitasoK() {
-        this.ikkuna = new Ikkuna("Keskitaso", alempilogiikka);
-        int luku = ikkuna.getK();
-        assertEquals(16, luku);
     }
     
     @Test
     public void testKeskitasoL() {
-        this.ikkuna = new Ikkuna("Keskitaso", alempilogiikka);
-        int luku = ikkuna.getL();
-        assertEquals(16, luku);
     }
     
     @Test
     public void testVaikeaK() {
-        this.ikkuna = new Ikkuna("Vaikea", alempilogiikka);
-        int luku = ikkuna.getK();
-        assertEquals(16, luku);
     }
     
     @Test
     public void testVaikeaL() {
-        this.ikkuna = new Ikkuna("Vaikea", alempilogiikka);
-        int luku = ikkuna.getL();
-        assertEquals(30, luku);
     }
     
     @Test
     public void testJFraamiTitle() {
-        this.ikkuna = new Ikkuna("Vaikea", alempilogiikka);
-        JFrame jfraami = ikkuna.getJFraami();
+        JFrame jfraami = ikkuna.getFraami();
         assertEquals("SeaSweeper", jfraami.getTitle());
     }
     

@@ -10,8 +10,6 @@ public class Ruutu {
     private boolean onkoMiina;
     private boolean onkoRaivattu;
     private boolean onkoLippu;
-    private final int k;
-    private final int l;
     private final JButton nappi;
     
     /**
@@ -20,12 +18,10 @@ public class Ruutu {
      * @param l
      * @param nappi
      */
-    public Ruutu(int k, int l, JButton nappi) {
+    public Ruutu(JButton nappi) {
         this.onkoMiina = false;
         this.onkoRaivattu = false;
         this.onkoLippu = false;
-        this.k = k;
-        this.l = l;
         this.nappi = nappi;
     }
     
@@ -82,22 +78,6 @@ public class Ruutu {
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT
-
-    /**
-     *
-     * @return
-     */
-    public int getK() {
-        return this.k;
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public int getL() {
-        return this.l;
-    }
     
     /**
      *

@@ -1,6 +1,9 @@
 package seasweeper.logiikka;
 
+import javax.swing.JButton;
 import seasweeper.gui.Ikkuna;
+import seasweeper.gui.Lautakuuntelija;
+import seasweeper.gui.Menukuuntelija;
 
 /**
  *
@@ -10,71 +13,79 @@ public final class YlempiLogiikka {
 
     private Ikkuna ikkuna;
     private AlempiLogiikka alempilogiikka;
+    private Lautakuuntelija lautakuuntelija;
+    private Menukuuntelija menukuuntelija;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
-    private String vaikeustaso;
 
     public YlempiLogiikka() {
-        this.k = 16;
-        this.l = 16;
-        this.ruudukko = new Ruutu[k][l];
-        this.alempilogiikka = new AlempiLogiikka(ruudukko, k, l);
-        ikkuna = new Ikkuna("Keskitaso", alempilogiikka);
-        uusiIkkuna(true);
-    }
-
-    public YlempiLogiikka(String vaikeustaso) {
-        this.vaikeustaso = vaikeustaso;
-        switch (vaikeustaso) {
-            case "Helppo":
-                this.k = 8;
-                this.l = 8;
-                break;
-            case "Vaikea":
-                this.k = 16;
-                this.l = 30;
-                break;
-            default:
-                this.k = 16;
-                this.l = 16;
-                break;
-        }
-        this.ruudukko = new Ruutu[k][l];
-        this.alempilogiikka = new AlempiLogiikka(ruudukko, k, l);
-        uusiIkkuna(false);
-    }
-
-    public void uusiRuudukko(boolean ekako) {
-        //mahdollisuus laudan uusimisille ilman uuden ikkunan luomista
-        //en tieda miten kutsua tätä metodia menukuuntelijassa
+        this.alempilogiikka = new AlempiLogiikka(this);
+        this.lautakuuntelija = new Lautakuuntelija(alempilogiikka);
+        this.menukuuntelija = new Menukuuntelija(this);
+        uusiIkkuna(true, 16, 16);
+    } 
+    
+    public void uusiRuudukko() {
+        ikkuna.poistaNapit(k, l);
+        ikkuna.getFraami().validate();
+        ikkuna.getFraami().repaint();
         
-        //if (false) {
-        //    for (int i = 0; i < k; i++) {
-        //        for (int j = 0; j < l; j++) {
-        //            ikkuna.poistaNappi(i, j);
-        //        }
-        //   }
-        //}
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < l; j++) {
-                ruudukko[i][j] = new Ruutu(i, j, ikkuna.luoNappi(i, j));
-            }
-        }
-
+        ruudukonLuonti(k, l);
+        ikkuna.getFraami().validate();
+        ikkuna.getFraami().repaint();
     }
 
-    public void uusiIkkuna(boolean ekako) {
+    public void uusiRuudukko(int a, int b) {
+        ruudukonLuonti(a, b);
+    }
+
+    public void uusiIkkuna(boolean ekako, int a, int b) {
+        k = a;
+        l = b;
+        
         if (ekako) {
-            ikkuna = new Ikkuna("Keskitaso", alempilogiikka);
+            ikkuna = new Ikkuna(getMenukuuntelija(), getLautakuuntelija(), k, l);
         } else {
-            ikkuna = new Ikkuna(vaikeustaso, alempilogiikka);
+            ikkuna = new Ikkuna(getMenukuuntelija(), getLautakuuntelija(), k, l);
         }
-        uusiRuudukko(ekako);
+        uusiRuudukko(k, l);
         ikkuna.visible();
     }
     
-    // TESTEJÄ VARTEN OLEVAT METODIT
+    public void ruudukonLuonti(int a, int b) {
+        this.ruudukko = new Ruutu[a][b];
+        
+        for (int i = 0; i < a; i++) {
+            for (int j = 0; j < b; j++) {
+                this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j));
+            }
+        }
+        
+        alempilogiikka.setOnEnsimmainenKlikkaus();
+        alempilogiikka.setPeliEiPaattynyt();
+    }
+    
+    public Menukuuntelija getMenukuuntelija() {
+        return menukuuntelija;
+    }
+    
+    public Lautakuuntelija getLautakuuntelija() {
+        return lautakuuntelija;
+    }
+    
+    public Ikkuna getIkkuna() {
+        return ikkuna;
+    }
+    
+    public JButton[][] getNapisto() {
+        return ikkuna.getNapisto();
+    }
+    
+    public Ruutu[][] getRuudukko() {
+        return ruudukko;
+    }
+    
     public int getK() {
         return k;
     }
@@ -83,7 +94,5 @@ public final class YlempiLogiikka {
         return l;
     }
     
-    public String getVaikeustaso() {
-        return vaikeustaso;
-    }
+    // TESTEJÄ VARTEN OLEVAT METODIT
 }

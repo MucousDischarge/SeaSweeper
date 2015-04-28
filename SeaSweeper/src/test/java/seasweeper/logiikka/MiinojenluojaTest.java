@@ -16,7 +16,7 @@ public class MiinojenluojaTest {
     
     public MiinojenluojaTest() {
         this.miinojenluoja = new Miinojenluoja(new Ruutu[16][16]);
-        this.ruutu = new Ruutu(8, 8, new JButton());
+        this.ruutu = new Ruutu(new JButton());
     }
     
     @BeforeClass

@@ -11,35 +11,26 @@ import seasweeper.gui.Kuvaluokka;
 public class AlempiLogiikka {
 
     private boolean onkoEnsimmainenKlikkaus;
-    private final Miinojenluoja miinojenluoja;
-    private final int k;
-    private final int l;
-    private final Ruutu[][] ruudukko;
-    private JButton[][] napisto;
+    private Miinojenluoja miinojenluoja;
+    private int k;
+    private int l;
+    private Ruutu[][] ruudukko;
+    private YlempiLogiikka ylempilogiikka;
     private Boolean pelipaattynyt;
-    private final int miinojenmaara;
+    private int miinojenmaara;
     private long alkuaika;
     private final Kuvaluokka kuvaluokka;
+    private JButton[][] napisto;
 
-    public AlempiLogiikka(Ruutu[][] ruudukko, int k, int l) {
-        this.onkoEnsimmainenKlikkaus = true;
-        this.k = k;
-        this.l = l;
-        this.ruudukko = ruudukko;
+    public AlempiLogiikka(YlempiLogiikka ylempilogiikka) {
         this.kuvaluokka = new Kuvaluokka();
-        this.miinojenluoja = new Miinojenluoja(ruudukko);
-        this.napisto = new JButton[k][l];
-        this.pelipaattynyt = false;
-        if (l == 8) {
-            miinojenmaara = 10;
-        } else if (l == 16) {
-            miinojenmaara = 40;
-        } else {
-            miinojenmaara = 99;
-        }
+        this.ylempilogiikka = ylempilogiikka;
     }
 
     public void napinpainallus(Object source, boolean oikeako) {
+        if (onkoEnsimmainenKlikkaus) { 
+            asetaNapistoJaRuudukko();
+        }
         if (!pelipaattynyt) {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < l; b++) {
@@ -57,7 +48,6 @@ public class AlempiLogiikka {
                         } else {
                             Raivaaja(a, b, false);
                             //alta paljastuu muuta kuin miina, ja läheiset paljastuvat myös
-
                         }
                     } else if (source == napisto[a][b]) {
                         if (!(ruudukko[a][b].onkoRaivattu())) {
@@ -185,8 +175,27 @@ public class AlempiLogiikka {
         }
     }
     
-    public void setNapisto(JButton[][] napisto) {
-        this.napisto = napisto;
+    public void asetaNapistoJaRuudukko() {
+        this.napisto = ylempilogiikka.getNapisto();
+        this.ruudukko = ylempilogiikka.getRuudukko();
+        this.k = this.ruudukko.length;
+        this.l = this.ruudukko[0].length;
+        this.miinojenluoja = new Miinojenluoja(ruudukko);
+        if (l == 8) {
+            miinojenmaara = 10;
+        } else if (l == 16) {
+            miinojenmaara = 40;
+        } else {
+            miinojenmaara = 99;
+        }
+    }
+    
+    public void setOnEnsimmainenKlikkaus() {
+        onkoEnsimmainenKlikkaus = true;
+    }
+    
+    public void setPeliEiPaattynyt() {
+        pelipaattynyt = false;
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT

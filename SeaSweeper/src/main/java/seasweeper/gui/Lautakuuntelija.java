@@ -15,12 +15,14 @@ import seasweeper.logiikka.AlempiLogiikka;
  */
 public class Lautakuuntelija implements MouseListener {
 
-    public AlempiLogiikka alempilogiikka;
+    private AlempiLogiikka alempilogiikka;
+    
 
     /**
      *
      * @param alempilogiikka
      */
+    
     public Lautakuuntelija(AlempiLogiikka alempilogiikka) {
         this.alempilogiikka = alempilogiikka;
     }

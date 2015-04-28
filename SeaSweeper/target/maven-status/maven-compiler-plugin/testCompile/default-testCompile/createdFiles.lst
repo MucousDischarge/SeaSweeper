@@ -3,7 +3,6 @@ seasweeper/logiikka/AlempiLogiikkaTest.class
 seasweeper/logiikka/YlempiLogiikkaTest.class
 seasweeper/gui/KuvaluokkaTest.class
 seasweeper/gui/IkkunaTest.class
-seasweeper/gui/LautakuuntelijaTest.class
 seasweeper/logiikka/MiinojenluojaTest.class
-seasweeper/logiikka/RuutuTest.class
 seasweeper/MainTest.class
+seasweeper/logiikka/RuutuTest.class

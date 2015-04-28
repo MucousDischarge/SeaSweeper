@@ -14,7 +14,6 @@ public class AlempiLogiikkaTest {
     private AlempiLogiikka alempilogiikka;
     
     public AlempiLogiikkaTest() {
-        this.alempilogiikka = new AlempiLogiikka(new Ruutu[8][8], 8, 8);
     }
     
     @BeforeClass

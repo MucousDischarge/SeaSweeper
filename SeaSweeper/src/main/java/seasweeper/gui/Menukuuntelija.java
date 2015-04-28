@@ -2,7 +2,6 @@ package seasweeper.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import seasweeper.logiikka.YlempiLogiikka;
 
 /**
@@ -10,42 +9,43 @@ import seasweeper.logiikka.YlempiLogiikka;
  * @author ez
  */
 public class Menukuuntelija implements ActionListener {
-    private final JFrame jfraami;
-    private final String vaikeustaso;
-    
-    public Menukuuntelija(JFrame jfraami, String vaikeustaso) {
-        this.jfraami = jfraami;
-        this.vaikeustaso = vaikeustaso;
+
+    private YlempiLogiikka ylempilogiikka;
+    private Ikkuna ikkuna;
+
+    public Menukuuntelija(YlempiLogiikka ylempilogiikka) {
+        this.ylempilogiikka = ylempilogiikka;
     }
+
     /**
      *
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        jfraami.dispose();
-        
+
         switch (e.getActionCommand()) {
             case "Helppo":
-                YlempiLogiikka lauta1 = new YlempiLogiikka("Helppo");
+                ikkunanLuonti(8, 8);
                 break;
             case "Keskitaso":
-                YlempiLogiikka lauta2 = new YlempiLogiikka("Keskitaso");
+                ikkunanLuonti(16, 16);
                 break;
             case "Vaikea":
-                YlempiLogiikka lauta3 = new YlempiLogiikka("Vaikea");
+                ikkunanLuonti(16, 30);
                 break;
             default:
-                YlempiLogiikka lauta4 = new YlempiLogiikka(vaikeustaso);
+                ylempilogiikka.uusiRuudukko();
                 break;
         }
 
     }
-    
-    // TESTEJÄ VARTEN OLEVAT METODIT
-    
-    public String getVaikeustaso() {
-        return vaikeustaso;
+
+    public void ikkunanLuonti(int a, int b) {
+        this.ikkuna = ylempilogiikka.getIkkuna();
+        ikkuna.getFraami().dispose();
+        ylempilogiikka.uusiIkkuna(true, a, b);
     }
-    
+
+    // TESTEJÄ VARTEN OLEVAT METODIT
 }

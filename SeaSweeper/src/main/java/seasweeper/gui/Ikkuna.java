@@ -14,33 +14,19 @@ import seasweeper.logiikka.AlempiLogiikka;
  */
 public class Ikkuna {
 
-    private final JFrame jfraami;
-    private final JButton napisto[][];
-    private final int k;
-    private final int l;
-    private AlempiLogiikka alempilogiikka;
-    private final Lautakuuntelija lautakuuntelija;
-    private final Menukuuntelija menukuuntelija;
-    private final Kuvaluokka kuvaluokka;
-    private String vaikeustaso;
+    private JFrame jfraami;
+    private JButton napisto[][];
+    private int k;
+    private int l;
+    private Lautakuuntelija lautakuuntelija;
+    private Menukuuntelija menukuuntelija;
+    private Kuvaluokka kuvaluokka;
 
-    public Ikkuna(String vaikeustaso, AlempiLogiikka alempilogiikka){
-        this.vaikeustaso = vaikeustaso;
-        this.alempilogiikka = alempilogiikka;
-        switch (vaikeustaso) {
-            case "Helppo":
-                this.k = 8;
-                this.l = 8;
-                break;
-            case "Vaikea":
-                this.k = 16;
-                this.l = 30;
-                break;
-            default:
-                this.k = 16;
-                this.l = 16;
-                break;
-        }
+    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l){
+        this.menukuuntelija = menukuuntelija;
+        this.lautakuuntelija = lautakuuntelija;
+        this.k = k;
+        this.l = l;
         this.jfraami = new JFrame();
         this.kuvaluokka = new Kuvaluokka();
         
@@ -60,8 +46,6 @@ public class Ikkuna {
         vaikeusvalinta.add(helppo);
         vaikeusvalinta.add(keskitaso);
         vaikeusvalinta.add(vaikea);
-        this.lautakuuntelija = new Lautakuuntelija(alempilogiikka);
-        this.menukuuntelija = new Menukuuntelija(jfraami, vaikeustaso);
         helppo.addActionListener(menukuuntelija);
         keskitaso.addActionListener(menukuuntelija);
         vaikea.addActionListener(menukuuntelija);
@@ -69,7 +53,6 @@ public class Ikkuna {
         valikko.add(reset);
         reset.addActionListener(menukuuntelija);
         jfraami.setJMenuBar(valikko);
-        alempilogiikka.setNapisto(napisto);
     }
 
     public JButton luoNappi(int i, int j) {
@@ -80,12 +63,24 @@ public class Ikkuna {
         return this.napisto[i][j];
     }
     
-    public void poistaNappi(int i, int j) {
-        jfraami.remove(this.napisto[i][j]);
+    public void poistaNapit(int i, int j) {
+        for (int a = 0; a < i; a++) {
+            for (int b = 0; b < j; b++) {
+                jfraami.remove(this.napisto[a][b]);
+            }
+        }
     }
     
     public void visible() {
         jfraami.setVisible(true);
+    }
+    
+    public JFrame getFraami() {
+        return jfraami;
+    }
+    
+    public JButton[][] getNapisto() {
+        return this.napisto;
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT
@@ -102,9 +97,5 @@ public class Ikkuna {
     
     public int getL() {
         return l;
-    }
-    
-    public JFrame getJFraami() {
-        return jfraami;
     }
 }

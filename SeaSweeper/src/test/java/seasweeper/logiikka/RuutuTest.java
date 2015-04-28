@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class RuutuTest {
     private Ruutu ruutu;
     public RuutuTest() {
-        this.ruutu = new Ruutu(16, 16, new JButton());
+        this.ruutu = new Ruutu(new JButton());
     }
     
     @BeforeClass

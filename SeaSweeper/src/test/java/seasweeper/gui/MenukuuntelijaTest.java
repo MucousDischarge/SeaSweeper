@@ -26,8 +26,6 @@ public class MenukuuntelijaTest {
     
     @Test
     public void testVaikeustasoString() {
-        this.menukuuntelija = new Menukuuntelija(new JFrame(), "Vaikea");
-        assertEquals("Vaikea", menukuuntelija.getVaikeustaso());
     }
     
 }
