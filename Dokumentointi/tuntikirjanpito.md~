@@ -52,3 +52,6 @@ Siirsin pienempiä toimintoja omiin luokkiinsa. Poistin huonot ArrayListit ja Ha
 
 ###23.04.2015
 Loin eri vaikeustasot, ja siistin taas vähän koodia. Lisäsin ajanpidon. Jostain syystä ikkunan koko heittelee välillä aivan hitusen, vaikka sen ei pitäisi. 4 tuntia käytetty.
+
+###24.04.2015
+Muutin ohjelman aivan kokonaan, toimimaan Ruutu-objektin ympärillä. 8 tuntia käytetty.

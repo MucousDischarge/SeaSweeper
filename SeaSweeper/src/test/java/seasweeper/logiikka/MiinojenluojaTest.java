@@ -28,17 +28,6 @@ public class MiinojenluojaTest {
     }
     
     @Test
-    public void testaaHavaitaankoMiinaaton() {
-        assertEquals(false, miinojenluoja.onkoRuutuMiina(ruutu));
-    }
-      
-    @Test
-    public void testaaHavaitaankoMiina() {
-        this.ruutu.laitaMiina();
-        assertEquals(true, miinojenluoja.onkoRuutuMiina(ruutu));
-    }
-    
-    @Test
     public void testaaRuudukko() {
         assertEquals(16, miinojenluoja.getRuudukko().length);
     }

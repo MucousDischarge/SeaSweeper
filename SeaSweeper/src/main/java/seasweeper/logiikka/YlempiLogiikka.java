@@ -1,6 +1,5 @@
 package seasweeper.logiikka;
 
-import javax.swing.JButton;
 import seasweeper.gui.Ikkuna;
 import seasweeper.gui.Lautakuuntelija;
 import seasweeper.gui.Menukuuntelija;
@@ -12,9 +11,9 @@ import seasweeper.gui.Menukuuntelija;
 public final class YlempiLogiikka {
 
     private Ikkuna ikkuna;
-    private AlempiLogiikka alempilogiikka;
-    private Lautakuuntelija lautakuuntelija;
-    private Menukuuntelija menukuuntelija;
+    private final AlempiLogiikka alempilogiikka;
+    private final Lautakuuntelija lautakuuntelija;
+    private final Menukuuntelija menukuuntelija;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
@@ -24,7 +23,20 @@ public final class YlempiLogiikka {
         this.lautakuuntelija = new Lautakuuntelija(alempilogiikka);
         this.menukuuntelija = new Menukuuntelija(this);
         uusiIkkuna(true, 16, 16);
-    } 
+    }
+    
+    public void uusiIkkuna(boolean ekako, int a, int b) {
+        k = a;
+        l = b;
+        
+        if (ekako) {
+            ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l);
+        } else {
+            ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l);
+        }
+        uusiRuudukko(k, l);
+        ikkuna.visible();
+    }
     
     public void uusiRuudukko() {
         ikkuna.poistaNapit(k, l);
@@ -39,19 +51,6 @@ public final class YlempiLogiikka {
     public void uusiRuudukko(int a, int b) {
         ruudukonLuonti(a, b);
     }
-
-    public void uusiIkkuna(boolean ekako, int a, int b) {
-        k = a;
-        l = b;
-        
-        if (ekako) {
-            ikkuna = new Ikkuna(getMenukuuntelija(), getLautakuuntelija(), k, l);
-        } else {
-            ikkuna = new Ikkuna(getMenukuuntelija(), getLautakuuntelija(), k, l);
-        }
-        uusiRuudukko(k, l);
-        ikkuna.visible();
-    }
     
     public void ruudukonLuonti(int a, int b) {
         this.ruudukko = new Ruutu[a][b];
@@ -61,37 +60,19 @@ public final class YlempiLogiikka {
                 this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j));
             }
         }
-        
-        alempilogiikka.setOnEnsimmainenKlikkaus();
-        alempilogiikka.setPeliEiPaattynyt();
+        alempilogiikka.setArvot(ruudukko, k, l);
     }
     
-    public Menukuuntelija getMenukuuntelija() {
-        return menukuuntelija;
-    }
-    
-    public Lautakuuntelija getLautakuuntelija() {
-        return lautakuuntelija;
+    public void kuva(String kuva, int a, int b) {
+        ikkuna.kuva(kuva, a, b);
     }
     
     public Ikkuna getIkkuna() {
         return ikkuna;
     }
     
-    public JButton[][] getNapisto() {
-        return ikkuna.getNapisto();
-    }
-    
-    public Ruutu[][] getRuudukko() {
-        return ruudukko;
-    }
-    
-    public int getK() {
-        return k;
-    }
-    
-    public int getL() {
-        return l;
+    public Object getNappi(int a, int b) {
+        return ikkuna.getNappi(a, b);
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT

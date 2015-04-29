@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import seasweeper.logiikka.AlempiLogiikka;
 import seasweeper.logiikka.Ruutu;
+import seasweeper.logiikka.YlempiLogiikka;
 
 /**
  *
@@ -15,9 +16,10 @@ import seasweeper.logiikka.Ruutu;
  */
 public class IkkunaTest {
     private Ikkuna ikkuna;
-    private AlempiLogiikka alempilogiikka;
     
     public IkkunaTest() {
+        
+        ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8);
     }
     
     @BeforeClass

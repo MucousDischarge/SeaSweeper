@@ -1,9 +1,11 @@
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Lautakuuntelija.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Miinojenluoja.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/YlempiLogiikka.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Raivaaja.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Ruutu.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Menukuuntelija.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Kuvaluokka.java
+/home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/Voitontarkastaja.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/gui/Ikkuna.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/logiikka/AlempiLogiikka.java
 /home/ezaalto/SeaSweeper/SeaSweeper/src/main/java/seasweeper/Main.java

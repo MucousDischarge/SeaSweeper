@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import seasweeper.logiikka.AlempiLogiikka;
 
 /**
  *
@@ -14,7 +13,7 @@ import seasweeper.logiikka.AlempiLogiikka;
  */
 public class Ikkuna {
 
-    private JFrame jfraami;
+    private final JFrame jfraami;
     private JButton napisto[][];
     private int k;
     private int l;
@@ -87,13 +86,11 @@ public class Ikkuna {
         napisto[a][b].setIcon(kuvaluokka.getKuva(kuva));
     }
     
-    // TESTEJÄ VARTEN OLEVAT METODIT
-    
-    
-
     public JButton getNappi(int i, int j) {
         return this.napisto[i][j];
     }
+    
+    // TESTEJÄ VARTEN OLEVAT METODIT
     
     public int getK() {
         return k;
