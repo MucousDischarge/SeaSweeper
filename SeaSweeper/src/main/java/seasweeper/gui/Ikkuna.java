@@ -27,6 +27,7 @@ public class Ikkuna {
         this.kuvaluokka = new Kuvaluokka();
         this.k = k;
         this.l = l;
+        this.napisto = new JButton[k][l];
         this.jfraami = new JFrame();
         
         jfraami.setSize((l * 22), (k * 25));
@@ -35,22 +36,27 @@ public class Ikkuna {
         jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfraami.setResizable(false);
         jfraami.setLayout(new GridLayout(k, l));
-        this.napisto = new JButton[k][l];
+        
         JMenuBar valikko = new JMenuBar();
         JMenu vaikeusvalinta = new JMenu("Vaikeustaso");
         valikko.add(vaikeusvalinta);
+        
         JMenuItem helppo = new JMenuItem("Helppo");
         JMenuItem keskitaso = new JMenuItem("Keskitaso");
         JMenuItem vaikea = new JMenuItem("Vaikea");
+        
         vaikeusvalinta.add(helppo);
         vaikeusvalinta.add(keskitaso);
         vaikeusvalinta.add(vaikea);
+        
         helppo.addActionListener(menukuuntelija);
         keskitaso.addActionListener(menukuuntelija);
         vaikea.addActionListener(menukuuntelija);
+        
         JMenuItem reset = new JMenuItem("Reset");
         valikko.add(reset);
         reset.addActionListener(menukuuntelija);
+        
         jfraami.setJMenuBar(valikko);
     }
 
