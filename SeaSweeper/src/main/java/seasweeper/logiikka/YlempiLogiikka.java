@@ -9,11 +9,11 @@ import seasweeper.gui.Menukuuntelija;
  * @author ez
  */
 public final class YlempiLogiikka {
-
-    private Ikkuna ikkuna;
+    
     private final AlempiLogiikka alempilogiikka;
     private final Lautakuuntelija lautakuuntelija;
     private final Menukuuntelija menukuuntelija;
+    private Ikkuna ikkuna;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
@@ -37,22 +37,8 @@ public final class YlempiLogiikka {
         uusiRuudukko(k, l);
         ikkuna.visible();
     }
-    
-    public void uusiRuudukko() {
-        ikkuna.poistaNapit(k, l);
-        ikkuna.getFraami().validate();
-        ikkuna.getFraami().repaint();
-        
-        ruudukonLuonti(k, l);
-        ikkuna.getFraami().validate();
-        ikkuna.getFraami().repaint();
-    }
 
     public void uusiRuudukko(int a, int b) {
-        ruudukonLuonti(a, b);
-    }
-    
-    public void ruudukonLuonti(int a, int b) {
         this.ruudukko = new Ruutu[a][b];
         
         for (int i = 0; i < a; i++) {
@@ -61,6 +47,16 @@ public final class YlempiLogiikka {
             }
         }
         alempilogiikka.setArvot(ruudukko, k, l);
+    }
+    
+    public void resetUusiRuudukko() {
+        ikkuna.poistaNapit(k, l);
+        ikkuna.getFraami().validate();
+        ikkuna.getFraami().repaint();
+        
+        uusiRuudukko(k, l);
+        ikkuna.getFraami().validate();
+        ikkuna.getFraami().repaint();
     }
     
     public void kuva(String kuva, int a, int b) {

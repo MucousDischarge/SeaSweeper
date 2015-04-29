@@ -13,21 +13,21 @@ import javax.swing.JMenuItem;
  */
 public class Ikkuna {
 
+    private final Lautakuuntelija lautakuuntelija;
+    private final Menukuuntelija menukuuntelija;
+    private final Kuvaluokka kuvaluokka;
+    private final int k;
+    private final int l;
     private final JFrame jfraami;
-    private JButton napisto[][];
-    private int k;
-    private int l;
-    private Lautakuuntelija lautakuuntelija;
-    private Menukuuntelija menukuuntelija;
-    private Kuvaluokka kuvaluokka;
-
+    private final JButton napisto[][];
+    
     public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l){
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
+        this.kuvaluokka = new Kuvaluokka();
         this.k = k;
         this.l = l;
         this.jfraami = new JFrame();
-        this.kuvaluokka = new Kuvaluokka();
         
         jfraami.setSize((l * 22), (k * 25));
         jfraami.setTitle("SeaSweeper");

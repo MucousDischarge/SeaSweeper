@@ -15,7 +15,7 @@ public class MiinojenluojaTest {
     private Ruutu ruutu;
     
     public MiinojenluojaTest() {
-        this.miinojenluoja = new Miinojenluoja(new Ruutu[16][16]);
+        this.miinojenluoja = new Miinojenluoja();
         this.ruutu = new Ruutu(new JButton());
     }
     
@@ -29,6 +29,5 @@ public class MiinojenluojaTest {
     
     @Test
     public void testaaRuudukko() {
-        assertEquals(16, miinojenluoja.getRuudukko().length);
     }
 }

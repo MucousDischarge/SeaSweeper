@@ -15,7 +15,7 @@ import seasweeper.logiikka.AlempiLogiikka;
  */
 public class Lautakuuntelija implements MouseListener {
 
-    private AlempiLogiikka alempilogiikka;
+    private final AlempiLogiikka alempilogiikka;
     
 
     /**

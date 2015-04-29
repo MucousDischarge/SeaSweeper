@@ -6,20 +6,20 @@ package seasweeper.logiikka;
  */
 public class AlempiLogiikka {
 
+    private final YlempiLogiikka ylempilogiikka;
+    private final Raivaaja raivaaja;
+    private final Voitontarkastaja voitontarkastaja;
+    private final Miinojenluoja miinojenluoja;
     private boolean onkoEnsimmainenKlikkaus;
-    private Miinojenluoja miinojenluoja;
-    private Raivaaja raivaaja;
-    private Voitontarkastaja voitontarkastaja;
+    private Boolean pelipaattynyt;
     private int k;
     private int l;
     private Ruutu[][] ruudukko;
-    private final YlempiLogiikka ylempilogiikka;
-    private Boolean pelipaattynyt;
-    private int miinojenmaara;
     private long alkuaika;
 
     public AlempiLogiikka(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
+        this.miinojenluoja = new Miinojenluoja();
         this.raivaaja = new Raivaaja(ylempilogiikka);
         this.voitontarkastaja = new Voitontarkastaja(ylempilogiikka);
     }
@@ -29,47 +29,59 @@ public class AlempiLogiikka {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < l; b++) {
                     if (source == ylempilogiikka.getNappi(a, b) && !(oikeako)) {
-                        if (onkoEnsimmainenKlikkaus) {
-                            alkuaika = System.currentTimeMillis();
-                            onkoEnsimmainenKlikkaus = false;
-                            miinojenluoja.luoMiinat(a, b, miinojenmaara);
-                        }
-
-                        if (ruudukko[a][b].onkoMiina()) {
-                            System.out.println("Osuit miinaan...");
-                            raivaaja.rajahti();
-                            this.pelipaattynyt = true;
-                            //kaikki miinat paljastuvat ruudulla
-                        } else {
-                            raivaaja.raivaus(a, b, false);
-                            //alta paljastuu muuta kuin miina, ja läheiset paljastuvat myös
-                        }
+                        vasenKlikkaus(a, b);
                     } else if (source == ylempilogiikka.getNappi(a, b)) {
-                        if (!(ruudukko[a][b].onkoRaivattu())) {
-                            if (ruudukko[a][b].onkoLippu()) {
-                                ylempilogiikka.kuva("tummavesi", a, b);
-                                ruudukko[a][b].poistaLippu();
-                            } else {
-                                ylempilogiikka.kuva("lippu", a, b);
-                                ruudukko[a][b].lisaaLippu();
-                            }
-                        }
+                        oikeaKlikkaus(a, b);
                     }
                 }
             }
-            if (voitontarkastaja.voitettiinko()) {
-                System.out.println("Voitit!");
-                System.out.println("Aikasi: " + Math.round((System.currentTimeMillis() - alkuaika) / 1000) + " sekuntia.");
-                this.pelipaattynyt = true;
-            }
+            tarkistetaanVoitettiinko();
         }
     }
 
+    public void vasenKlikkaus(int a, int b) {
+        if (onkoEnsimmainenKlikkaus) {
+            alkuaika = System.currentTimeMillis();
+            onkoEnsimmainenKlikkaus = false;
+            miinojenluoja.luoMiinat(a, b);
+        }
+
+        if (ruudukko[a][b].onkoMiina()) {
+            System.out.println("Osuit miinaan...");
+            raivaaja.rajahti();
+            //kaikki miinat paljastuvat ruudulla
+            this.pelipaattynyt = true;
+        } else {
+            raivaaja.raivaus(a, b, false);
+            //ruudun sisältö paljastetaan, ja tyhjän tapauksessa leviää
+        }
+    }
+
+    public void oikeaKlikkaus(int a, int b) {
+        if (!(ruudukko[a][b].onkoRaivattu())) {
+            if (ruudukko[a][b].onkoLippu()) {
+                ylempilogiikka.kuva("tummavesi", a, b);
+                ruudukko[a][b].poistaLippu();
+            } else {
+                ylempilogiikka.kuva("lippu", a, b);
+                ruudukko[a][b].lisaaLippu();
+            }
+        }
+    }
+    
+    public void tarkistetaanVoitettiinko() {
+        if (voitontarkastaja.voitettiinko()) {
+            System.out.println("Voitit!");
+            System.out.println("Aikasi: " + Math.round((System.currentTimeMillis() - alkuaika) / 1000) + " sekuntia.");
+            this.pelipaattynyt = true;
+        }
+    }
+    
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         this.ruudukko = ruudukko;
         this.k = k;
         this.l = l;
-        this.miinojenluoja = new Miinojenluoja(ruudukko);
+        int miinojenmaara;
         if (l == 8) {
             miinojenmaara = 10;
         } else if (l == 16) {
@@ -77,6 +89,7 @@ public class AlempiLogiikka {
         } else {
             miinojenmaara = 99;
         }
+        miinojenluoja.setRuudukko(ruudukko, miinojenmaara);
         raivaaja.setArvot(ruudukko, k, l);
         voitontarkastaja.setArvot(ruudukko, k, l, miinojenmaara);
         onkoEnsimmainenKlikkaus = true;

@@ -7,21 +7,21 @@ import java.util.Random;
  * @author ez
  */
 public class Miinojenluoja {
-    private final Ruutu[][] ruudukko;
+    private Ruutu[][] ruudukko;
+    private int miinojenmaara;
 
-    public Miinojenluoja(Ruutu[][] ruudukko) {
-        this.ruudukko = ruudukko;
+    public Miinojenluoja() {
     }
 
-    public void luoMiinat(int a, int b, int miinamaara) {
+    public void luoMiinat(int a, int b) {
         int w = 0;
 
         int miinaY;
         int miinaX;
 
-        while (w < miinamaara) {
+        while (w < miinojenmaara) {
 
-            switch (miinamaara) {
+            switch (miinojenmaara) {
                 case 10:
                     miinaY = satunnainenLukuValilta(0, 7);
                     miinaX = satunnainenLukuValilta(0, 7);
@@ -53,6 +53,11 @@ public class Miinojenluoja {
         int satunnainenLuku = randomi.nextInt((maksimi - minimi) + 1) + minimi;
 
         return satunnainenLuku;
+    }
+    
+    public void setRuudukko(Ruutu[][] ruudukko, int miinojenmaara) {
+        this.ruudukko = ruudukko;
+        this.miinojenmaara = miinojenmaara;
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT

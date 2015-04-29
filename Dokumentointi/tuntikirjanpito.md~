@@ -55,3 +55,6 @@ Loin eri vaikeustasot, ja siistin taas vähän koodia. Lisäsin ajanpidon. Josta
 
 ###24.04.2015
 Muutin ohjelman aivan kokonaan, toimimaan Ruutu-objektin ympärillä. 8 tuntia käytetty.
+
+###29.04.2015
+Muutin hierarkiaa, ja sain eriytettyä käyttöliittymää ja logiikkaa.

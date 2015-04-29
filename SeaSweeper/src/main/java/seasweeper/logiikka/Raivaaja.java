@@ -5,6 +5,7 @@ package seasweeper.logiikka;
  * @author ez
  */
 public class Raivaaja {
+
     private final YlempiLogiikka ylempilogiikka;
     private Ruutu[][] ruudukko;
     private int k;
@@ -12,34 +13,6 @@ public class Raivaaja {
 
     public Raivaaja(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
-    }
-    
-    public void raivaus(int a, int b, boolean alaLevia) {
-        if (tarkista(a, b)) {
-            int[][] lista = luoLista(a, b);
-            int luku = laskeLuku(lista);
-
-            ylempilogiikka.kuva(String.valueOf(luku), a, b);
-
-            ruudukko[a][b].onRaivattu();
-
-            if (!(alaLevia || luku > 0)) {
-                for (int i = 0; i < 8; i++) {
-                    if (tarkista(lista[i][0], lista[i][1]) && !(ruudukko[lista[i][0]][lista[i][1]].onkoMiina())) {
-
-                        if (!(ruudukko[lista[i][0]][lista[i][1]].onkoRaivattu())) {
-                            int[][] uusiLista = luoLista(lista[i][0], lista[i][1]);
-                            if (laskeLuku(uusiLista) == 0) {
-                                raivaus(lista[i][0], lista[i][1], false);
-                            } else {
-                                raivaus(lista[i][0], lista[i][1], true);
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
     }
     
     public void rajahti() {
@@ -50,6 +23,34 @@ public class Raivaaja {
                 }
             }
         }
+    }
+
+    public void raivaus(int a, int b, boolean alaLevia) {
+        if (tarkista(a, b)) {
+            int[][] x = luoLista(a, b);
+            int luku = laskeLuku(x);
+
+            ylempilogiikka.kuva(String.valueOf(luku), a, b);
+
+            ruudukko[a][b].onRaivattu();
+
+            if (!(alaLevia) && !(luku > 0)) {
+                for (int i = 0; i < 8; i++) {
+                    if (leviaako(x[i][0], x[i][1])) {
+                        int[][] uusiLista = luoLista(x[i][0], x[i][1]);
+                        if (laskeLuku(uusiLista) == 0) {
+                            raivaus(x[i][0], x[i][1], false);
+                        } else {
+                            raivaus(x[i][0], x[i][1], true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public boolean leviaako(int a, int b) {
+        return tarkista(a, b) && !(ruudukko[a][b].onkoMiina()) && !(ruudukko[a][b].onkoRaivattu());
     }
 
     public int[][] luoLista(int a, int b) {
@@ -75,31 +76,25 @@ public class Raivaaja {
         return lista;
     }
 
-    public int laskeLuku(int[][] lista) {
+    public int laskeLuku(int[][] x) {
         int luku = 0;
 
         for (int i = 0; i < 8; i++) {
-            if (tarkista(lista[i][0], lista[i][1])) {
-                if (ruudukko[lista[i][0]][lista[i][1]].onkoMiina()) {
-                    luku++;
-                }
+            if (tarkista(x[i][0], x[i][1]) && ruudukko[x[i][0]][x[i][1]].onkoMiina()) {
+                luku++;
             }
         }
 
         return luku;
     }
-    
-    public boolean tarkista(int a, int b) {
-        if (a <= k - 1 && a >= 0 && b <= l - 1 && b >= 0) {
-            return true;
-        }
 
-        return false;
+    public boolean tarkista(int a, int b) {
+        return a <= k - 1 && a >= 0 && b <= l - 1 && b >= 0;
     }
-    
+
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         this.ruudukko = ruudukko;
         this.k = k;
         this.l = l;
     }
- }
+}

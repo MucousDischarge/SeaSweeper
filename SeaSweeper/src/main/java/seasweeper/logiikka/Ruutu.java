@@ -10,19 +10,15 @@ public class Ruutu {
     private boolean onkoMiina;
     private boolean onkoRaivattu;
     private boolean onkoLippu;
-    private final JButton nappi;
     
     /**
      *
-     * @param k
-     * @param l
      * @param nappi
      */
     public Ruutu(JButton nappi) {
         this.onkoMiina = false;
         this.onkoRaivattu = false;
         this.onkoLippu = false;
-        this.nappi = nappi;
     }
     
     /**
@@ -78,12 +74,4 @@ public class Ruutu {
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT
-    
-    /**
-     *
-     * @return
-     */
-    public JButton getNappi() {
-        return this.nappi;
-    }
 }

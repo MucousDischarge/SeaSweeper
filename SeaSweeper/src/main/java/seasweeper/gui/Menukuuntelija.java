@@ -10,7 +10,7 @@ import seasweeper.logiikka.YlempiLogiikka;
  */
 public class Menukuuntelija implements ActionListener {
 
-    private YlempiLogiikka ylempilogiikka;
+    private final YlempiLogiikka ylempilogiikka;
     private Ikkuna ikkuna;
 
     public Menukuuntelija(YlempiLogiikka ylempilogiikka) {
@@ -35,7 +35,7 @@ public class Menukuuntelija implements ActionListener {
                 ikkunanLuonti(16, 30);
                 break;
             default:
-                ylempilogiikka.uusiRuudukko();
+                ylempilogiikka.resetUusiRuudukko();
                 break;
         }
 
