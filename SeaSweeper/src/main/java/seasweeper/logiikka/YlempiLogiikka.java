@@ -1,5 +1,6 @@
 package seasweeper.logiikka;
 
+import java.io.IOException;
 import seasweeper.gui.Ikkuna;
 import seasweeper.gui.Lautakuuntelija;
 import seasweeper.gui.Menukuuntelija;
@@ -18,14 +19,14 @@ public final class YlempiLogiikka {
     private int k;
     private int l;
 
-    public YlempiLogiikka() {
+    public YlempiLogiikka() throws IOException {
         this.alempilogiikka = new AlempiLogiikka(this);
         this.lautakuuntelija = new Lautakuuntelija(alempilogiikka);
         this.menukuuntelija = new Menukuuntelija(this);
         uusiIkkuna(true, 16, 16);
     }
     
-    public void uusiIkkuna(boolean ekako, int a, int b) {
+    public void uusiIkkuna(boolean ekako, int a, int b) throws IOException {
         k = a;
         l = b;
         
@@ -51,6 +52,9 @@ public final class YlempiLogiikka {
     
     public void resetUusiRuudukko() {
         ikkuna.poistaNapit(k, l);
+        if(k != 8) {
+            ikkuna.nollaaAika();
+        }
         ikkuna.getFraami().validate();
         ikkuna.getFraami().repaint();
         
@@ -69,6 +73,18 @@ public final class YlempiLogiikka {
     
     public Object getNappi(int a, int b) {
         return ikkuna.getNappi(a, b);
+    }
+    
+    public void startKello() {
+        ikkuna.ajanPaivittaja();
+    }
+    
+    public void rajahti() {
+        ikkuna.rajahti();
+    }
+    
+    public void voitit() throws IOException {
+        ikkuna.voitit();
     }
     
     // TESTEJÄ VARTEN OLEVAT METODIT

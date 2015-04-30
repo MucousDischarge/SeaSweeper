@@ -1,5 +1,7 @@
 package seasweeper.logiikka;
 
+import java.io.IOException;
+
 /**
  *
  * @author ez
@@ -24,7 +26,7 @@ public class AlempiLogiikka {
         this.voitontarkastaja = new Voitontarkastaja(ylempilogiikka);
     }
 
-    public void napinpainallus(Object source, boolean oikeako) {
+    public void napinpainallus(Object source, boolean oikeako) throws IOException {
         if (!pelipaattynyt) {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < l; b++) {
@@ -41,7 +43,9 @@ public class AlempiLogiikka {
 
     public void vasenKlikkaus(int a, int b) {
         if (onkoEnsimmainenKlikkaus) {
-            alkuaika = System.currentTimeMillis();
+            if (k != 8 ) {
+                ylempilogiikka.startKello();
+            }
             onkoEnsimmainenKlikkaus = false;
             miinojenluoja.luoMiinat(a, b);
         }
@@ -49,6 +53,7 @@ public class AlempiLogiikka {
         if (ruudukko[a][b].onkoMiina()) {
             System.out.println("Osuit miinaan...");
             raivaaja.rajahti();
+            ylempilogiikka.rajahti();
             //kaikki miinat paljastuvat ruudulla
             this.pelipaattynyt = true;
         } else {
@@ -69,10 +74,9 @@ public class AlempiLogiikka {
         }
     }
     
-    public void tarkistetaanVoitettiinko() {
+    public void tarkistetaanVoitettiinko() throws IOException {
         if (voitontarkastaja.voitettiinko()) {
-            System.out.println("Voitit!");
-            System.out.println("Aikasi: " + Math.round((System.currentTimeMillis() - alkuaika) / 1000) + " sekuntia.");
+            ylempilogiikka.voitit();
             this.pelipaattynyt = true;
         }
     }

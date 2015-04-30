@@ -1,11 +1,14 @@
 seasweeper/logiikka/AlempiLogiikka.class
 seasweeper/logiikka/Raivaaja.class
-seasweeper/logiikka/Miinojenluoja.class
 seasweeper/gui/Kuvaluokka.class
-seasweeper/logiikka/Ruutu.class
 seasweeper/gui/Ikkuna.class
+seasweeper/logiikka/Kello.class
 seasweeper/gui/Menukuuntelija.class
 seasweeper/logiikka/YlempiLogiikka.class
+seasweeper/logiikka/Kello$1.class
+seasweeper/logiikka/Miinojenluoja.class
+seasweeper/logiikka/Ruutu.class
+seasweeper/logiikka/HighScore.class
 seasweeper/Main.class
 seasweeper/logiikka/Voitontarkastaja.class
 seasweeper/gui/Lautakuuntelija.class

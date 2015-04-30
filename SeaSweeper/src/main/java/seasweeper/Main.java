@@ -1,5 +1,6 @@
 package seasweeper;
 
+import java.io.IOException;
 import seasweeper.logiikka.YlempiLogiikka;
 
 
@@ -9,7 +10,7 @@ import seasweeper.logiikka.YlempiLogiikka;
  */
 public class Main {
    
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         YlempiLogiikka peli = new YlempiLogiikka();
     }
 }

@@ -1,5 +1,6 @@
 package seasweeper.logiikka;
 
+import java.io.IOException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import static org.junit.Assert.*;
 public class AlempiLogiikkaTest {
     private AlempiLogiikka alempilogiikka;
     
-    public AlempiLogiikkaTest() {
+    public AlempiLogiikkaTest() throws IOException {
         this.alempilogiikka = new AlempiLogiikka(new YlempiLogiikka());
     }
     

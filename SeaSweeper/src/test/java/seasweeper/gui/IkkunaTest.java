@@ -1,5 +1,6 @@
 package seasweeper.gui;
 
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import org.junit.AfterClass;
@@ -17,7 +18,7 @@ import seasweeper.logiikka.YlempiLogiikka;
 public class IkkunaTest {
     private Ikkuna ikkuna;
     
-    public IkkunaTest() {
+    public IkkunaTest() throws IOException {
         
         ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8);
     }

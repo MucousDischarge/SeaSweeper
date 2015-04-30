@@ -1,22 +1,34 @@
 ###12.03.2015
-Tutustuminen ensimmäisen deadlinen vaatimuksiin. Git tullut tutuksi. Netbeans ei suostu pistämään Coberturaa ja PITtiä valikkoonsa. 2 tuntia käytetty.
+Tutustuminen ensimmäisen deadlinen vaatimuksiin. Git tullut tutuksi. Netbeans ei suostu pistämään Coberturaa ja PITtiä valikkoonsa. 
+
+* 2 tuntia käytetty
 
 ###13.03.2015
-Netbeans ei suostu edelleenkään pistämään Coberturaa ja PITtiä valikkoonsa. Ilmoitettu molemmille ohjaajille. Toinen vastasi, muttei osannut auttaa. Ohjaaja sanoi Coberturaa voitavan käyttää eräällä toisella tavalla. Pyysin lisää aikaa, sain päivän. 2 tuntia käytetty.
+Netbeans ei suostu edelleenkään pistämään Coberturaa ja PITtiä valikkoonsa. Ilmoitettu molemmille ohjaajille. Toinen vastasi, muttei osannut auttaa. Ohjaaja sanoi Coberturaa voitavan käyttää eräällä toisella tavalla. Pyysin lisää aikaa, sain päivän. 
+
+* 2 tuntia käytetty
 
 ###14.03.2015
-Sain todeta, että Coberturaa ja PITtiä ei käytetä vielä tässä vaiheessa. Luulin paljon työtä olevan vielä edessä. Oikeasti ensimmäinen deadline ei vaadi muuta kuin Gittiin tutustumisen. Gittiin olin jo tutustunut eilen. Cobertura ja PIT saatiin korjattua aiemmin vastaamatta jättäneen ohjaajan vastattua. nbactions.xml oli jostain syystä hyvin syvällä Netbeans-projektin sisällä, eikä pom.xml:n vieressä, jossa sen piti olla. Suurin osa ajasta kuitenkin kului siihen, että korjasin fuksiläppärin ongelmia. Kirjoitin aihemäärittelyn ja tuntikirjanpidon. 3 tuntia käytetty.
+Sain todeta, että Coberturaa ja PITtiä ei käytetä vielä tässä vaiheessa. Luulin paljon työtä olevan vielä edessä. Oikeasti ensimmäinen deadline ei vaadi muuta kuin Gittiin tutustumisen. Gittiin olin jo tutustunut eilen. Cobertura ja PIT saatiin korjattua aiemmin vastaamatta jättäneen ohjaajan vastattua. nbactions.xml oli jostain syystä hyvin syvällä Netbeans-projektin sisällä, eikä pom.xml:n vieressä, jossa sen piti olla. Suurin osa ajasta kuitenkin kului siihen, että korjasin fuksiläppärin ongelmia. Kirjoitin aihemäärittelyn ja tuntikirjanpidon. 
+
+* 3 tuntia käytetty
 
 ###20.03.2015
-Itse ohjelmoiminen alkaa. Tässä vaiheessa halutaan näköjään jo monta luokkaa ja testiä. Itse näkisin nämä myöhempinä urakoina, sillä jos koko rakenteen tietää jo nyt, niin voisi koko ohjelman jo kasata muutamassa tunnissa. Tein aluksi luokan, joka avaa ikkunan, jossa on monta pientä nappia. Tässä on jo pelin oleellisin koossa. Piti vähän virvoittaa muistia lukemalla ikkunatoiminnoista. Ikkunatestit aiheuttivat haasteita. 10 testiä kuitenkin syntyi, vaikkeivät hyviä ole. En tiedä mitä tarkoittivat Pit-raportilla. Löysin pit-reports-kansion, jossa päivämäärällinen kansio sisällä. Ei se voi olla muu kuin tämä. 4 tuntia käytetty.
+Itse ohjelmoiminen alkaa. Tässä vaiheessa halutaan näköjään jo monta luokkaa ja testiä. Itse näkisin nämä myöhempinä urakoina, sillä jos koko rakenteen tietää jo nyt, niin voisi koko ohjelman jo kasata muutamassa tunnissa. Tein aluksi luokan, joka avaa ikkunan, jossa on monta pientä nappia. Tässä on jo pelin oleellisin koossa. Piti vähän virvoittaa muistia lukemalla ikkunatoiminnoista. Ikkunatestit aiheuttivat haasteita. 10 testiä kuitenkin syntyi, vaikkeivät hyviä ole. En tiedä mitä tarkoittivat Pit-raportilla. Löysin pit-reports-kansion, jossa päivämäärällinen kansio sisällä. Ei se voi olla muu kuin tämä. 
+
+* 4 tuntia käytetty
 
 ###27.03.2015
 Tutustuin taas vähän ikkunoiden alkeisiin, ja seuraava selkeä askel on ActionListener. MouseListenerin käyttö tämänkaltaisessa puhtaassa nappiohjelmassa on epäkäytännöllistä. Hassusti käyn lävitse käyttöliittymää ennen itse peliä, vaikka alkusuunnitelmassa suunnittelin päinvastoin. 
 
-Muokkasin luokkia huomattavasti. Pistin kuuntelijan samaan luokkaa kuin lauta, koska piti viitata napistoon, jota en osannut erillisestä luokasta. Sain tämän kikan selville, ja se toimi. Sain toteutettua hiiritestin, joka ei halua toimia. Hiirirobotin kanssa kikkailu kidutusta. Kokeilin streamitestiä, mutta Main jumittui sitä kokeillessa. Tein uuden luokkakaaviokuvan. Pit meni näköjään hulluksi hiirirobotista. 4 tuntia käytetty.
+Muokkasin luokkia huomattavasti. Pistin kuuntelijan samaan luokkaa kuin lauta, koska piti viitata napistoon, jota en osannut erillisestä luokasta. Sain tämän kikan selville, ja se toimi. Sain toteutettua hiiritestin, joka ei halua toimia. Hiirirobotin kanssa kikkailu kidutusta. Kokeilin streamitestiä, mutta Main jumittui sitä kokeillessa. Tein uuden luokkakaaviokuvan. Pit meni näköjään hulluksi hiirirobotista. 
+
+* 4 tuntia käytetty
 
 ###10.04.2015
-Jäsentelin projektia labtoolista löytyneiden ohjeiden mukaisesti, joita en ollut aiemmin huomannut. Loin erilliset alapaketit, ja siistin pom.xml:ää. Poistin vihoitelleen hiiriklikkaustestin... Muokkasin luokkakaavion uuden mukaiseksi - ja olen unohtanut mikä oli aiemmin käyttämäni fontti... Lisäsin uuden logiikkaluokan itse projektiin. Tutustuin Javadocciin, ja luulen tajunneeni idean. Suurin osa ajasta kului pelilogiikkaa luodessa. Olin kirjoittanut sitä aiemmin mukavammalle, isommalle näytölle erilliselle koneelle, ja en nyt kiireessä ehtinyt siistimään että siirtämään ja muovaamaan sopivaksi projektiin. Ei se ole vielä toimivakaan. Tiedän ettei tällä ole mitään merkitystä pisteisiin, mutta ajattelin vain ilmoittaa, ettei huolta. 2 tuntia käytetty.
+Jäsentelin projektia labtoolista löytyneiden ohjeiden mukaisesti, joita en ollut aiemmin huomannut. Loin erilliset alapaketit, ja siistin pom.xml:ää. Poistin vihoitelleen hiiriklikkaustestin... Muokkasin luokkakaavion uuden mukaiseksi - ja olen unohtanut mikä oli aiemmin käyttämäni fontti... Lisäsin uuden logiikkaluokan itse projektiin. Tutustuin Javadocciin, ja luulen tajunneeni idean. Suurin osa ajasta kului pelilogiikkaa luodessa. Olin kirjoittanut sitä aiemmin mukavammalle, isommalle näytölle erilliselle koneelle, ja en nyt kiireessä ehtinyt siistimään että siirtämään ja muovaamaan sopivaksi projektiin. Ei se ole vielä toimivakaan. Tiedän ettei tällä ole mitään merkitystä pisteisiin, mutta ajattelin vain ilmoittaa, ettei huolta. 
+
+* 2 tuntia käytetty
 
 ###18.04.2015
 Peli on jo melkein koossa pelilogiikallisesti; jäljellä lähinnä miinoja lähellä olemattomat ruudut ja niiden raivautuminen virusmaisesti, pelin voittaminen ja pelin häviäminen. Sen jälkeen testit ja koodin puhdistus. Sitten myös tietenkin pelivalinnat ja paremmat grafiikat. Jäljellä on kyllä vielä joku harmittava ongelma jossain, joka valittaa välillä jotain ruutua klikatessa exceptionista. Kai se löytyy helposti. 
@@ -31,30 +43,44 @@ Miinaluokka oli valmis, mutta testaillessani sain todeta HashMapissa olevan vain
 
 Sain tehtyä kuvasysteemin, jolla päästään jo kohta pelaamaan. Jostain syystä ohjelma ei tunnistanut kuin aivan täyttä tiedoston sijaintia tietokoneessa. Mikään /home/:a pienemmästä alkava sijainti ei kelvannut. Kuvat ovat placeholdereita, jotka väänsin hetkessä.
 
+* 4 tuntia käytetty
+
 ###19.04.2015 00:08
 Hups, jäi Raivaaja-metodissa yksinkertaisesti tuplayhtäsuuruusmerkit uupumaan, jolloinka ohjelma ei käy lävitse numeroiden virusmaista leviämistä.
 
-Lisäksi unohdin mainita ajankäytön: 4 tuntia.
-
-* Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei muutaman minuutin... Nyt ongelmana enää lähinnä tuo ärsyttävä exception, joka tapahtuu välillä.
+1. Tyhjien ruutujen merkitseminen nollalla, ja tämän lisääminen raivaajaan vei muutaman minuutin... Nyt ongelmana enää lähinnä tuo ärsyttävä exception, joka tapahtuu välillä.
  
-* Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella numerolla 1-256, vaikka sen tietenkin pitäisi olla 0-255. 
+2. Exception-ongelma selvisi hyvin nopeasti. Viittasin ArrayListaani satunnaisella numerolla 1-256, vaikka sen tietenkin pitäisi olla 0-255. 
 
-* Korjasin yhden toisen exceptionin, joka johtui -1-, -2-, 16- ja 17-arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.
+3. Korjasin yhden toisen exceptionin, joka johtui -1-, -2-, 16- ja 17-arvoista. Lisäksi huomasin, että nollat eivät leviä tarpeeksi pitkälle. Pitää saada ne olemaan tottelematta leviämättömyyskäskyä.
 
 
-* Sain siistittyä koodia aika lailla. Vähän nollat vielä junnaavat supermassiivisissa kööreissä, mutta ratkon sitä myöhemmin...
+4. Sain siistittyä koodia aika lailla. Vähän nollat vielä junnaavat supermassiivisissa kööreissä, mutta ratkon sitä myöhemmin...
 
-* Olin unohtanut vahtia miinojen määriä, ja lisäksi vaadin aina yhden liikaa.
+5. Olin unohtanut vahtia miinojen määriä, ja lisäksi vaadin aina yhden liikaa.
+
+* 4 tuntia käytetty
 
 ###22.04.2015
-Siirsin pienempiä toimintoja omiin luokkiinsa. Poistin huonot ArrayListit ja HashMapit; korvasin vanhalla tupla-arraylla. Tein paremmat grafiikat ilmaismateriaalista. Peli pyörii nyt täydellisesti. Uudelleennimesin. 7 tuntia käytetty.
+Siirsin pienempiä toimintoja omiin luokkiinsa. Poistin huonot ArrayListit ja HashMapit; korvasin vanhalla tupla-arraylla. Tein paremmat grafiikat ilmaismateriaalista. Peli pyörii nyt täydellisesti. Uudelleennimesin. 
+
+* 7 tuntia käytetty
 
 ###23.04.2015
-Loin eri vaikeustasot, ja siistin taas vähän koodia. Lisäsin ajanpidon. Jostain syystä ikkunan koko heittelee välillä aivan hitusen, vaikka sen ei pitäisi. 4 tuntia käytetty.
+Loin eri vaikeustasot, ja siistin taas vähän koodia. Lisäsin ajanpidon. Jostain syystä ikkunan koko heittelee välillä aivan hitusen, vaikka sen ei pitäisi. 
+
+* 4 tuntia käytetty
 
 ###24.04.2015
-Muutin ohjelman aivan kokonaan, toimimaan Ruutu-objektin ympärillä. 8 tuntia käytetty.
+Muutin ohjelman aivan kokonaan, toimimaan Ruutu-objektin ympärillä.
+
+* 8 tuntia käytetty
 
 ###29.04.2015
-Muutin hierarkiaa, ja sain eriytettyä käyttöliittymää ja logiikkaa.
+Muutin hierarkiaa, ja sain eriytettyä käyttöliittymää ja logiikkaa. Antin kertoma "this"-parametri luokan antaessa itsensä parametrinä toiselle luomalleen luokalle ratkaisi kaiken.
+
+Seuraavana olisi vielä high score ja näkyvä kello.
+
+Sen jälkeen tulen varmaan tekemään sekvenssikaaviot, ja sitten seuraavien päivien kuluessa luomaan testejä.
+
+* 4 tuntia käytetty

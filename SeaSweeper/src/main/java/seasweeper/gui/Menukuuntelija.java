@@ -2,6 +2,9 @@ package seasweeper.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import seasweeper.logiikka.YlempiLogiikka;
 
 /**
@@ -26,13 +29,13 @@ public class Menukuuntelija implements ActionListener {
 
         switch (e.getActionCommand()) {
             case "Helppo":
-                ikkunanLuonti(8, 8);
+                IOOngelma(8, 8);
                 break;
             case "Keskitaso":
-                ikkunanLuonti(16, 16);
+                IOOngelma(16, 16);
                 break;
             case "Vaikea":
-                ikkunanLuonti(16, 30);
+                IOOngelma(16, 30);
                 break;
             default:
                 ylempilogiikka.resetUusiRuudukko();
@@ -41,11 +44,20 @@ public class Menukuuntelija implements ActionListener {
 
     }
 
-    public void ikkunanLuonti(int a, int b) {
+    public void ikkunanLuonti(int a, int b) throws IOException {
         this.ikkuna = ylempilogiikka.getIkkuna();
         ikkuna.getFraami().dispose();
         ylempilogiikka.uusiIkkuna(true, a, b);
     }
+    
+    public void IOOngelma(int a, int b) {
+        try {
+                ikkunanLuonti(a, b);
+            } catch (IOException ex) {
+                Logger.getLogger(Menukuuntelija.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
 
     // TESTEJÄ VARTEN OLEVAT METODIT
 }
