@@ -22,10 +22,14 @@ public class HighScore {
     private boolean muutoksiako;
     private File tiedosto;
 
-    public HighScore() throws IOException, URISyntaxException {
+    public HighScore(Boolean vaikeako) throws IOException, URISyntaxException {
         this.highscore = new String[10][2];
         this.muutoksiako = false;
-        this.tiedosto = new File(getClass().getClassLoader().getResource("highscore.txt").toURI());
+        if (vaikeako) {
+            this.tiedosto = new File(getClass().getClassLoader().getResource("highscorevaikea.txt").toURI());
+        } else {
+            this.tiedosto = new File(getClass().getClassLoader().getResource("highscorekeskitaso.txt").toURI());
+        }
         lue();
     }
 

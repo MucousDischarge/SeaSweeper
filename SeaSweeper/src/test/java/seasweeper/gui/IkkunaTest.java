@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import seasweeper.logiikka.AlempiLogiikka;
-import seasweeper.logiikka.Ruutu;
 import seasweeper.logiikka.YlempiLogiikka;
 
 /**

@@ -51,7 +51,6 @@ public class AlempiLogiikka {
         }
 
         if (ruudukko[a][b].onkoMiina()) {
-            System.out.println("Osuit miinaan...");
             raivaaja.rajahti();
             ylempilogiikka.rajahti();
             //kaikki miinat paljastuvat ruudulla

@@ -22,7 +22,8 @@ public class Ikkuna {
     private final Menukuuntelija menukuuntelija;
     private final Kuvaluokka kuvaluokka;
     private final Kello kello;
-    private final HighScore highscore;
+    private final HighScore keskitaso;
+    private final HighScore vaikea;
     private final int k;
     private final int l;
     private final JFrame jfraami;
@@ -34,7 +35,8 @@ public class Ikkuna {
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();
         this.kello = new Kello(this);
-        this.highscore = new HighScore();
+        this.keskitaso = new HighScore(false);
+        this.vaikea = new HighScore(true);
         this.k = k;
         this.l = l;
         this.napisto = new JButton[k][l];
@@ -141,7 +143,11 @@ public class Ikkuna {
             String aikasi = kello.peliPaattyi();
             stringi = "                Onnistuit!\n       Haravoit kaikki miinat!\n" + "              Aikasi: " + aikasi;
             String s = (String)JOptionPane.showInputDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"), null, "nimesi");
-            highscore.lisaa(s, aikasi);
+            if (l == 16) {
+                keskitaso.lisaa(s, aikasi);
+            } else {
+                vaikea.lisaa(s, aikasi);
+            }
         } else {
             stringi = "              Onnistuit!\n     Haravoit kaikki miinat!";
             JOptionPane.showMessageDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"));
