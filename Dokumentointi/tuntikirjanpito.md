@@ -86,7 +86,7 @@ Sen jälkeen tulen varmaan tekemään sekvenssikaaviot, ja sitten seuraavien pä
 * 4 tuntia käytetty
 
 ###30.04.2014
-Lisäsin kellon ja highscore-systeemin. Nämä sotkevat ohjelmaa hyvin paljon.
+Lisäsin kellon ja highscore-systeemin. Nämä sotkevat ohjelmaa hyvin paljon. Olen aika uninen ja väsynyt nyt, joten katson lisää myöhemmin.
 
 * 5 tuntia käytetty.
 
