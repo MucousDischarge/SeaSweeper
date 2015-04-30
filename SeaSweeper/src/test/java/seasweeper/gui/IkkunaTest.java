@@ -1,6 +1,7 @@
 package seasweeper.gui;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import org.junit.AfterClass;
@@ -18,7 +19,7 @@ import seasweeper.logiikka.YlempiLogiikka;
 public class IkkunaTest {
     private Ikkuna ikkuna;
     
-    public IkkunaTest() throws IOException {
+    public IkkunaTest() throws IOException, URISyntaxException {
         
         ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8);
     }

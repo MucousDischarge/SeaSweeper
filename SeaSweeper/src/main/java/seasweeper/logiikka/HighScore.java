@@ -2,12 +2,15 @@ package seasweeper.logiikka;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URISyntaxException;
+import java.util.Scanner;
 
 /**
  *
@@ -17,12 +20,12 @@ public class HighScore {
 
     private String[][] highscore;
     private boolean muutoksiako;
-    private String tiedosto;
+    private File tiedosto;
 
-    public HighScore() throws IOException {
+    public HighScore() throws IOException, URISyntaxException {
         this.highscore = new String[10][2];
         this.muutoksiako = false;
-        this.tiedosto = getClass().getClassLoader().getResource("highscore.txt").toString();
+        this.tiedosto = new File(getClass().getClassLoader().getResource("highscore.txt").toURI());
         lue();
     }
 
@@ -53,30 +56,29 @@ public class HighScore {
     }
 
     public void lue() throws FileNotFoundException, IOException {
-        try (FileReader tiedostolukija = new FileReader(tiedosto)) {
-            BufferedReader lukija = new BufferedReader(tiedostolukija);
-            String rivi = lukija.readLine();
-            int luku = 0;
-            while (rivi != null) {
-                String[] osat = rivi.split("-");
-                highscore[luku][0] = osat[0];
-                highscore[luku][1] = osat[1];
-                luku++;
-            }
+        Scanner skanneri = new Scanner(tiedosto);
+        int luku = 0;
+        while (skanneri.hasNextLine()) {
+            String rivi = skanneri.nextLine();
+            String[] osat = rivi.split("~");
+            highscore[luku][0] = osat[0];
+            highscore[luku][1] = osat[1];
+            luku++;
         }
+        skanneri.close();
     }
 
     public void kirjoita() throws FileNotFoundException, IOException {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream(tiedosto)))) {
+                new FileOutputStream(tiedosto)))) {
             writer.write(kokoaKirjoitettava());
         }
     }
-    
+
     public String kokoaKirjoitettava() {
         String palautettava = "";
         for (int i = 0; i < highscore.length; i++) {
-            palautettava += highscore[i][0] + "-" + highscore[i][1] + "\n";
+            palautettava += highscore[i][0] + "~" + highscore[i][1] + "\n";
         }
         return palautettava;
     }

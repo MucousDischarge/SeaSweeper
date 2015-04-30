@@ -86,6 +86,7 @@ Sen jälkeen tulen varmaan tekemään sekvenssikaaviot, ja sitten seuraavien pä
 * 4 tuntia käytetty
 
 ###30.04.2014
-Lisäsin kellon ja highscore-systeemin, mutta highscore-luokka ei tunnista tiedostoa. Tähän johtava ongelma on mahdollisesti hyvin yksinkertainen.
+Lisäsin kellon ja highscore-systeemin. Nämä sotkevat ohjelmaa hyvin paljon.
 
-* 4 tuntia käytetty.
+* 5 tuntia käytetty.
+

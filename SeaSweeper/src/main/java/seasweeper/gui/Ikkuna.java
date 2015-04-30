@@ -3,6 +3,7 @@ package seasweeper.gui;
 import seasweeper.logiikka.Kello;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -28,7 +29,7 @@ public class Ikkuna {
     private final JButton napisto[][];
     private final JMenuItem aika;
 
-    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l) throws IOException {
+    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l) throws IOException, URISyntaxException {
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();

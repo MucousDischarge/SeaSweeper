@@ -84,3 +84,8 @@ Seuraavana olisi vielä high score ja näkyvä kello.
 Sen jälkeen tulen varmaan tekemään sekvenssikaaviot, ja sitten seuraavien päivien kuluessa luomaan testejä.
 
 * 4 tuntia käytetty
+
+###30.04.2014
+Lisäsin kellon ja highscore-systeemin, mutta highscore-luokka ei tunnista tiedostoa. Tähän johtava ongelma on mahdollisesti hyvin yksinkertainen.
+
+* 4 tuntia käytetty.

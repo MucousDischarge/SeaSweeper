@@ -1,6 +1,7 @@
 package seasweeper.logiikka;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import seasweeper.gui.Ikkuna;
 import seasweeper.gui.Lautakuuntelija;
 import seasweeper.gui.Menukuuntelija;
@@ -19,14 +20,14 @@ public final class YlempiLogiikka {
     private int k;
     private int l;
 
-    public YlempiLogiikka() throws IOException {
+    public YlempiLogiikka() throws IOException, URISyntaxException {
         this.alempilogiikka = new AlempiLogiikka(this);
         this.lautakuuntelija = new Lautakuuntelija(alempilogiikka);
         this.menukuuntelija = new Menukuuntelija(this);
         uusiIkkuna(true, 16, 16);
     }
     
-    public void uusiIkkuna(boolean ekako, int a, int b) throws IOException {
+    public void uusiIkkuna(boolean ekako, int a, int b) throws IOException, URISyntaxException {
         k = a;
         l = b;
         

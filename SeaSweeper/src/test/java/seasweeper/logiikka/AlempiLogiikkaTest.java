@@ -1,6 +1,7 @@
 package seasweeper.logiikka;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 public class AlempiLogiikkaTest {
     private AlempiLogiikka alempilogiikka;
     
-    public AlempiLogiikkaTest() throws IOException {
+    public AlempiLogiikkaTest() throws IOException, URISyntaxException {
         this.alempilogiikka = new AlempiLogiikka(new YlempiLogiikka());
     }
     
