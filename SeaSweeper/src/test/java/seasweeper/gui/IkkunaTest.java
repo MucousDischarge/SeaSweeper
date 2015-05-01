@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import seasweeper.logiikka.AlempiLogiikka;
+import seasweeper.logiikka.HighScore;
 import seasweeper.logiikka.YlempiLogiikka;
 
 /**
@@ -18,15 +19,26 @@ import seasweeper.logiikka.YlempiLogiikka;
 public class IkkunaTest {
     private Ikkuna ikkuna;
     
+    /**
+     *
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public IkkunaTest() throws IOException, URISyntaxException {
         
-        ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8);
+        ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8, new HighScore(false), new HighScore(true));
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
@@ -38,30 +50,51 @@ public class IkkunaTest {
     public void testLuoNappi() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testHelppoK() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testHelppoL() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testKeskitasoK() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testKeskitasoL() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testVaikeaK() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testVaikeaL() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testJFraamiTitle() {
         JFrame jfraami = ikkuna.getFraami();

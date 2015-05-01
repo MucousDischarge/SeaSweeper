@@ -11,25 +11,44 @@ import org.junit.Test;
  */
 public class YlempiLogiikkaTest {
     private YlempiLogiikka ylempilogiikka;
+
+    /**
+     *
+     */
     public YlempiLogiikkaTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testaaVaikeustasoString() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testK() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testL() {
     }

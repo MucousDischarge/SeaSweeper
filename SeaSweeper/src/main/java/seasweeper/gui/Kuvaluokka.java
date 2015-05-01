@@ -3,8 +3,7 @@ package seasweeper.gui;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author ez
+ * Kuvien luokka; palauttaa pyynnöstä ImageIconit kuvista
  */
 public class Kuvaluokka {
     private final ImageIcon kuvat[];
@@ -12,6 +11,9 @@ public class Kuvaluokka {
     private final ImageIcon lippu;
     private final ImageIcon tummavesi;
 
+    /**
+     *
+     */
     public Kuvaluokka() {
         this.kuvat = new ImageIcon[9];
         for (int i = 0; i < 9; i++) {
@@ -22,6 +24,11 @@ public class Kuvaluokka {
         this.tummavesi = new ImageIcon(getClass().getClassLoader().getResource("icons/tummavesi.png"));
     }
     
+    /**
+     *
+     * @param kuva
+     * @return
+     */
     public ImageIcon getKuva(String kuva) { 
         switch (kuva) {
             case "miina":

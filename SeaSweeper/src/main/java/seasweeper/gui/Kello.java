@@ -1,4 +1,4 @@
-package seasweeper.logiikka;
+package seasweeper.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
-import seasweeper.gui.Ikkuna;
 
 /**
  *
- * @author ez
+ * Pelikello, joka hoitaa näkyvän kellon toiminnot
  */
 public class Kello {
 
@@ -20,11 +19,18 @@ public class Kello {
     private int aikaSekunneissa;
     private Timer ajastin;
 
+    /**
+     *
+     * @param ikkuna
+     */
     public Kello(Ikkuna ikkuna) {
         this.ikkuna = ikkuna;
         this.aikaSekunneissa = 0;
     }
 
+    /**
+     *
+     */
     public void aikaTimer() {
         ActionListener aikaKuuntelija = new ActionListener() {
             @Override
@@ -41,6 +47,10 @@ public class Kello {
         ajastin.start();
     }
 
+    /**
+     *
+     * @return
+     */
     public String aika() {
         int intMinuutit = aikaSekunneissa / 60;
         boolean taysi = false;
@@ -65,11 +75,18 @@ public class Kello {
         return stringMinuutit + ":" + stringSekunnit;
     }
     
+    /**
+     *
+     * @return
+     */
     public String peliPaattyi() {
         ajastin.stop();
         return aika();
     }
     
+    /**
+     *
+     */
     public void nollaaAika() {
         ajastin.stop();
         aikaSekunneissa = 0;

@@ -9,11 +9,7 @@ import seasweeper.logiikka.AlempiLogiikka;
 
 /**
  *
- * @author ez
- */
-/**
- *
- * Luokka suorittaa graafisen pelilaudan kuuntelun
+ * Luokka suorittaa pelinappuloiden kuuntelun
  */
 public class Lautakuuntelija implements MouseListener {
 
@@ -27,6 +23,10 @@ public class Lautakuuntelija implements MouseListener {
         this.alempilogiikka = alempilogiikka;
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
 
@@ -48,6 +48,11 @@ public class Lautakuuntelija implements MouseListener {
         }
     }
 
+    /**
+     *
+     * @param object
+     * @param kumpi
+     */
     public void tryCatchi(Object object, boolean kumpi) {
         try {
             alempilogiikka.napinpainallus(object, kumpi);
@@ -56,16 +61,28 @@ public class Lautakuuntelija implements MouseListener {
         }
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseReleased(MouseEvent me) {
 
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseEntered(MouseEvent me) {
 
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseExited(MouseEvent me) {
 

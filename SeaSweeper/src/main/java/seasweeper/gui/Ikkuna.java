@@ -1,6 +1,5 @@
 package seasweeper.gui;
 
-import seasweeper.logiikka.Kello;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,7 +13,7 @@ import seasweeper.logiikka.HighScore;
 
 /**
  *
- * @author ez
+ * Pääasiallinen GUI-luokka
  */
 public class Ikkuna {
 
@@ -31,13 +30,24 @@ public class Ikkuna {
     private final JMenuItem aika;
     private final JMenuItem highscore;
 
-    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l) throws IOException, URISyntaxException {
+    /**
+     *
+     * @param menukuuntelija
+     * @param lautakuuntelija
+     * @param k
+     * @param l
+     * @param keskitasotaulu
+     * @param vaikeataulu
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l, HighScore keskitasotaulu, HighScore vaikeataulu) throws IOException, URISyntaxException {
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();
         this.kello = new Kello(this);
-        this.keskitasotaulu = new HighScore(false);
-        this.vaikeataulu = new HighScore(true);
+        this.keskitasotaulu = keskitasotaulu;
+        this.vaikeataulu = vaikeataulu;
         this.k = k;
         this.l = l;
         this.napisto = new JButton[k][l];
@@ -81,6 +91,12 @@ public class Ikkuna {
         jfraami.setJMenuBar(valikko);
     }
 
+    /**
+     *
+     * @param i
+     * @param j
+     * @return
+     */
     public JButton luoNappi(int i, int j) {
         this.napisto[i][j] = new JButton();
         this.napisto[i][j].setIcon(kuvaluokka.getKuva("tummavesi"));
@@ -89,6 +105,11 @@ public class Ikkuna {
         return this.napisto[i][j];
     }
 
+    /**
+     *
+     * @param i
+     * @param j
+     */
     public void poistaNapit(int i, int j) {
         for (int a = 0; a < i; a++) {
             for (int b = 0; b < j; b++) {
@@ -97,39 +118,76 @@ public class Ikkuna {
         }
     }
 
+    /**
+     *
+     */
     public void visible() {
         jfraami.setVisible(true);
     }
 
+    /**
+     *
+     * @return
+     */
     public JFrame getFraami() {
         return jfraami;
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton[][] getNapisto() {
         return this.napisto;
     }
 
+    /**
+     *
+     * @param kuva
+     * @param a
+     * @param b
+     */
     public void kuva(String kuva, int a, int b) {
         napisto[a][b].setIcon(kuvaluokka.getKuva(kuva));
     }
 
+    /**
+     *
+     * @param i
+     * @param j
+     * @return
+     */
     public JButton getNappi(int i, int j) {
         return this.napisto[i][j];
     }
 
+    /**
+     *
+     * @param uusiAika
+     * @throws IOException
+     */
     public void paivitaAika(String uusiAika) throws IOException {
         aika.setText(uusiAika);
     }
 
+    /**
+     *
+     */
     public void ajanPaivittaja() {
         kello.aikaTimer();
     }
 
+    /**
+     *
+     */
     public void nollaaAika() {
         kello.nollaaAika();
         aika.setText("00:00");
     }
 
+    /**
+     *
+     */
     public void rajahti() {
         String stringi;
         if (k != 8) {
@@ -141,6 +199,10 @@ public class Ikkuna {
         JOptionPane.showMessageDialog(jfraami, stringi, "Nyt kävi köpelösti", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("miina"));
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void voitit() throws IOException {
         String stringi;
         if (k != 8) {
@@ -158,6 +220,9 @@ public class Ikkuna {
         }
     }
     
+    /**
+     *
+     */
     public void highscore() {
         if (l ==  16) {
             JOptionPane.showMessageDialog(jfraami, keskitasotaulu.kokoaTaulu(), "Top 10 Keskitaso", JOptionPane.PLAIN_MESSAGE);
@@ -167,10 +232,19 @@ public class Ikkuna {
     }
 
     // TESTEJÄ VARTEN OLEVAT METODIT
-    public int getK() {
+
+    /**
+     *
+     * @return
+     */
+        public int getK() {
         return k;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getL() {
         return l;
     }

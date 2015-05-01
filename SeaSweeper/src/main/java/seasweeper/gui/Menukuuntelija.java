@@ -10,13 +10,17 @@ import seasweeper.logiikka.YlempiLogiikka;
 
 /**
  *
- * @author ez
+ * Kuuntelee yllä olevia menunappeja
  */
 public class Menukuuntelija implements ActionListener {
 
     private final YlempiLogiikka ylempilogiikka;
     private Ikkuna ikkuna;
 
+    /**
+     *
+     * @param ylempilogiikka
+     */
     public Menukuuntelija(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
     }
@@ -48,12 +52,24 @@ public class Menukuuntelija implements ActionListener {
 
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void ikkunanLuonti(int a, int b) throws IOException, URISyntaxException {
         this.ikkuna = ylempilogiikka.getIkkuna();
         ikkuna.getFraami().dispose();
         ylempilogiikka.uusiIkkuna(true, a, b);
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     */
     public void ongelma(int a, int b) {
 
         try {

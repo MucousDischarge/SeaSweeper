@@ -4,7 +4,7 @@ import javax.swing.JButton;
 
 /**
  * K
- * @author ez
+ * Ruutu tietää ominaisuutensa, ja on osa ruudukkoa eli loogista pelilautaa
  */
 public class Ruutu {
     private boolean onkoMiina;

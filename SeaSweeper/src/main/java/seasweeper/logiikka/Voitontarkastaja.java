@@ -2,7 +2,7 @@ package seasweeper.logiikka;
 
 /**
  *
- * @author ez
+ * Tarkastaa joka klikkauksen jälkeen ollaanko voitettu
  */
 public class Voitontarkastaja {
 
@@ -12,10 +12,18 @@ public class Voitontarkastaja {
     private int l;
     private int miinojenmaara;
 
+    /**
+     *
+     * @param ylempilogiikka
+     */
     public Voitontarkastaja(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean voitettiinko() {
         int raivattujenmaara = 0;
 
@@ -41,6 +49,13 @@ public class Voitontarkastaja {
         return false;
     }
     
+    /**
+     *
+     * @param ruudukko
+     * @param k
+     * @param l
+     * @param miinojenmaara
+     */
     public void setArvot(Ruutu[][] ruudukko, int k, int l, int miinojenmaara) {
         this.ruudukko = ruudukko;
         this.k = k;

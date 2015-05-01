@@ -1,21 +1,16 @@
 package seasweeper.logiikka;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
  *
- * @author ez
+ * Hoitaa pelitilastotoiminnot, eli lukee tekstitiedostoja ja kirjoittaa niihin
  */
 public class HighScore {
 
@@ -23,6 +18,12 @@ public class HighScore {
     private boolean muutoksiako;
     private File tiedosto;
 
+    /**
+     *
+     * @param vaikeako
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public HighScore(Boolean vaikeako) throws IOException, URISyntaxException {
         this.highscore = new String[10][2];
         this.muutoksiako = false;
@@ -34,12 +35,23 @@ public class HighScore {
         lue();
     }
 
+    /**
+     *
+     * @param nimi
+     * @param aika
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void lisaa(String nimi, String aika) throws FileNotFoundException, IOException {
         for (int i = 0; i < highscore.length; i++) {
             String[] osat1 = highscore[i][1].split(":");
             String[] osat2 = aika.split(":");
             if (Integer.parseInt(osat1[0]) > Integer.parseInt(osat2[0])) {
-                highscore[i][0] = nimi;
+                if (eiLiianPitkaTaiLyhyt(nimi)) {
+                    highscore[i][0] = nimi;
+                } else {
+                    highscore[i][0] = uusiNimi(nimi);
+                }
                 highscore[i][1] = aika;
                 muutoksiako = true;
                 break;
@@ -47,7 +59,11 @@ public class HighScore {
 
             if (Integer.parseInt(osat1[0]) == Integer.parseInt(osat2[0])) {
                 if (Integer.parseInt(osat1[1]) > Integer.parseInt(osat2[1])) {
-                    highscore[i][0] = nimi;
+                    if (eiLiianPitkaTaiLyhyt(nimi)) {
+                        highscore[i][0] = nimi;
+                    } else {
+                        highscore[i][0] = uusiNimi(nimi);
+                    }
                     highscore[i][1] = aika;
                     muutoksiako = true;
                     break;
@@ -60,6 +76,11 @@ public class HighScore {
         }
     }
 
+    /**
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void lue() throws FileNotFoundException, IOException {
         Scanner skanneri = new Scanner(tiedosto);
         int luku = 0;
@@ -73,6 +94,11 @@ public class HighScore {
         skanneri.close();
     }
 
+    /**
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void kirjoita() throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(tiedosto.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(fw);
@@ -80,11 +106,31 @@ public class HighScore {
         bw.close();
     }
 
+    /**
+     *
+     * @return
+     */
     public String kokoaTaulu() {
         String palautettava = "";
         for (int i = 0; i < highscore.length; i++) {
             palautettava += highscore[i][0] + "~" + highscore[i][1] + "\n";
         }
         return palautettava;
+    }
+
+    public boolean eiLiianPitkaTaiLyhyt(String nimi) {
+        if (!(nimi.equals("")) && nimi.length() <= 30) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public String uusiNimi(String nimi) {
+        if (nimi.equals("")) {
+            return "anon";
+        } else {
+            return nimi.substring(0, 30);
+        }
     }
 }

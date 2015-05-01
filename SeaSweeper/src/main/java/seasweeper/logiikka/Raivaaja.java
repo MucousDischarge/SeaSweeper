@@ -2,7 +2,7 @@ package seasweeper.logiikka;
 
 /**
  *
- * @author ez
+ * Suorittaa miinattoman ruudun klikkausta seuraavan raivauksen
  */
 public class Raivaaja {
 
@@ -11,20 +11,20 @@ public class Raivaaja {
     private int k;
     private int l;
 
+    /**
+     *
+     * @param ylempilogiikka
+     */
     public Raivaaja(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
     }
-    
-    public void rajahti() {
-        for (int x = 0; x < k; x++) {
-            for (int y = 0; y < l; y++) {
-                if (ruudukko[x][y].onkoMiina()) {
-                    ylempilogiikka.kuva("miina", x, y);
-                }
-            }
-        }
-    }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @param alaLevia
+     */
     public void raivaus(int a, int b, boolean alaLevia) {
         if (tarkista(a, b)) {
             int[][] x = luoLista(a, b);
@@ -49,10 +49,22 @@ public class Raivaaja {
         }
     }
     
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public boolean leviaako(int a, int b) {
         return tarkista(a, b) && !(ruudukko[a][b].onkoMiina()) && !(ruudukko[a][b].onkoRaivattu());
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public int[][] luoLista(int a, int b) {
         int[][] lista = new int[8][2];
 
@@ -76,6 +88,11 @@ public class Raivaaja {
         return lista;
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     public int laskeLuku(int[][] x) {
         int luku = 0;
 
@@ -88,10 +105,22 @@ public class Raivaaja {
         return luku;
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public boolean tarkista(int a, int b) {
         return a <= k - 1 && a >= 0 && b <= l - 1 && b >= 0;
     }
 
+    /**
+     *
+     * @param ruudukko
+     * @param k
+     * @param l
+     */
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         this.ruudukko = ruudukko;
         this.k = k;

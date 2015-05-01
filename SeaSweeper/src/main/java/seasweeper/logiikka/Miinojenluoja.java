@@ -4,15 +4,23 @@ import java.util.Random;
 
 /**
  *
- * @author ez
+ * Luo miinat ja ripottelee ne ruudukolle satunnaisesti
  */
 public class Miinojenluoja {
     private Ruutu[][] ruudukko;
     private int miinojenmaara;
 
+    /**
+     *
+     */
     public Miinojenluoja() {
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     */
     public void luoMiinat(int a, int b) {
         int w = 0;
 
@@ -46,6 +54,12 @@ public class Miinojenluoja {
         }
     }
 
+    /**
+     *
+     * @param minimi
+     * @param maksimi
+     * @return
+     */
     public static int satunnainenLukuValilta(int minimi, int maksimi) {
 
         Random randomi = new Random();
@@ -55,6 +69,11 @@ public class Miinojenluoja {
         return satunnainenLuku;
     }
     
+    /**
+     *
+     * @param ruudukko
+     * @param miinojenmaara
+     */
     public void setRuudukko(Ruutu[][] ruudukko, int miinojenmaara) {
         this.ruudukko = ruudukko;
         this.miinojenmaara = miinojenmaara;
@@ -62,6 +81,11 @@ public class Miinojenluoja {
     
     // TESTEJÄ VARTEN OLEVAT METODIT
     
+    /**
+     *
+     * @return
+     */
+        
     public Ruutu[][] getRuudukko() {
         return ruudukko;
     }

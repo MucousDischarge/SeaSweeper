@@ -14,22 +14,39 @@ import static org.junit.Assert.*;
 public class AlempiLogiikkaTest {
     private AlempiLogiikka alempilogiikka;
     
+    /**
+     *
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public AlempiLogiikkaTest() throws IOException, URISyntaxException {
         this.alempilogiikka = new AlempiLogiikka(new YlempiLogiikka());
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Test
     public void setNapisto() {
     }
     
+    /**
+     *
+     */
     @Test
     public void eiOllaPainettuVielaEiAnnettu() {
         assertEquals(false, alempilogiikka.getOnkoEnsimmainenKlikkaus());
@@ -41,14 +58,24 @@ public class AlempiLogiikkaTest {
     //    assertEquals(false, alempilogiikka.getOnkoEnsimmainenKlikkaus());
     //}
     
+    /**
+     *
+     */
+        
     @Test
     public void testaaK() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testaaL() {
     }
     
+    /**
+     *
+     */
     @Test
     public void onkoPeliPaattynytEnnenaikaisesti() { 
     }

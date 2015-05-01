@@ -14,19 +14,31 @@ public class MiinojenluojaTest {
     private Miinojenluoja miinojenluoja;
     private Ruutu ruutu;
     
+    /**
+     *
+     */
     public MiinojenluojaTest() {
         this.miinojenluoja = new Miinojenluoja();
         this.ruutu = new Ruutu(new JButton());
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testaaRuudukko() {
     }

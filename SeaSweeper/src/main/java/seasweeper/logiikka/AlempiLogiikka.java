@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  *
- * @author ez
+ * Alemman, tarkemman tason pelilogiikka
  */
 public class AlempiLogiikka {
 
@@ -19,6 +19,10 @@ public class AlempiLogiikka {
     private Ruutu[][] ruudukko;
     private long alkuaika;
 
+    /**
+     *
+     * @param ylempilogiikka
+     */
     public AlempiLogiikka(YlempiLogiikka ylempilogiikka) {
         this.ylempilogiikka = ylempilogiikka;
         this.miinojenluoja = new Miinojenluoja();
@@ -26,6 +30,12 @@ public class AlempiLogiikka {
         this.voitontarkastaja = new Voitontarkastaja(ylempilogiikka);
     }
 
+    /**
+     *
+     * @param source
+     * @param oikeako
+     * @throws IOException
+     */
     public void napinpainallus(Object source, boolean oikeako) throws IOException {
         if (!pelipaattynyt) {
             for (int a = 0; a < k; a++) {
@@ -41,6 +51,11 @@ public class AlempiLogiikka {
         }
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     */
     public void vasenKlikkaus(int a, int b) {
         if (onkoEnsimmainenKlikkaus) {
             if (k != 8 ) {
@@ -51,7 +66,6 @@ public class AlempiLogiikka {
         }
 
         if (ruudukko[a][b].onkoMiina()) {
-            raivaaja.rajahti();
             ylempilogiikka.rajahti();
             //kaikki miinat paljastuvat ruudulla
             this.pelipaattynyt = true;
@@ -61,6 +75,11 @@ public class AlempiLogiikka {
         }
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     */
     public void oikeaKlikkaus(int a, int b) {
         if (!(ruudukko[a][b].onkoRaivattu())) {
             if (ruudukko[a][b].onkoLippu()) {
@@ -73,6 +92,10 @@ public class AlempiLogiikka {
         }
     }
     
+    /**
+     *
+     * @throws IOException
+     */
     public void tarkistetaanVoitettiinko() throws IOException {
         if (voitontarkastaja.voitettiinko()) {
             ylempilogiikka.voitit();
@@ -80,6 +103,12 @@ public class AlempiLogiikka {
         }
     }
     
+    /**
+     *
+     * @param ruudukko
+     * @param k
+     * @param l
+     */
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         this.ruudukko = ruudukko;
         this.k = k;
@@ -100,18 +129,35 @@ public class AlempiLogiikka {
     }
 
     // TESTEJÄ VARTEN OLEVAT METODIT
-    public boolean getOnkoEnsimmainenKlikkaus() {
+
+    /**
+     *
+     * @return
+     */
+        public boolean getOnkoEnsimmainenKlikkaus() {
         return onkoEnsimmainenKlikkaus;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getK() {
         return k;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getL() {
         return l;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getPeliPaattynyt() {
         return pelipaattynyt;
     }

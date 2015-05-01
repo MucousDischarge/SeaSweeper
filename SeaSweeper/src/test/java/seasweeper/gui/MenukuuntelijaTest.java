@@ -13,17 +13,29 @@ import static org.junit.Assert.*;
 public class MenukuuntelijaTest {
     private Menukuuntelija menukuuntelija;
     
+    /**
+     *
+     */
     public MenukuuntelijaTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Test
     public void testVaikeustasoString() {
     }

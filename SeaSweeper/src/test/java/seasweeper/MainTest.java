@@ -11,13 +11,22 @@ import org.junit.Test;
  */
 public class MainTest {
     
+    /**
+     *
+     */
     public MainTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
