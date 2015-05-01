@@ -38,6 +38,9 @@ public class Menukuuntelija implements ActionListener {
             case "Vaikea":
                 ongelma(16, 30);
                 break;
+            case "HighScore":
+                ylempilogiikka.highscoreIkkuna();
+                break;
             default:
                 ylempilogiikka.resetUusiRuudukko();
                 break;

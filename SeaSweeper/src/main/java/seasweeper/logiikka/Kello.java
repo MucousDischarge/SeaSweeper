@@ -71,6 +71,7 @@ public class Kello {
     }
     
     public void nollaaAika() {
+        ajastin.stop();
         aikaSekunneissa = 0;
     }
 

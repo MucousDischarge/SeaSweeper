@@ -76,17 +76,15 @@ public class HighScore {
     public void kirjoita() throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(tiedosto.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(kokoaKirjoitettava());
+        bw.write(kokoaTaulu());
         bw.close();
-
     }
 
-    public String kokoaKirjoitettava() {
+    public String kokoaTaulu() {
         String palautettava = "";
         for (int i = 0; i < highscore.length; i++) {
             palautettava += highscore[i][0] + "~" + highscore[i][1] + "\n";
         }
-        System.out.println(palautettava);
         return palautettava;
     }
 }

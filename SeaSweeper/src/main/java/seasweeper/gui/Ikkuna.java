@@ -22,21 +22,22 @@ public class Ikkuna {
     private final Menukuuntelija menukuuntelija;
     private final Kuvaluokka kuvaluokka;
     private final Kello kello;
-    private final HighScore keskitaso;
-    private final HighScore vaikea;
+    private final HighScore keskitasotaulu;
+    private final HighScore vaikeataulu;
     private final int k;
     private final int l;
     private final JFrame jfraami;
     private final JButton napisto[][];
     private final JMenuItem aika;
+    private final JMenuItem highscore;
 
     public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l) throws IOException, URISyntaxException {
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();
         this.kello = new Kello(this);
-        this.keskitaso = new HighScore(false);
-        this.vaikea = new HighScore(true);
+        this.keskitasotaulu = new HighScore(false);
+        this.vaikeataulu = new HighScore(true);
         this.k = k;
         this.l = l;
         this.napisto = new JButton[k][l];
@@ -50,7 +51,7 @@ public class Ikkuna {
         jfraami.setLayout(new GridLayout(k, l));
 
         JMenuBar valikko = new JMenuBar();
-        JMenu vaikeusvalinta = new JMenu("Vaikeustaso");
+        JMenu vaikeusvalinta = new JMenu("Vaikeus");
         valikko.add(vaikeusvalinta);
 
         JMenuItem helppo = new JMenuItem("Helppo");
@@ -69,9 +70,12 @@ public class Ikkuna {
         reset.addActionListener(menukuuntelija);
 
         aika = new JMenuItem("00:00");
+        highscore = new JMenuItem("HighScore");
 
         if (k != 8) {
             valikko.add(aika);
+            highscore.addActionListener(menukuuntelija);
+            valikko.add(highscore);
         }
 
         jfraami.setJMenuBar(valikko);
@@ -115,7 +119,6 @@ public class Ikkuna {
 
     public void paivitaAika(String uusiAika) throws IOException {
         aika.setText(uusiAika);
-        voitit();
     }
 
     public void ajanPaivittaja() {
@@ -130,9 +133,9 @@ public class Ikkuna {
     public void rajahti() {
         String stringi;
         if (k != 8) {
-            stringi = "               Osuit miinaan...\nKokeile uudestaan painamalla reset.\n" + "                 Aikasi: " + kello.peliPaattyi();
+            stringi = "                Osuit miinaan...\nKokeile uudestaan painamalla reset.\n" + "                 Aikasi: " + kello.peliPaattyi();
         } else {
-            stringi = "               Osuit miinaan...\nKokeile uudestaan painamalla reset.";
+            stringi = "                Osuit miinaan...\nKokeile uudestaan painamalla reset.";
         }
 
         JOptionPane.showMessageDialog(jfraami, stringi, "Nyt kävi köpelösti", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("miina"));
@@ -145,13 +148,21 @@ public class Ikkuna {
             stringi = "                Onnistuit!\n       Haravoit kaikki miinat!\n" + "              Aikasi: " + aikasi;
             String s = (String)JOptionPane.showInputDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"), null, "nimesi");
             if (l == 16) {
-                keskitaso.lisaa(s, aikasi);
+                keskitasotaulu.lisaa(s, aikasi);
             } else {
-                vaikea.lisaa(s, aikasi);
+                vaikeataulu.lisaa(s, aikasi);
             }
         } else {
             stringi = "              Onnistuit!\n     Haravoit kaikki miinat!";
             JOptionPane.showMessageDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"));
+        }
+    }
+    
+    public void highscore() {
+        if (l ==  16) {
+            JOptionPane.showMessageDialog(jfraami, keskitasotaulu.kokoaTaulu(), "Top 10 Keskitaso", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(jfraami, vaikeataulu.kokoaTaulu(), "Top 10 Vaikea", JOptionPane.PLAIN_MESSAGE);
         }
     }
 

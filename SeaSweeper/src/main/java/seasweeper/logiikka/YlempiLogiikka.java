@@ -11,7 +11,7 @@ import seasweeper.gui.Menukuuntelija;
  * @author ez
  */
 public final class YlempiLogiikka {
-    
+
     private final AlempiLogiikka alempilogiikka;
     private final Lautakuuntelija lautakuuntelija;
     private final Menukuuntelija menukuuntelija;
@@ -26,11 +26,11 @@ public final class YlempiLogiikka {
         this.menukuuntelija = new Menukuuntelija(this);
         uusiIkkuna(true, 16, 16);
     }
-    
+
     public void uusiIkkuna(boolean ekako, int a, int b) throws IOException, URISyntaxException {
         k = a;
         l = b;
-        
+
         if (ekako) {
             ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l);
         } else {
@@ -42,7 +42,7 @@ public final class YlempiLogiikka {
 
     public void uusiRuudukko(int a, int b) {
         this.ruudukko = new Ruutu[a][b];
-        
+
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < b; j++) {
                 this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j));
@@ -50,43 +50,49 @@ public final class YlempiLogiikka {
         }
         alempilogiikka.setArvot(ruudukko, k, l);
     }
-    
+
     public void resetUusiRuudukko() {
-        ikkuna.poistaNapit(k, l);
-        if(k != 8) {
-            ikkuna.nollaaAika();
+        if (!(alempilogiikka.getOnkoEnsimmainenKlikkaus())) {
+            ikkuna.poistaNapit(k, l);
+            if (k != 8) {
+                ikkuna.nollaaAika();
+            }
+            ikkuna.getFraami().validate();
+            ikkuna.getFraami().repaint();
+
+            uusiRuudukko(k, l);
+            ikkuna.getFraami().validate();
+            ikkuna.getFraami().repaint();
         }
-        ikkuna.getFraami().validate();
-        ikkuna.getFraami().repaint();
-        
-        uusiRuudukko(k, l);
-        ikkuna.getFraami().validate();
-        ikkuna.getFraami().repaint();
     }
-    
+
     public void kuva(String kuva, int a, int b) {
         ikkuna.kuva(kuva, a, b);
     }
-    
+
     public Ikkuna getIkkuna() {
         return ikkuna;
     }
-    
+
     public Object getNappi(int a, int b) {
         return ikkuna.getNappi(a, b);
     }
-    
+
     public void startKello() {
         ikkuna.ajanPaivittaja();
     }
-    
+
     public void rajahti() {
         ikkuna.rajahti();
     }
-    
+
     public void voitit() throws IOException {
         ikkuna.voitit();
     }
-    
+
+    public void highscoreIkkuna() {
+        ikkuna.highscore();
+    }
+
     // TESTEJÄ VARTEN OLEVAT METODIT
 }
