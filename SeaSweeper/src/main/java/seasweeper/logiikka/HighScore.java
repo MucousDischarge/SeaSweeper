@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -73,10 +74,11 @@ public class HighScore {
     }
 
     public void kirjoita() throws FileNotFoundException, IOException {
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(tiedosto)))) {
-            writer.write(kokoaKirjoitettava());
-        }
+        FileWriter fw = new FileWriter(tiedosto.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(kokoaKirjoitettava());
+        bw.close();
+
     }
 
     public String kokoaKirjoitettava() {
@@ -84,6 +86,7 @@ public class HighScore {
         for (int i = 0; i < highscore.length; i++) {
             palautettava += highscore[i][0] + "~" + highscore[i][1] + "\n";
         }
+        System.out.println(palautettava);
         return palautettava;
     }
 }

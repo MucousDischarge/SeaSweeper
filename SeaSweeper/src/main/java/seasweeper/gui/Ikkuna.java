@@ -113,8 +113,9 @@ public class Ikkuna {
         return this.napisto[i][j];
     }
 
-    public void paivitaAika(String uusiAika) {
+    public void paivitaAika(String uusiAika) throws IOException {
         aika.setText(uusiAika);
+        voitit();
     }
 
     public void ajanPaivittaja() {

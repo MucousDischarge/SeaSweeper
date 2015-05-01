@@ -2,6 +2,9 @@ package seasweeper.logiikka;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 import seasweeper.gui.Ikkuna;
 
@@ -26,8 +29,12 @@ public class Kello {
         ActionListener aikaKuuntelija = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                aikaSekunneissa++;
-                ikkuna.paivitaAika(aika());
+                try {
+                    aikaSekunneissa++;
+                    ikkuna.paivitaAika(aika());
+                } catch (IOException ex) {
+                    Logger.getLogger(Kello.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         ajastin = new Timer(1000, aikaKuuntelija);
