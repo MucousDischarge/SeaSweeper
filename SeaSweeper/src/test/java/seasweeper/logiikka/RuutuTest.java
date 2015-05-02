@@ -1,5 +1,7 @@
 package seasweeper.logiikka;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.swing.JButton;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -12,12 +14,14 @@ import static org.junit.Assert.*;
  */
 public class RuutuTest {
     private Ruutu ruutu;
+    private YlinLogiikka ylinlogiikka;
 
     /**
      *
      */
-    public RuutuTest() {
-        this.ruutu = new Ruutu(new JButton());
+    public RuutuTest() throws IOException, URISyntaxException {
+        this.ylinlogiikka = new YlinLogiikka();
+        this.ruutu = new Ruutu(new JButton(), ylinlogiikka.getIkkuna());
     }
     
     /**

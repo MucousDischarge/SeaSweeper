@@ -8,27 +8,35 @@ import seasweeper.logiikka.HighScore;
 
 /**
  *
- * @author ez
+ * Popup-ikkunoiden luokka.
  */
 public class Popup {
     private final HighScore keskitasotaulu;
     private final HighScore vaikeataulu;
     private final Kello kello;
     private final Kuvaluokka kuvaluokka;
-    private final JFrame jfraami;
-    private final int l;
+    private JFrame jfraami;
+    private int l;
     
-    public Popup(Kello kello, HighScore keskitasotaulu, HighScore vaikeataulu, Kuvaluokka kuvaluokka, JFrame jfraami, int l) {
+    /**
+     * Konstruktorissa annetaan ylimmässä logiikassa luotuja luokkia ja laudan
+     * leveys.
+     * 
+     * @param kello Ylimmässä logiikassa luotu Kello.
+     * @param keskitasotaulu Ylimmässä logiikassa luotu keskitasoarvoinen HighScore. 
+     * @param vaikeataulu Ylimmässä logiikassa luotu vaikea-arvoinen HighScore.
+     * @param kuvaluokka Ylimmässä logiikassa luotu Kuvaluokka.
+     * @param l Ylimmän luokan tämänhetkinen laudan leveys.
+     */
+    public Popup(Kello kello, HighScore keskitasotaulu, HighScore vaikeataulu, Kuvaluokka kuvaluokka, int l) {
         this.kello = kello;
         this.keskitasotaulu = keskitasotaulu;
         this.vaikeataulu = vaikeataulu;
         this.kuvaluokka = kuvaluokka;
-        this.jfraami = jfraami;
-        this.l = l;
     }
     
     /**
-     *
+     * Miinan klikkausta seuraava häviö-popup.
      */
     public void rajahti() {
         String stringi;
@@ -42,7 +50,8 @@ public class Popup {
     }
     
     /**
-     *
+     * Kaikkien miinattomien ruutujen klikkausta seuraava voitto-popup.
+     * 
      * @throws IOException
      */
     public void voitit() throws IOException {
@@ -63,7 +72,7 @@ public class Popup {
     }
     
     /**
-     *
+     * HighScore-menupainikkeen klikkausta seuraava pistetilasto-popup.
      */
     public void highscore() {
         if (l ==  16) {
@@ -71,5 +80,16 @@ public class Popup {
         } else {
             JOptionPane.showMessageDialog(jfraami, vaikeataulu.kokoaTaulu(), "Top 10 Vaikea", JOptionPane.PLAIN_MESSAGE);
         }
+    }
+    
+    /**
+     * Uusien ruudukkojen luonnissa asetetaan aina uudet arvot.
+     * 
+     * @param jfraami
+     * @param l
+     */
+    public void setArvot(JFrame jfraami, int l) {
+        this.jfraami = jfraami;
+        this.l = l;
     }
  }

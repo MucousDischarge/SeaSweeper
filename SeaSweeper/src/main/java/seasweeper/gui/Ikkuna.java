@@ -13,7 +13,7 @@ import seasweeper.logiikka.HighScore;
 
 /**
  *
- * Pääasiallinen GUI-luokka
+ * Pääasiallinen GUI-luokka.
  */
 public class Ikkuna {
 
@@ -24,21 +24,23 @@ public class Ikkuna {
     private final HighScore keskitasotaulu;
     private final HighScore vaikeataulu;
     private final Popup popup;
-    private final int k;
-    private final int l;
-    private final JFrame jfraami;
-    private final JButton napisto[][];
+    private int k;
+    private int l;
+    private JFrame jfraami;
+    private JButton napisto[][];
     private JMenuItem aika;
     private JMenuItem highscore;
 
     /**
-     *
-     * @param menukuuntelija
-     * @param lautakuuntelija
-     * @param k
-     * @param l
-     * @param keskitasotaulu
-     * @param vaikeataulu
+     * Konstruktorin yhteydessä annetaan liuta ylimmän logiikan luomia luokkia.
+     * 
+     * @param menukuuntelija Ylimmän logiikan luoma Menukuuntelija.
+     * @param lautakuuntelija Ylimmän logiikan luoma Lautakuuntelija.
+     * @param k Ylemmän logiikan tämänhetkinen laudan korkeus.
+     * @param l Ylemmän logiikan tämänhetkinen laudan leveys.
+     * @param keskitasotaulu Ylimmän logiikan luoma keskitasoarvoinen HighScore.
+     * @param vaikeataulu Ylimmän logiikan luoma vaikeatasoinen HighScore.
+     * @param kello Ylimmän logiikan luoma Kello.
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -49,15 +51,30 @@ public class Ikkuna {
         this.kello = kello;
         this.keskitasotaulu = keskitasotaulu;
         this.vaikeataulu = vaikeataulu;
+        this.popup = new Popup(kello, keskitasotaulu, vaikeataulu, kuvaluokka, l);
+        newFraami(k, l);
+    }
+    
+    /**
+     * Jatkuvien uusien ikkunaluokkien luomisen sijaan luodaan tarvittaessa
+     * vain uusi fraami.
+     * 
+     * @param k Laudan korkeus.
+     * @param l Laudan leveys.
+     */
+    public void newFraami(int k, int l) {
         this.k = k;
         this.l = l;
         this.napisto = new JButton[k][l];
         this.jfraami = new JFrame();
-        this.popup = new Popup(kello, keskitasotaulu, vaikeataulu, kuvaluokka, jfraami, l);
+        popup.setArvot(this.jfraami, l);
         fraamiPerusasetukset();
         asetaMenu();
     }
     
+    /**
+     * Asetetaan fraami perusasetukset.
+     */
     public final void fraamiPerusasetukset() {
         jfraami.setSize((l * 22), (k * 25));
         jfraami.setTitle("SeaSweeper");
@@ -67,12 +84,20 @@ public class Ikkuna {
         jfraami.setLayout(new GridLayout(k, l));
     }
     
+    /**
+     * Asetetaan fraamiin menuvalikko.
+     */
     public final void asetaMenu() {
         JMenuBar valikko = new JMenuBar();
         asetaVaikeusMenu(valikko);
         asetaMuutMenuItemit(valikko);
     }
     
+    /**
+     * Asetetaan fraamin menuvalikkoon vaikeusvalintavalikko.
+     * 
+     * @param valikko Menuvalikko, johon asetetaan vaikeusvalinta.
+     */
     public void asetaVaikeusMenu(JMenuBar valikko) {
         JMenu vaikeusvalinta = new JMenu("Vaikeus");
         valikko.add(vaikeusvalinta);
@@ -89,6 +114,11 @@ public class Ikkuna {
         vaikea.addActionListener(menukuuntelija);
     }
     
+    /**
+     * Asetetaan menuvalikkoon muut halutut toiminnot.
+     * 
+     * @param valikko Menuvalikko, johon halutut toiminnot asetetaan.
+     */
     public void asetaMuutMenuItemit(JMenuBar valikko) {
         JMenuItem reset = new JMenuItem("Reset");
         valikko.add(reset);
@@ -107,10 +137,11 @@ public class Ikkuna {
     } 
 
     /**
-     *
-     * @param i
-     * @param j
-     * @return
+     * Luodaan JButton, johon asetetaan kuuntelija ja aluksi tummavesikuva.
+     * 
+     * @param i Napin korkeussijainti.
+     * @param j Napin leveyssijainti.
+     * @return Palautetaan luotu nappi.
      */
     public JButton luoNappi(int i, int j) {
         this.napisto[i][j] = new JButton();
@@ -121,50 +152,54 @@ public class Ikkuna {
     }
 
     /**
-     *
-     * @param i
-     * @param j
+     * Uusien ruudukkojen luomisen yhteydessä kutsutaan tämä metodi, jossa
+     * poistetaan fraamilta kaikki vanhat JButtonit.
      */
-    public void poistaNapit(int i, int j) {
-        for (int a = 0; a < i; a++) {
-            for (int b = 0; b < j; b++) {
+    public void poistaNapit() {
+        for (int a = 0; a < k; a++) {
+            for (int b = 0; b < l; b++) {
                 jfraami.remove(this.napisto[a][b]);
             }
         }
     }
 
     /**
-     *
+     * Asetetaan fraami näkyväksi erikseen, sillä napit luodaan tavallisten 
+     * fraamiasetusten jälkeen.
      */
     public void visible() {
         jfraami.setVisible(true);
     }
 
     /**
-     *
+     * Tuhotaan vanha fraami uuden tieltä.
      */
     public void tuhoa() {
         jfraami.dispose();
     }
     
+    /**
+     * Uuden ruudukon luonnissa tärkeä ikkunan uudelleenpiirto.
+     */
     public void piirraUudelleen() {
         jfraami.validate();
         jfraami.repaint();
     }
 
     /**
-     *
-     * @param kuva
-     * @param a
-     * @param b
+     * Ruutujen antama käsky kuvan annosta itsensä JButtonille.
+     * 
+     * @param nappi Ruudun JButton, jolle kuva annetaan.
+     * @param kuva Haluttu kuva.
      */
-    public void kuva(String kuva, int a, int b) {
-        napisto[a][b].setIcon(kuvaluokka.getKuva(kuva));
+    public void kuva(JButton nappi, String kuva) {
+        nappi.setIcon(kuvaluokka.getKuva(kuva));
     }
 
     /**
-     *
-     * @param uusiAika
+     * Näkyvän ajan jokasekuntinen päivitys.
+     * 
+     * @param uusiAika Uusi aika String-muodossa.
      * @throws IOException
      */
     public void paivitaAika(String uusiAika) throws IOException {
@@ -172,14 +207,14 @@ public class Ikkuna {
     }
 
     /**
-     *
+     * Kellonkäynnin aloitus.
      */
     public void aloitaAjanlasku() {
         kello.aikaTimer();
     }
 
     /**
-     *
+     * Ajan nollaus, resetoidessa ruudukkoa.
      */
     public void nollaaAika() {
         kello.nollaaAika();
@@ -187,14 +222,15 @@ public class Ikkuna {
     }
 
     /**
-     *
+     * Miinaan osuminen, josta seuraa miina-popup.
      */
     public void rajahti() {
        popup.rajahti();
     }
 
     /**
-     *
+     * Kaikkia miinattomia ruutuja klikattua avautuu voitto-popup.
+     * 
      * @throws IOException
      */
     public void voitit() throws IOException {
@@ -202,7 +238,7 @@ public class Ikkuna {
     }
     
     /**
-     *
+     * Menun highscore-nappia klikatessa avautuu highscore-popup.
      */
     public void highscore() {
         popup.highscore();
@@ -211,27 +247,34 @@ public class Ikkuna {
     // TESTEJÄ VARTEN OLEVAT METODIT
 
     /**
-     *
+     * Testimetodi
+     * 
      * @return
      */
-        public int getK() {
+    public int getK() {
         return k;
     }
 
     /**
-     *
+     * Testimetodi.
      * @return
      */
     public int getL() {
         return l;
     }
     
+    /**
+     * Testimetodi.
+     * 
+     * @return
+     */
     public JFrame getFraami() {
         return jfraami;
     }
     
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
     public JButton[][] getNapisto() {

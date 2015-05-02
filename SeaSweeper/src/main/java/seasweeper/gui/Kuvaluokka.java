@@ -3,7 +3,7 @@ package seasweeper.gui;
 import javax.swing.ImageIcon;
 
 /**
- * Kuvien luokka; palauttaa pyynnöstä ImageIconit kuvista
+ * Kuvien luokka; palauttaa pyynnöstä ImageIconit kuvista.
  */
 public class Kuvaluokka {
     private final ImageIcon kuvat[];
@@ -12,7 +12,7 @@ public class Kuvaluokka {
     private final ImageIcon tummavesi;
 
     /**
-     *
+     * Konstruktorin yhteydessä annetaan kuvien sijainti.
      */
     public Kuvaluokka() {
         this.kuvat = new ImageIcon[9];
@@ -25,9 +25,11 @@ public class Kuvaluokka {
     }
     
     /**
-     *
-     * @param kuva
-     * @return
+     * Ikkuna kutsuu kuvaluokasta ImageIconin tämän metodin kautta, joka palauttaa
+     * parametrinä annetun Stringin perusteella halutun kuvan.
+     * 
+     * @param kuva Tulleen metodikutsun yhteydessä annettu haluttu kuva.
+     * @return Palautetaan haluttu kuva ImageIconina.
      */
     public ImageIcon getKuva(String kuva) { 
         switch (kuva) {

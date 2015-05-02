@@ -1,8 +1,14 @@
 seasweeper/gui/MenukuuntelijaTest.class
-seasweeper/logiikka/AlempiLogiikkaTest.class
-seasweeper/logiikka/YlempiLogiikkaTest.class
-seasweeper/gui/KuvaluokkaTest.class
+seasweeper/logiikka/VoitontarkastajaTest.class
 seasweeper/gui/IkkunaTest.class
+seasweeper/gui/LautakuuntelijaTest.class
 seasweeper/logiikka/MiinojenluojaTest.class
 seasweeper/MainTest.class
+seasweeper/logiikka/HighScoreTest.class
 seasweeper/logiikka/RuutuTest.class
+seasweeper/gui/PopupTest.class
+seasweeper/logiikka/YlinLogiikkaTest.class
+seasweeper/logiikka/NapinpainallusTest.class
+seasweeper/gui/KuvaluokkaTest.class
+seasweeper/logiikka/KelloTest.class
+seasweeper/logiikka/RaivaajaTest.class

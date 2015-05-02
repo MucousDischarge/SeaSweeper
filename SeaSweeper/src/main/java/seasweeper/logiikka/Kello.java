@@ -6,11 +6,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
-import seasweeper.gui.Ikkuna;
-
 /**
  *
- * Pelikello, joka hoitaa näkyvän kellon toiminnot
+ * Pelikello, joka hoitaa näkyvän kellon toiminnot.
  */
 public class Kello {
 
@@ -21,8 +19,9 @@ public class Kello {
     private Timer ajastin;
 
     /**
-     *
-     * @param ylinlogiikka
+     * Konstruktorissa annetaan viittaus ylimpään logiikkaan.
+     * 
+     * @param ylinlogiikka Ylimmän logiikan luokka.
      */
     public Kello(YlinLogiikka ylinlogiikka) {
         this.ylinlogiikka = ylinlogiikka;
@@ -30,7 +29,8 @@ public class Kello {
     }
 
     /**
-     *
+     * Itse kello, joka joka sekunti antaa päivitetyn aikatekstin ylimmän logiikan
+     * kautta ikkunaluokan näkyvälle kellolle.
      */
     public void aikaTimer() {
         ActionListener aikaKuuntelija = new ActionListener() {
@@ -49,8 +49,10 @@ public class Kello {
     }
 
     /**
-     *
-     * @return
+     * Jonkin kysyessä nykyistä aikaa, annetaan se aina nelinumeroisena ja kaksoispiste välissä;
+     * paitsi yli tunnin ajan kestossa pysäytetään tuntiin.
+     * 
+     * @return String-pätkä ajasta.
      */
     public String aika() {
         String stringMinuutit;
@@ -70,6 +72,12 @@ public class Kello {
         return stringMinuutit + ":" + stringSekunnit;
     }
 
+    /**
+     * Aikatekstipätkämetodin siistijä, jossa pidetään huoli nelinumeroisuudesta. 
+     * 
+     * @param puolikas Toinen osa aikaa.
+     * @return Ajan puolikas, jossa on aina kaksi numeroa.
+     */
     public String aikaSiistija(int puolikas) {
         if (puolikas < 10) {
             return "0" + puolikas;
@@ -79,7 +87,8 @@ public class Kello {
     }
 
     /**
-     *
+     * Pelin päättyessä ajastin pysäytetään ja aika palautetaan Stringinä.
+     * 
      * @return
      */
     public String peliPaattyi() {
@@ -88,7 +97,8 @@ public class Kello {
     }
 
     /**
-     *
+     * Aloittaessa uutta peliä nollataan aika.
+     * 
      */
     public void nollaaAika() {
         ajastin.stop();

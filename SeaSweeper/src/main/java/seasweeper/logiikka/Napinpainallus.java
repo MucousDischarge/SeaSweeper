@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  *
- * Alemman, tarkemman tason pelilogiikka
+ * Napinpainalluksen tarkempi logiikka.
  */
 public class Napinpainallus {
 
@@ -20,20 +20,24 @@ public class Napinpainallus {
     private int raivattujenmaara;
 
     /**
-     *
-     * @param ylempilogiikka
+     * Tuodaan ylinlogiikkaluokka  käytettäväksi, ja luodaan miinojenluoja, 
+     * raivaaja ja voitontarkistaja, joille kuitenkin annetaan arvot vasta
+     * myöhemmin ensimmäisen klikkauksen jälkeen.
+     * 
+     * @param ylinlogiikka Yhteys hierarkiassa ylempään luokkaan.
      */
-    public Napinpainallus(YlinLogiikka ylempilogiikka) {
-        this.ylinlogiikka = ylempilogiikka;
+    public Napinpainallus(YlinLogiikka ylinlogiikka) {
+        this.ylinlogiikka = ylinlogiikka;
         this.miinojenluoja = new Miinojenluoja();
         this.raivaaja = new Raivaaja(this);
         this.voitontarkastaja = new Voitontarkastaja(this);
     }
 
     /**
-     *
-     * @param source
-     * @param oikeako
+     * Tämä metodi kutsutaan aina lautakuuntelijan havannoidessa klikkauksen.
+     * 
+     * @param source Klikattu JButton.
+     * @param oikeako Boolean, joka kertoo onko klikattu oikeaa vaiko vasenta hiirenpainiketta.
      * @throws IOException
      */
     public void napinpainallus(Object source, boolean oikeako) throws IOException {
@@ -42,28 +46,24 @@ public class Napinpainallus {
                 for (int b = 0; b < l; b++) {
                     if (ruudukko[a][b].onkoNappi(source) && !(oikeako)) {
                         vasenKlikkaus(a, b);
+                        tarkistetaanVoitettiinko();
                     } else if (ruudukko[a][b].onkoNappi(source)) {
                         oikeaKlikkaus(a, b);
                     }
                 }
             }
-            tarkistetaanVoitettiinko();
         }
     }
 
     /**
-     *
-     * @param a
-     * @param b
+     * Tämä kutsutaan aina vasenta hiirenpainiketta klikattua laudan JButtoneille,
+     * ja tämä suorittaa oleellisimmat kutsut ja tarkistukset.
+     * 
+     * @param a Klikatun napin korkeussijainti.
+     * @param b Klikatun napin leveyssijainti.
      */
     public void vasenKlikkaus(int a, int b) {
-        if (onkoEnsimmainenKlikkaus) {
-            if (k != 8 ) {
-                ylinlogiikka.startKello();
-            }
-            onkoEnsimmainenKlikkaus = false;
-            miinojenluoja.luoMiinat(a, b);
-        }
+        ensimmainenKlikkaus(a, b);
 
         if (ruudukko[a][b].onkoMiina()) {
             voitontarkastaja.havittiin();
@@ -75,26 +75,46 @@ public class Napinpainallus {
             //ruudun sisältö paljastetaan, ja tyhjän tapauksessa leviää
         }
     }
+    
+    /**
+     * Suoritetaan ensimmäisen klikkauksen yhteydessä, ja tämä suorittaa 
+     * kellonkäynnin aloittamisen, miinojenluonnin ja raivaamisen/rajahtamisen kutsut.
+     * 
+     * @param a Klikatun napin korkeussijainti.
+     * @param b Klikatun napin leveyssijainti.
+     */
+    public void ensimmainenKlikkaus(int a, int b) {
+        if (onkoEnsimmainenKlikkaus) {
+            if (k != 8 ) {
+                ylinlogiikka.startKello();
+            }
+            onkoEnsimmainenKlikkaus = false;
+            miinojenluoja.luoMiinat(a, b);
+        }
+    }
 
     /**
-     *
-     * @param a
-     * @param b
+     * Tämä kutsutaan klikattua laudan JButtonia oikealla hiirenpainikkeella,
+     * ja tämä ainoa toiminto onkin liputtaminen ja epäliputtaminen.
+     * 
+     * @param a Klikatun napin korkeussijainti.
+     * @param b Klikatun napin leveyssijainti.
      */
     public void oikeaKlikkaus(int a, int b) {
         if (!(ruudukko[a][b].onkoRaivattu())) {
             if (ruudukko[a][b].onkoLippu()) {
-                ylinlogiikka.kuva("tummavesi", a, b);
+                ruudukko[a][b].kuva("tummavesi");
                 ruudukko[a][b].poistaLippu();
             } else {
-                ylinlogiikka.kuva("lippu", a, b);
+                ruudukko[a][b].kuva("lippu");
                 ruudukko[a][b].lisaaLippu();
             }
         }
     }
     
     /**
-     *
+     * Tarkistetaan joka vasemman klikkauksen jälkeen voitettiinko.
+     * 
      * @throws IOException
      */
     public void tarkistetaanVoitettiinko() throws IOException {
@@ -105,10 +125,11 @@ public class Napinpainallus {
     }
     
     /**
-     *
-     * @param ruudukko
-     * @param k
-     * @param l
+     * Asetetaan ylimmän logiikan käskemänä aina uuden ruudukon luonnin yhteydessä uudet arvot.
+     * 
+     * @param ruudukko Nykyinen pelilauta Ruutu-objekteja
+     * @param k Ruudukon eli pelilaudan korkeus.
+     * @param l Ruudukon eli pelilaudan leveys.
      */
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         raivattujenmaara = 0;
@@ -130,14 +151,20 @@ public class Napinpainallus {
         pelipaattynyt = false;
     }
     
-    public void kuva(String kuva, int x, int y) {
-        ylinlogiikka.kuva(kuva, x, y);
-    }
-    
+    /**
+     * Voitontarkistuksen yhteydessä tarvitaan raivattujen määrää, jonka
+     * seuraaminen napinpainalluksessa on resurssisesti halvempaa kuin sen
+     * laskeminen joka kerta voitontarkistuksen yhteydessä uudelleen.
+     * 
+     * @return Raivattujen määrä.
+     */
     public int getRaivattujenmaara() {
         return raivattujenmaara;
     }
     
+    /**
+     * Lisätään raivattujen määrään yksi.
+     */
     public void lisaaRaivattu() {
         raivattujenmaara++;
     }
@@ -145,7 +172,8 @@ public class Napinpainallus {
     // TESTEJÄ VARTEN OLEVAT METODIT
 
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
         public boolean getOnkoEnsimmainenKlikkaus() {
@@ -153,7 +181,8 @@ public class Napinpainallus {
     }
 
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
     public int getK() {
@@ -161,7 +190,8 @@ public class Napinpainallus {
     }
 
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
     public int getL() {
@@ -169,7 +199,8 @@ public class Napinpainallus {
     }
 
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
     public boolean getPeliPaattynyt() {

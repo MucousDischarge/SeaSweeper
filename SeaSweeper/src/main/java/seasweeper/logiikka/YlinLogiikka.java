@@ -8,7 +8,7 @@ import seasweeper.gui.Menukuuntelija;
 
 /**
  *
- * Ylemmän tason ohjelmatoiminnot ja logiikka
+ * Ylimmän tason ohjelmatoiminnot ja logiikka.
  */
 public final class YlinLogiikka {
 
@@ -25,6 +25,7 @@ public final class YlinLogiikka {
 
     /**
      * Luodaan luokat ja perustason 16x16-lauta aluksi konstruktorissa.
+     * 
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -35,50 +36,55 @@ public final class YlinLogiikka {
         this.keskitasotaulu = new HighScore(false);
         this.vaikeataulu = new HighScore(true);
         this.kello = new Kello(this);
-        uusiIkkuna(16, 16);
+        uusiIkkuna(true, 16, 16);
     }
 
     /**
-     * Luodaan uusi ikkuna joko pelin alussa tai vaikeustasoa vaihtaessa 
-     * - samalla luodaan ruudukko ja pistetaululuokat.
-     * @param a
-     * @param b
+     * Luodaan uusi ikkuna joko pelin alussa tai vaikeustasoa vaihtaessa,
+     * ja samalla luodaan ruudukko ja pistetaululuokat - ikkunaluokka luodaan vain
+     * kerran alussa, ja sen jälkeen kutsutaan vain uutta fraamia.
+     * 
+     * @param ekako Tarkistetaan onko ensimmäinen kutsukerta.
+     * @param a Pelilaudan korkeus.
+     * @param b Pelilaudan leveys.
      * @throws IOException
      * @throws URISyntaxException
      */
-    public void uusiIkkuna(int a, int b) throws IOException, URISyntaxException {
+    public void uusiIkkuna(boolean ekako, int a, int b) throws IOException, URISyntaxException {
         k = a;
         l = b;
-
-        ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l, keskitasotaulu, vaikeataulu, kello);
-
+        if (ekako) {
+            ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l, keskitasotaulu, vaikeataulu, kello);
+        } else {
+            ikkuna.newFraami(k, l);
+        }
         uusiRuudukko(k, l);
         ikkuna.visible();
     }
 
     /**
      * Piirretään uusi ruudukko ruuduista ja jbuttoneista.
-     * @param a
-     * @param b
+     * 
+     * @param a Pelilaudan korkeus.
+     * @param b Pelilaudan leveys.
      */
     public void uusiRuudukko(int a, int b) {
         this.ruudukko = new Ruutu[a][b];
 
         for (int i = 0; i < a; i++) {
             for (int j = 0; j < b; j++) {
-                this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j));
+                this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j), ikkuna);
             }
         }
         napinpainallus.setArvot(ruudukko, k, l);
     }
 
     /**
-     * Uusi ruudukko resetoituessa; eli piirretään vain uusi ruudukko,
-     * tuhoamatta ikkunaa.
+     * Uusi ruudukko resetoidessa; eli piirretään vain uusi ruudukko tuhoamatta ikkunaa.
      */
     public void resetUusiRuudukko() {
         if (!(napinpainallus.getOnkoEnsimmainenKlikkaus())) {
-            ikkuna.poistaNapit(k, l);
+            ikkuna.poistaNapit();
             if (k != 8) {
                 ikkuna.nollaaAika();
             }
@@ -89,7 +95,7 @@ public final class YlinLogiikka {
     }
     
     /**
-     * Menukuuntelija kutsuu tämän, käyttäjän vaihtaessa vaikeustaso ja ikkunaa.
+     * Menukuuntelija kutsuu tämän, käyttäjän vaihtaessa vaikeustasoa ja ikkunaa.
      */
     public void ikkunaDispose() {
         ikkuna.tuhoa();
@@ -97,7 +103,7 @@ public final class YlinLogiikka {
 
     /**
      * Ensimmainen klikkaus aloittaa kellon; tämä kutsutaan 
-     * lautakuuntelijan kutsuessa vasenta klikkausmetodia alempilogiikassa.
+     * lautakuuntelijan kutsuessa vasenta klikkausmetodia napinpainallusluokassa.
      */
     public void startKello() {
         ikkuna.aloitaAjanlasku();
@@ -106,30 +112,20 @@ public final class YlinLogiikka {
     //rajahti tai voitit: kaksi pelin loppua
     
     /**
-     * Alempilogiikasta tulee metodikutsu, joka ohjautuu ikkunaluokkaan ja avaa
-     * miinaloppuikkunan.
+     * Napinpainallusluokasta tulee metodikutsu, joka ohjautuu ikkunaluokkaan 
+     * ja avaa miinaloppuikkunan.
      */
     public void rajahti() {
         ikkuna.rajahti();
     }
 
     /**
-     * Alempilogiikasta tulee hyvin paljon rajahtamisen tapaan metodikutsu.
+     * Napinpainallusluokasta tulee rajahtamisen tapaan metodikutsu.
+     * 
      * @throws IOException
      */
     public void voitit() throws IOException {
         ikkuna.voitit();
-    }
-    
-    /**
-     * Alempilogiikka käskee ylempilogiikan kautta ikkunaa laittamaan haluamansa 
-     * kuvan antamillensa arvojen määrittämälle sijainnille.
-     * @param kuva
-     * @param a
-     * @param b
-     */
-    public void kuva(String kuva, int a, int b) {
-        ikkuna.kuva(kuva, a, b);
     }
 
     /**
@@ -140,9 +136,26 @@ public final class YlinLogiikka {
         ikkuna.highscore();
     }
     
+    /**
+     * Kellon timer päivittää ikkunaluokan näkyvän graafisen kellon joka sekunti,
+     * ylimmän logiikan kautta.
+     * 
+     * @param aika Uusi näkyvä aika.
+     * @throws IOException
+     */
     public void paivitaAika(String aika) throws IOException {
         ikkuna.paivitaAika(aika);
     }
 
     // TESTEJÄ VARTEN OLEVAT METODIT
+    
+    /**
+     * Testimetodi.
+     * 
+     * @return
+     */
+        
+    public Ikkuna getIkkuna() {
+        return ikkuna;
+    }
 }

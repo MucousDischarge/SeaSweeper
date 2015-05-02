@@ -2,7 +2,7 @@ package seasweeper.logiikka;
 
 /**
  *
- * Tarkastaa joka klikkauksen jälkeen ollaanko voitettu
+ * Tarkastaa joka klikkauksen jälkeen ollaanko voitettu.
  */
 public class Voitontarkastaja {
 
@@ -13,16 +13,19 @@ public class Voitontarkastaja {
     private int miinojenmaara;
 
     /**
-     *
-     * @param napinpainallus
+     * Annetaan konstruktorissa yhteys napinpainallusluokkaan.
+     * 
+     * @param napinpainallus Napinpainallusluokka.
      */
     public Voitontarkastaja(Napinpainallus napinpainallus) {
         this.napinpainallus = napinpainallus;
     }
 
     /**
-     *
-     * @return
+     * Napinpainalluksessa kutsutaan tämä voitontarkistus joka pelilaudan nappuloita 
+     * kohtaan osuvan vasemman klikkauksen jälkeen.
+     * 
+     * @return Totuusarvo voitosta vai ei vielä voitosta.
      */
     public boolean voitettiinko() {
 
@@ -30,7 +33,7 @@ public class Voitontarkastaja {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < l; y++) {
                     if (ruudukko[x][y].onkoMiina()) {
-                        napinpainallus.kuva("lippu", x, y);
+                        ruudukko[x][y].kuva("lippu");
                     }
                 }
             }
@@ -40,22 +43,27 @@ public class Voitontarkastaja {
         return false;
     }
     
+    /**
+     * Joskun ei voi voittaa, ja miinaa klikatessa napinpainallusluokassa 
+     * kaikki miinat paljastetaan. 
+     */
     public void havittiin() {
         for (int x = 0; x < k; x++) {
             for (int y = 0; y < l; y++) {
                 if (ruudukko[x][y].onkoMiina()) {
-                    napinpainallus.kuva("miina", x, y);
+                    ruudukko[x][y].kuva("miina");
                 }
             }
         }
     }
     
     /**
-     *
-     * @param ruudukko
-     * @param k
-     * @param l
-     * @param miinojenmaara
+     * Uusien ruudukoiden luonnin takia arvoja pitää tulla voida antaa uudelleen.
+     * 
+     * @param ruudukko Pelilaudan nappulat, Ruutu-oliot.
+     * @param k Pelilaudan korkeus.
+     * @param l Pelilaudan leveys.
+     * @param miinojenmaara Miinojen määrä pelilaudalla.
      */
     public void setArvot(Ruutu[][] ruudukko, int k, int l, int miinojenmaara) {
         this.ruudukko = ruudukko;

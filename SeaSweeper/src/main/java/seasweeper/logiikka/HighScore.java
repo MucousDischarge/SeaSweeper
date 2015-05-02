@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  *
- * Hoitaa pelitilastotoiminnot, eli lukee tekstitiedostoja ja kirjoittaa niihin
+ * Hoitaa pelitilastotoiminnot, eli lukee tekstitiedostoja ja kirjoittaa niihin.
  */
 public class HighScore {
 
@@ -19,8 +19,10 @@ public class HighScore {
     private final File tiedosto;
 
     /**
-     *
-     * @param vaikeako
+     * Konstruktorin yhteydessä annetaan selvennys vaikeustasosta: eli joko keskitaso
+     * tai vaikea; jonka perusteella luetaan kyseinen tiedosto.
+     * 
+     * @param vaikeako Boolean, jonka perusteella valitaan keskitaso tai vaikea.
      * @throws IOException
      * @throws URISyntaxException
      */
@@ -36,9 +38,11 @@ public class HighScore {
     }
 
     /**
-     *
-     * @param nimi
-     * @param aika
+     * Pistetilastoon lisätään uusi nimi uudella ajalla, jos aika päihittää jonkin aiemmista
+     * ajoista - ja nimi lisätään aina parhausjärjestyksessä ylhäältä alas.
+     * 
+     * @param nimi Uuden ajan nimi.
+     * @param aika Uuden ajan aika.
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -70,6 +74,13 @@ public class HighScore {
         muutoksiako = false;
     }
 
+    /**
+     * Lisayksen siistija, jossa lisayksen osio, jossa juuri laitetaan tilastoon uusi aika.
+     * 
+     * @param i Pistetilaston kohta.
+     * @param nimi Uusi nimi. 
+     * @param aika Uusi aika.
+     */
     public void lisaaSiistija(int i, String nimi, String aika) {
         if (eiLiianPitkaTaiLyhyt(nimi)) {
             highscore[i][0] = nimi;
@@ -81,7 +92,8 @@ public class HighScore {
     }
 
     /**
-     *
+     * Luetaan pistetilastotiedosto.
+     * 
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -99,7 +111,8 @@ public class HighScore {
     }
 
     /**
-     *
+     * Itse tiedostoon kirjoittaminen.
+     * 
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -111,8 +124,9 @@ public class HighScore {
     }
 
     /**
-     *
-     * @return
+     * Yhden Stringin kokoaminen pistetilastotiedoston tekstimassasta.
+     * 
+     * @return Haluttu yksi String pistetilastosta.
      */
     public String kokoaTaulu() {
         String palautettava = "";
@@ -122,10 +136,22 @@ public class HighScore {
         return palautettava;
     }
 
+    /**
+     * Tarkistetaan, ettei annettu nimi ole liian pitkä tai lyhyt.
+     * 
+     * @param nimi Annettu nimi.
+     * @return Onko vai ei sopiva nimi.
+     */
     public boolean eiLiianPitkaTaiLyhyt(String nimi) {
         return !(nimi.equals("")) && nimi.length() <= 30;
     }
 
+    /**
+     * Epäkelvon nimen tapauksessa muokataan nimeä.
+     * 
+     * @param nimi Annettu nimi.
+     * @return Muokattu nimi.
+     */
     public String uusiNimi(String nimi) {
         if (nimi.equals("")) {
             return "anon";

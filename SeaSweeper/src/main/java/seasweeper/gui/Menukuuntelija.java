@@ -10,14 +10,15 @@ import seasweeper.logiikka.YlinLogiikka;
 
 /**
  *
- * Kuuntelee yllä olevia menunappeja
+ * Kuuntelee peli-ikkunan yläosassa olevia menunappeja.
  */
 public class Menukuuntelija implements ActionListener {
 
     private final YlinLogiikka ylinlogiikka;
 
     /**
-     *
+     * Annetaan konstruktorin yhteydessä yhteys ylimpään logiikkaan.
+     * 
      * @param ylinlogiikka
      */
     public Menukuuntelija(YlinLogiikka ylinlogiikka) {
@@ -25,8 +26,10 @@ public class Menukuuntelija implements ActionListener {
     }
 
     /**
-     *
-     * @param e
+     * Metodi, joka kutsuu halutut toiminnot menua klikattua; ja erottelee eri napit
+     * eri toiminnoiksi.
+     * 
+     * @param e Menunapin klikkaustapahtuma.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,15 +55,16 @@ public class Menukuuntelija implements ActionListener {
     }
 
     /**
-     *
-     * @param a
-     * @param b
+     * Uuden ikkunan luonti vaikeustasoa vaihtaessa.
+     * 
+     * @param a Uuden laudan korkeus.
+     * @param b Uuden laudan leveys.
      * @throws IOException
      * @throws URISyntaxException
      */
     public void ikkunanLuonti(int a, int b) throws IOException, URISyntaxException {
         ylinlogiikka.ikkunaDispose();
-        ylinlogiikka.uusiIkkuna(a, b);
+        ylinlogiikka.uusiIkkuna(false, a, b);
     }
 
     /**

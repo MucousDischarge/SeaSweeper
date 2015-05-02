@@ -14,15 +14,11 @@ public class Miinojenluoja {
     private int miinaX;
 
     /**
-     *
-     */
-    public Miinojenluoja() {
-    }
-
-    /**
-     *
-     * @param a
-     * @param b
+     * Luodaan miinat, muttei klikatulle ruudulle, jonka sijainti annetaan parametrinä
+     * - lisäksi laudan koko päätellään miinojen määrästä.
+     * 
+     * @param a Klikatun ruudun korkeussijainti.
+     * @param b Klikatun ruudun leveyssijainti.
      */
     public void luoMiinat(int a, int b) {
         int w = 0;
@@ -40,6 +36,9 @@ public class Miinojenluoja {
         }
     }
 
+    /**
+     * While-loopin sisällä miinojen generoimiseen satunnaisia sijainti antava metodi.
+     */
     public void vaihdaXjaY() {
         switch (miinojenmaara) {
             case 10:
@@ -58,10 +57,12 @@ public class Miinojenluoja {
     }
 
     /**
-     *
-     * @param minimi
-     * @param maksimi
-     * @return
+     * Itse satunnaislukugeneraattori, jolle annetaan minimiluku ja maksimiluku, joiden
+     * välillä arvotaan satunnaisluku.
+     * 
+     * @param minimi Halutun välin minimiluku.
+     * @param maksimi Halutun välin maksimiluku
+     * @return Satunnainen luku halutulta väliltä.
      */
     public static int satunnainenLukuValilta(int minimi, int maksimi) {
 
@@ -73,9 +74,10 @@ public class Miinojenluoja {
     }
 
     /**
-     *
-     * @param ruudukko
-     * @param miinojenmaara
+     * Uusien ruudukkojen luonnissa annetaan uudet arvot.
+     * 
+     * @param ruudukko Uusi ruudukko.
+     * @param miinojenmaara Uusi miinojenmaara.
      */
     public void setRuudukko(Ruutu[][] ruudukko, int miinojenmaara) {
         this.ruudukko = ruudukko;
@@ -84,7 +86,8 @@ public class Miinojenluoja {
 
     // TESTEJÄ VARTEN OLEVAT METODIT
     /**
-     *
+     * Testimetodi.
+     * 
      * @return
      */
     public Ruutu[][] getRuudukko() {

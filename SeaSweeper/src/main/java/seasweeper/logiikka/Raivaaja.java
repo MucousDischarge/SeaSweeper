@@ -2,7 +2,7 @@ package seasweeper.logiikka;
 
 /**
  *
- * Suorittaa miinattoman ruudun klikkausta seuraavan raivauksen
+ * Suorittaa miinattoman ruudun klikkausta seuraavan raivauksen.
  */
 public class Raivaaja {
 
@@ -12,17 +12,19 @@ public class Raivaaja {
     private int l;
 
     /**
+     * Annetaan konstruktorissa yhteys napinpainallusluokkaan.
      *
-     * @param napinpainallus
+     * @param napinpainallus Napinpainallusluokka.
      */
     public Raivaaja(Napinpainallus napinpainallus) {
         this.napinpainallus = napinpainallus;
     }
 
     /**
+     * Miinattoman ruudun raivaus, joka klikkauksesta tai leviämisestä.
      *
-     * @param a
-     * @param b
+     * @param a Raivattavan ruudun korkeussijainti.
+     * @param b Raivattavan ruudun leveyssijainti.
      */
     public void raivaus(int a, int b) {
         if (tarkista(a, b)) {
@@ -30,37 +32,49 @@ public class Raivaaja {
                 int[][] x = luoLista(a, b);
                 int luku = laskeLuku(x);
 
-                napinpainallus.kuva(String.valueOf(luku), a, b);
+                ruudukko[a][b].kuva(String.valueOf(luku));
 
                 napinpainallus.lisaaRaivattu();
                 ruudukko[a][b].onRaivattu();
 
-                if (luku == 0) {
-                    for (int i = 0; i < 8; i++) {
-                        if (leviaako(x[i][0], x[i][1])) {
-                            raivaus(x[i][0], x[i][1]);
-                        }
-                    }
+                rekursioRaivaus(luku, x);
+            }
+        }
+    }
+
+    /**
+     * Nollaa klikattua leviava rekursioraivaus.
+     * 
+     * @param luku Käytetään tarkistamaan onko ruutu kelvollinen rekursioraivaukselle.
+     * @param x Ruudun läheiset ruudut, joihin mahdollisesti leviää.
+     */
+    public void rekursioRaivaus(int luku, int[][] x) {
+        if (luku == 0) {
+            for (int i = 0; i < 8; i++) {
+                if (leviaakoSinne(x[i][0], x[i][1])) {
+                    raivaus(x[i][0], x[i][1]);
                 }
             }
         }
     }
 
     /**
+     * Siivoojametodi rekursioleviamisen tarkistamiselle.
      *
-     * @param a
-     * @param b
-     * @return
+     * @param a Leviämiskohteena olevan ruudun korkeussijainti.
+     * @param b Leviämiskohteena olevan ruudun leveyssijainti.
+     * @return Onko kelvollinen leviamiselle.
      */
-    public boolean leviaako(int a, int b) {
+    public boolean leviaakoSinne(int a, int b) {
         return tarkista(a, b) && !(ruudukko[a][b].onkoRaivattu());
     }
 
     /**
-     *
-     * @param a
-     * @param b
-     * @return
+     * Laaditaan lista ruudun läheisistä ruuduista.
+     * 
+     * @param a Raivattavan ruudun korkeussijainti.
+     * @param b Raivattavan ruudun leveyssijainti.
+     * @return Palautetaan lista.
      */
     public int[][] luoLista(int a, int b) {
         int[][] lista = new int[8][2];
@@ -86,9 +100,11 @@ public class Raivaaja {
     }
 
     /**
-     *
-     * @param x
-     * @return
+     * Lasketaan ruudun läheisten miinojen määrä, käyttämällä hyväksi aiempaa
+     * läheisten ruutujen listaa.
+     * 
+     * @param x Ruudun läheisten ruutujen lista.
+     * @return Palautetaan läheisten miinojen määrä.
      */
     public int laskeLuku(int[][] x) {
         int luku = 0;
@@ -103,20 +119,23 @@ public class Raivaaja {
     }
 
     /**
-     *
-     * @param a
-     * @param b
-     * @return
+     * Tarkistetaan onko korkeus- ja leveyssijainti kelvollisia, joka on tärkeää
+     * tietää tarkistaessa ruudun läheisiä ruutuja.
+     * 
+     * @param a Korkeussijainti.
+     * @param b Leveyssijainti.
+     * @return Onko pelilaudan osa vai ei.
      */
     public boolean tarkista(int a, int b) {
         return a <= k - 1 && a >= 0 && b <= l - 1 && b >= 0;
     }
 
     /**
-     *
-     * @param ruudukko
-     * @param k
-     * @param l
+     * Uusia ruudukkoja laatiessa raivaajan arvot muutetaan usein.
+     * 
+     * @param ruudukko Uusi ruudukko.
+     * @param k Pelilaudan korkeus.
+     * @param l Pelilaudan leveys.
      */
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
         this.ruudukko = ruudukko;

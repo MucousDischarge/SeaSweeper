@@ -9,23 +9,25 @@ import seasweeper.logiikka.Napinpainallus;
 
 /**
  *
- * Luokka suorittaa pelinappuloiden kuuntelun
+ * Luokka suorittaa pelinappuloiden kuuntelun.
  */
 public class Lautakuuntelija implements MouseListener {
 
     private final Napinpainallus napinpainallus;
 
     /**
-     *
-     * @param napinpainallus
+     * Konstruktorissa annetaan yhteys napinpainallusluokkaan.
+     * 
+     * @param napinpainallus Napinpainallusluokka.
      */
     public Lautakuuntelija(Napinpainallus napinpainallus) {
         this.napinpainallus = napinpainallus;
     }
 
     /**
-     *
-     * @param me
+     * Käyttämätön metodi.
+     * 
+     * @param me 
      */
     @Override
     public void mouseClicked(MouseEvent me) {
@@ -33,9 +35,10 @@ public class Lautakuuntelija implements MouseListener {
     }
 
     /**
-     * Metodi suorittaa halutun toiminnon napinpainalluksesta
+     * Laudan nappia klikatessa tämä herää henkiin, joka välittää tiedon klikatusta JButtonista
+     * sekä hiirenpainikkeesta napinpainallusluokalle.
      *
-     * @param me
+     * @param me Hiirenklikkaustapahtuma, jonka tiedoissa lukee klikattu nappi ja hiirenpainike.
      */
     @Override
     public void mousePressed(MouseEvent me) {
@@ -49,9 +52,10 @@ public class Lautakuuntelija implements MouseListener {
     }
 
     /**
-     *
-     * @param object
-     * @param kumpi
+     * Siivoojametodi trycatch-sokkeloille.
+     * 
+     * @param object Klikattu JButton.
+     * @param kumpi Painettu hiirenpainike.
      */
     public void tryCatchi(Object object, boolean kumpi) {
         try {
@@ -62,7 +66,8 @@ public class Lautakuuntelija implements MouseListener {
     }
 
     /**
-     *
+     * Käyttämätön metodi.
+     * 
      * @param me
      */
     @Override
@@ -71,7 +76,8 @@ public class Lautakuuntelija implements MouseListener {
     }
 
     /**
-     *
+     * Käyttämätön metodi.
+     * 
      * @param me
      */
     @Override
@@ -80,7 +86,8 @@ public class Lautakuuntelija implements MouseListener {
     }
 
     /**
-     *
+     * Käyttämätön metodi.
+     * 
      * @param me
      */
     @Override

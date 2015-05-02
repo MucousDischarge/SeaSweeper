@@ -98,4 +98,6 @@ Muokkasin vähän rakennelmaa, ja lisäsin jotain toimintoja.
 ###02.05.2015
 Selkeytin ohjelmaa, ja jaoin toimintoja pienempiin osiin.
 
-* 2 tuntia käytetty.
+Loin Javadocit.
+
+* 3 tuntia käytetty.
