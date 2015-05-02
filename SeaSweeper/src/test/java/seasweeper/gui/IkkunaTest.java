@@ -8,9 +8,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import seasweeper.logiikka.AlempiLogiikka;
+import seasweeper.logiikka.Napinpainallus;
 import seasweeper.logiikka.HighScore;
-import seasweeper.logiikka.YlempiLogiikka;
+import seasweeper.logiikka.Kello;
+import seasweeper.logiikka.YlinLogiikka;
 
 /**
  *
@@ -18,6 +19,7 @@ import seasweeper.logiikka.YlempiLogiikka;
  */
 public class IkkunaTest {
     private Ikkuna ikkuna;
+    private YlinLogiikka ylempilogiikka;
     
     /**
      *
@@ -25,8 +27,8 @@ public class IkkunaTest {
      * @throws URISyntaxException
      */
     public IkkunaTest() throws IOException, URISyntaxException {
-        
-        ikkuna = new Ikkuna(new Menukuuntelija(new YlempiLogiikka()), new Lautakuuntelija(new AlempiLogiikka(new YlempiLogiikka())), 8, 8, new HighScore(false), new HighScore(true));
+        this.ylempilogiikka = new YlinLogiikka();
+        ikkuna = new Ikkuna(new Menukuuntelija(ylempilogiikka), new Lautakuuntelija(new Napinpainallus(ylempilogiikka)), 8, 8, new HighScore(false), new HighScore(true), new Kello(ylempilogiikka));
     }
     
     /**

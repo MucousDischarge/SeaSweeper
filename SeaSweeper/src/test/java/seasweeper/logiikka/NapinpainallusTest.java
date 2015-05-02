@@ -11,16 +11,16 @@ import static org.junit.Assert.*;
  *
  * @author ez
  */
-public class AlempiLogiikkaTest {
-    private AlempiLogiikka alempilogiikka;
+public class NapinpainallusTest {
+    private Napinpainallus alempilogiikka;
     
     /**
      *
      * @throws IOException
      * @throws URISyntaxException
      */
-    public AlempiLogiikkaTest() throws IOException, URISyntaxException {
-        this.alempilogiikka = new AlempiLogiikka(new YlempiLogiikka());
+    public NapinpainallusTest() throws IOException, URISyntaxException {
+        this.alempilogiikka = new Napinpainallus(new YlinLogiikka());
     }
     
     /**

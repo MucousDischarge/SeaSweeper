@@ -6,49 +6,46 @@ package seasweeper.logiikka;
  */
 public class Raivaaja {
 
-    private final YlempiLogiikka ylempilogiikka;
+    private final Napinpainallus napinpainallus;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
 
     /**
      *
-     * @param ylempilogiikka
+     * @param napinpainallus
      */
-    public Raivaaja(YlempiLogiikka ylempilogiikka) {
-        this.ylempilogiikka = ylempilogiikka;
+    public Raivaaja(Napinpainallus napinpainallus) {
+        this.napinpainallus = napinpainallus;
     }
 
     /**
      *
      * @param a
      * @param b
-     * @param alaLevia
      */
-    public void raivaus(int a, int b, boolean alaLevia) {
+    public void raivaus(int a, int b) {
         if (tarkista(a, b)) {
-            int[][] x = luoLista(a, b);
-            int luku = laskeLuku(x);
+            if (!(ruudukko[a][b].onkoRaivattu())) {
+                int[][] x = luoLista(a, b);
+                int luku = laskeLuku(x);
 
-            ylempilogiikka.kuva(String.valueOf(luku), a, b);
+                napinpainallus.kuva(String.valueOf(luku), a, b);
 
-            ruudukko[a][b].onRaivattu();
+                napinpainallus.lisaaRaivattu();
+                ruudukko[a][b].onRaivattu();
 
-            if (!(alaLevia) && !(luku > 0)) {
-                for (int i = 0; i < 8; i++) {
-                    if (leviaako(x[i][0], x[i][1])) {
-                        int[][] uusiLista = luoLista(x[i][0], x[i][1]);
-                        if (laskeLuku(uusiLista) == 0) {
-                            raivaus(x[i][0], x[i][1], false);
-                        } else {
-                            raivaus(x[i][0], x[i][1], true);
+                if (luku == 0) {
+                    for (int i = 0; i < 8; i++) {
+                        if (leviaako(x[i][0], x[i][1])) {
+                            raivaus(x[i][0], x[i][1]);
                         }
                     }
                 }
             }
         }
     }
-    
+
     /**
      *
      * @param a
@@ -56,7 +53,7 @@ public class Raivaaja {
      * @return
      */
     public boolean leviaako(int a, int b) {
-        return tarkista(a, b) && !(ruudukko[a][b].onkoMiina()) && !(ruudukko[a][b].onkoRaivattu());
+        return tarkista(a, b) && !(ruudukko[a][b].onkoRaivattu());
     }
 
     /**

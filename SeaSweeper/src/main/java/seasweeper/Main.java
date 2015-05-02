@@ -2,7 +2,7 @@ package seasweeper;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import seasweeper.logiikka.YlempiLogiikka;
+import seasweeper.logiikka.YlinLogiikka;
 
 
 /**
@@ -18,6 +18,6 @@ public class Main {
      * @throws URISyntaxException
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        YlempiLogiikka peli = new YlempiLogiikka();
+        YlinLogiikka peli = new YlinLogiikka();
     }
 }

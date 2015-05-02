@@ -6,7 +6,7 @@ package seasweeper.logiikka;
  */
 public class Voitontarkastaja {
 
-    private final YlempiLogiikka ylempilogiikka;
+    private final Napinpainallus napinpainallus;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
@@ -14,10 +14,10 @@ public class Voitontarkastaja {
 
     /**
      *
-     * @param ylempilogiikka
+     * @param napinpainallus
      */
-    public Voitontarkastaja(YlempiLogiikka ylempilogiikka) {
-        this.ylempilogiikka = ylempilogiikka;
+    public Voitontarkastaja(Napinpainallus napinpainallus) {
+        this.napinpainallus = napinpainallus;
     }
 
     /**
@@ -25,21 +25,12 @@ public class Voitontarkastaja {
      * @return
      */
     public boolean voitettiinko() {
-        int raivattujenmaara = 0;
 
-        for (int x = 0; x < k; x++) {
-            for (int y = 0; y < l; y++) {
-                if (ruudukko[x][y].onkoRaivattu()) {
-                    raivattujenmaara++;
-                }
-            }
-        }
-
-        if ((k * l) - raivattujenmaara == miinojenmaara) {
+        if ((k * l) - napinpainallus.getRaivattujenmaara() == miinojenmaara) {
             for (int x = 0; x < k; x++) {
                 for (int y = 0; y < l; y++) {
                     if (ruudukko[x][y].onkoMiina()) {
-                        ylempilogiikka.kuva("lippu", x, y);
+                        napinpainallus.kuva("lippu", x, y);
                     }
                 }
             }
@@ -47,6 +38,16 @@ public class Voitontarkastaja {
         }
         
         return false;
+    }
+    
+    public void havittiin() {
+        for (int x = 0; x < k; x++) {
+            for (int y = 0; y < l; y++) {
+                if (ruudukko[x][y].onkoMiina()) {
+                    napinpainallus.kuva("miina", x, y);
+                }
+            }
+        }
     }
     
     /**

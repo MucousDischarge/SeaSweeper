@@ -94,3 +94,8 @@ Lisäsin kellon ja highscore-systeemin. Nämä sotkevat ohjelmaa hyvin paljon. O
 Muokkasin vähän rakennelmaa, ja lisäsin jotain toimintoja.
 
 * 2 tuntia käytetty.
+
+###02.05.2015
+Selkeytin ohjelmaa, ja jaoin toimintoja pienempiin osiin.
+
+* 2 tuntia käytetty.

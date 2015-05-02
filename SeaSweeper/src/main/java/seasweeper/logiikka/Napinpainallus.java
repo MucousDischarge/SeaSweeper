@@ -6,9 +6,9 @@ import java.io.IOException;
  *
  * Alemman, tarkemman tason pelilogiikka
  */
-public class AlempiLogiikka {
+public class Napinpainallus {
 
-    private final YlempiLogiikka ylempilogiikka;
+    private final YlinLogiikka ylinlogiikka;
     private final Raivaaja raivaaja;
     private final Voitontarkastaja voitontarkastaja;
     private final Miinojenluoja miinojenluoja;
@@ -17,17 +17,17 @@ public class AlempiLogiikka {
     private int k;
     private int l;
     private Ruutu[][] ruudukko;
-    private long alkuaika;
+    private int raivattujenmaara;
 
     /**
      *
      * @param ylempilogiikka
      */
-    public AlempiLogiikka(YlempiLogiikka ylempilogiikka) {
-        this.ylempilogiikka = ylempilogiikka;
+    public Napinpainallus(YlinLogiikka ylempilogiikka) {
+        this.ylinlogiikka = ylempilogiikka;
         this.miinojenluoja = new Miinojenluoja();
-        this.raivaaja = new Raivaaja(ylempilogiikka);
-        this.voitontarkastaja = new Voitontarkastaja(ylempilogiikka);
+        this.raivaaja = new Raivaaja(this);
+        this.voitontarkastaja = new Voitontarkastaja(this);
     }
 
     /**
@@ -40,9 +40,9 @@ public class AlempiLogiikka {
         if (!pelipaattynyt) {
             for (int a = 0; a < k; a++) {
                 for (int b = 0; b < l; b++) {
-                    if (source == ylempilogiikka.getNappi(a, b) && !(oikeako)) {
+                    if (ruudukko[a][b].onkoNappi(source) && !(oikeako)) {
                         vasenKlikkaus(a, b);
-                    } else if (source == ylempilogiikka.getNappi(a, b)) {
+                    } else if (ruudukko[a][b].onkoNappi(source)) {
                         oikeaKlikkaus(a, b);
                     }
                 }
@@ -59,18 +59,19 @@ public class AlempiLogiikka {
     public void vasenKlikkaus(int a, int b) {
         if (onkoEnsimmainenKlikkaus) {
             if (k != 8 ) {
-                ylempilogiikka.startKello();
+                ylinlogiikka.startKello();
             }
             onkoEnsimmainenKlikkaus = false;
             miinojenluoja.luoMiinat(a, b);
         }
 
         if (ruudukko[a][b].onkoMiina()) {
-            ylempilogiikka.rajahti();
+            voitontarkastaja.havittiin();
+            ylinlogiikka.rajahti();
             //kaikki miinat paljastuvat ruudulla
             this.pelipaattynyt = true;
         } else {
-            raivaaja.raivaus(a, b, false);
+            raivaaja.raivaus(a, b);
             //ruudun sisältö paljastetaan, ja tyhjän tapauksessa leviää
         }
     }
@@ -83,10 +84,10 @@ public class AlempiLogiikka {
     public void oikeaKlikkaus(int a, int b) {
         if (!(ruudukko[a][b].onkoRaivattu())) {
             if (ruudukko[a][b].onkoLippu()) {
-                ylempilogiikka.kuva("tummavesi", a, b);
+                ylinlogiikka.kuva("tummavesi", a, b);
                 ruudukko[a][b].poistaLippu();
             } else {
-                ylempilogiikka.kuva("lippu", a, b);
+                ylinlogiikka.kuva("lippu", a, b);
                 ruudukko[a][b].lisaaLippu();
             }
         }
@@ -98,7 +99,7 @@ public class AlempiLogiikka {
      */
     public void tarkistetaanVoitettiinko() throws IOException {
         if (voitontarkastaja.voitettiinko()) {
-            ylempilogiikka.voitit();
+            ylinlogiikka.voitit();
             this.pelipaattynyt = true;
         }
     }
@@ -110,6 +111,7 @@ public class AlempiLogiikka {
      * @param l
      */
     public void setArvot(Ruutu[][] ruudukko, int k, int l) {
+        raivattujenmaara = 0;
         this.ruudukko = ruudukko;
         this.k = k;
         this.l = l;
@@ -126,6 +128,18 @@ public class AlempiLogiikka {
         voitontarkastaja.setArvot(ruudukko, k, l, miinojenmaara);
         onkoEnsimmainenKlikkaus = true;
         pelipaattynyt = false;
+    }
+    
+    public void kuva(String kuva, int x, int y) {
+        ylinlogiikka.kuva(kuva, x, y);
+    }
+    
+    public int getRaivattujenmaara() {
+        return raivattujenmaara;
+    }
+    
+    public void lisaaRaivattu() {
+        raivattujenmaara++;
     }
 
     // TESTEJÄ VARTEN OLEVAT METODIT

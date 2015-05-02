@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seasweeper.logiikka.AlempiLogiikka;
+import seasweeper.logiikka.Napinpainallus;
 
 /**
  *
@@ -13,14 +13,14 @@ import seasweeper.logiikka.AlempiLogiikka;
  */
 public class Lautakuuntelija implements MouseListener {
 
-    private final AlempiLogiikka alempilogiikka;
+    private final Napinpainallus napinpainallus;
 
     /**
      *
-     * @param alempilogiikka
+     * @param napinpainallus
      */
-    public Lautakuuntelija(AlempiLogiikka alempilogiikka) {
-        this.alempilogiikka = alempilogiikka;
+    public Lautakuuntelija(Napinpainallus napinpainallus) {
+        this.napinpainallus = napinpainallus;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Lautakuuntelija implements MouseListener {
      */
     public void tryCatchi(Object object, boolean kumpi) {
         try {
-            alempilogiikka.napinpainallus(object, kumpi);
+            napinpainallus.napinpainallus(object, kumpi);
         } catch (IOException ex) {
             Logger.getLogger(Lautakuuntelija.class.getName()).log(Level.SEVERE, null, ex);
         }

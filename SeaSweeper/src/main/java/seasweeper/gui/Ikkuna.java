@@ -1,5 +1,6 @@
 package seasweeper.gui;
 
+import seasweeper.logiikka.Kello;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -8,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import seasweeper.logiikka.HighScore;
 
 /**
@@ -23,12 +23,13 @@ public class Ikkuna {
     private final Kello kello;
     private final HighScore keskitasotaulu;
     private final HighScore vaikeataulu;
+    private final Popup popup;
     private final int k;
     private final int l;
     private final JFrame jfraami;
     private final JButton napisto[][];
-    private final JMenuItem aika;
-    private final JMenuItem highscore;
+    private JMenuItem aika;
+    private JMenuItem highscore;
 
     /**
      *
@@ -41,26 +42,38 @@ public class Ikkuna {
      * @throws IOException
      * @throws URISyntaxException
      */
-    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l, HighScore keskitasotaulu, HighScore vaikeataulu) throws IOException, URISyntaxException {
+    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l, HighScore keskitasotaulu, HighScore vaikeataulu, Kello kello) throws IOException, URISyntaxException {
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();
-        this.kello = new Kello(this);
+        this.kello = kello;
         this.keskitasotaulu = keskitasotaulu;
         this.vaikeataulu = vaikeataulu;
         this.k = k;
         this.l = l;
         this.napisto = new JButton[k][l];
         this.jfraami = new JFrame();
-
+        this.popup = new Popup(kello, keskitasotaulu, vaikeataulu, kuvaluokka, jfraami, l);
+        fraamiPerusasetukset();
+        asetaMenu();
+    }
+    
+    public final void fraamiPerusasetukset() {
         jfraami.setSize((l * 22), (k * 25));
         jfraami.setTitle("SeaSweeper");
         jfraami.setLocationRelativeTo(null);
         jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfraami.setResizable(false);
         jfraami.setLayout(new GridLayout(k, l));
-
+    }
+    
+    public final void asetaMenu() {
         JMenuBar valikko = new JMenuBar();
+        asetaVaikeusMenu(valikko);
+        asetaMuutMenuItemit(valikko);
+    }
+    
+    public void asetaVaikeusMenu(JMenuBar valikko) {
         JMenu vaikeusvalinta = new JMenu("Vaikeus");
         valikko.add(vaikeusvalinta);
 
@@ -74,7 +87,9 @@ public class Ikkuna {
         helppo.addActionListener(menukuuntelija);
         keskitaso.addActionListener(menukuuntelija);
         vaikea.addActionListener(menukuuntelija);
-
+    }
+    
+    public void asetaMuutMenuItemit(JMenuBar valikko) {
         JMenuItem reset = new JMenuItem("Reset");
         valikko.add(reset);
         reset.addActionListener(menukuuntelija);
@@ -89,7 +104,7 @@ public class Ikkuna {
         }
 
         jfraami.setJMenuBar(valikko);
-    }
+    } 
 
     /**
      *
@@ -127,18 +142,14 @@ public class Ikkuna {
 
     /**
      *
-     * @return
      */
-    public JFrame getFraami() {
-        return jfraami;
+    public void tuhoa() {
+        jfraami.dispose();
     }
-
-    /**
-     *
-     * @return
-     */
-    public JButton[][] getNapisto() {
-        return this.napisto;
+    
+    public void piirraUudelleen() {
+        jfraami.validate();
+        jfraami.repaint();
     }
 
     /**
@@ -153,16 +164,6 @@ public class Ikkuna {
 
     /**
      *
-     * @param i
-     * @param j
-     * @return
-     */
-    public JButton getNappi(int i, int j) {
-        return this.napisto[i][j];
-    }
-
-    /**
-     *
      * @param uusiAika
      * @throws IOException
      */
@@ -173,7 +174,7 @@ public class Ikkuna {
     /**
      *
      */
-    public void ajanPaivittaja() {
+    public void aloitaAjanlasku() {
         kello.aikaTimer();
     }
 
@@ -189,14 +190,7 @@ public class Ikkuna {
      *
      */
     public void rajahti() {
-        String stringi;
-        if (k != 8) {
-            stringi = "                Osuit miinaan...\nKokeile uudestaan painamalla reset.\n" + "                 Aikasi: " + kello.peliPaattyi();
-        } else {
-            stringi = "                Osuit miinaan...\nKokeile uudestaan painamalla reset.";
-        }
-
-        JOptionPane.showMessageDialog(jfraami, stringi, "Nyt kävi köpelösti", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("miina"));
+       popup.rajahti();
     }
 
     /**
@@ -204,31 +198,14 @@ public class Ikkuna {
      * @throws IOException
      */
     public void voitit() throws IOException {
-        String stringi;
-        if (k != 8) {
-            String aikasi = kello.peliPaattyi();
-            stringi = "                Onnistuit!\n       Haravoit kaikki miinat!\n" + "              Aikasi: " + aikasi;
-            String s = (String)JOptionPane.showInputDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"), null, "nimesi");
-            if (l == 16) {
-                keskitasotaulu.lisaa(s, aikasi);
-            } else {
-                vaikeataulu.lisaa(s, aikasi);
-            }
-        } else {
-            stringi = "              Onnistuit!\n     Haravoit kaikki miinat!";
-            JOptionPane.showMessageDialog(jfraami, stringi, "Voitit!", JOptionPane.INFORMATION_MESSAGE, kuvaluokka.getKuva("lippu"));
-        }
+        popup.voitit();
     }
     
     /**
      *
      */
     public void highscore() {
-        if (l ==  16) {
-            JOptionPane.showMessageDialog(jfraami, keskitasotaulu.kokoaTaulu(), "Top 10 Keskitaso", JOptionPane.PLAIN_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(jfraami, vaikeataulu.kokoaTaulu(), "Top 10 Vaikea", JOptionPane.PLAIN_MESSAGE);
-        }
+        popup.highscore();
     }
 
     // TESTEJÄ VARTEN OLEVAT METODIT
@@ -247,5 +224,17 @@ public class Ikkuna {
      */
     public int getL() {
         return l;
+    }
+    
+    public JFrame getFraami() {
+        return jfraami;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public JButton[][] getNapisto() {
+        return this.napisto;
     }
 }

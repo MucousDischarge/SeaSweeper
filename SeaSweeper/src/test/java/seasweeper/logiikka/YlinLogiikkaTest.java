@@ -9,13 +9,13 @@ import org.junit.Test;
  *
  * @author ez
  */
-public class YlempiLogiikkaTest {
-    private YlempiLogiikka ylempilogiikka;
+public class YlinLogiikkaTest {
+    private YlinLogiikka ylempilogiikka;
 
     /**
      *
      */
-    public YlempiLogiikkaTest() {
+    public YlinLogiikkaTest() {
     }
     
     /**

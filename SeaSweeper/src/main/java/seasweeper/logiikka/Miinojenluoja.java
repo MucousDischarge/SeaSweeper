@@ -7,8 +7,11 @@ import java.util.Random;
  * Luo miinat ja ripottelee ne ruudukolle satunnaisesti
  */
 public class Miinojenluoja {
+
     private Ruutu[][] ruudukko;
     private int miinojenmaara;
+    private int miinaY;
+    private int miinaX;
 
     /**
      *
@@ -24,25 +27,8 @@ public class Miinojenluoja {
     public void luoMiinat(int a, int b) {
         int w = 0;
 
-        int miinaY;
-        int miinaX;
-
         while (w < miinojenmaara) {
-
-            switch (miinojenmaara) {
-                case 10:
-                    miinaY = satunnainenLukuValilta(0, 7);
-                    miinaX = satunnainenLukuValilta(0, 7);
-                    break;
-                case 99:
-                    miinaY = satunnainenLukuValilta(0, 15);
-                    miinaX = satunnainenLukuValilta(0, 29);
-                    break;
-                default:
-                    miinaY = satunnainenLukuValilta(0, 15);
-                    miinaX = satunnainenLukuValilta(0, 15);
-                    break;
-            }
+            vaihdaXjaY();
 
             if (!(miinaY == a && miinaX == b)) {
                 if (!(ruudukko[miinaY][miinaX].onkoMiina())) {
@@ -51,6 +37,23 @@ public class Miinojenluoja {
                 }
             }
 
+        }
+    }
+
+    public void vaihdaXjaY() {
+        switch (miinojenmaara) {
+            case 10:
+                miinaY = satunnainenLukuValilta(0, 7);
+                miinaX = satunnainenLukuValilta(0, 7);
+                break;
+            case 99:
+                miinaY = satunnainenLukuValilta(0, 15);
+                miinaX = satunnainenLukuValilta(0, 29);
+                break;
+            default:
+                miinaY = satunnainenLukuValilta(0, 15);
+                miinaX = satunnainenLukuValilta(0, 15);
+                break;
         }
     }
 
@@ -68,7 +71,7 @@ public class Miinojenluoja {
 
         return satunnainenLuku;
     }
-    
+
     /**
      *
      * @param ruudukko
@@ -78,14 +81,12 @@ public class Miinojenluoja {
         this.ruudukko = ruudukko;
         this.miinojenmaara = miinojenmaara;
     }
-    
+
     // TESTEJÄ VARTEN OLEVAT METODIT
-    
     /**
      *
      * @return
      */
-        
     public Ruutu[][] getRuudukko() {
         return ruudukko;
     }

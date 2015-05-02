@@ -14,9 +14,9 @@ import java.util.Scanner;
  */
 public class HighScore {
 
-    private String[][] highscore;
+    private final String[][] highscore;
     private boolean muutoksiako;
-    private File tiedosto;
+    private final File tiedosto;
 
     /**
      *
@@ -44,28 +44,21 @@ public class HighScore {
      */
     public void lisaa(String nimi, String aika) throws FileNotFoundException, IOException {
         for (int i = 0; i < highscore.length; i++) {
-            String[] osat1 = highscore[i][1].split(":");
-            String[] osat2 = aika.split(":");
-            if (Integer.parseInt(osat1[0]) > Integer.parseInt(osat2[0])) {
-                if (eiLiianPitkaTaiLyhyt(nimi)) {
-                    highscore[i][0] = nimi;
-                } else {
-                    highscore[i][0] = uusiNimi(nimi);
-                }
-                highscore[i][1] = aika;
-                muutoksiako = true;
+            String[] vanha = highscore[i][1].split(":");
+            String[] uusi = aika.split(":");
+            int V0 = Integer.parseInt(vanha[0]);
+            int V1 = Integer.parseInt(vanha[1]);
+            int U0 = Integer.parseInt(uusi[0]);
+            int U1 = Integer.parseInt(uusi[1]);
+            
+            if (U0 < V0) {
+                lisaaSiistija(i, nimi, aika);
                 break;
             }
 
-            if (Integer.parseInt(osat1[0]) == Integer.parseInt(osat2[0])) {
-                if (Integer.parseInt(osat1[1]) > Integer.parseInt(osat2[1])) {
-                    if (eiLiianPitkaTaiLyhyt(nimi)) {
-                        highscore[i][0] = nimi;
-                    } else {
-                        highscore[i][0] = uusiNimi(nimi);
-                    }
-                    highscore[i][1] = aika;
-                    muutoksiako = true;
+            if (U0 == V0) {
+                if (U1 < V1) {
+                    lisaaSiistija(i, nimi, aika);
                     break;
                 }
             }
@@ -74,6 +67,17 @@ public class HighScore {
         if (muutoksiako) {
             kirjoita();
         }
+        muutoksiako = false;
+    }
+
+    public void lisaaSiistija(int i, String nimi, String aika) {
+        if (eiLiianPitkaTaiLyhyt(nimi)) {
+            highscore[i][0] = nimi;
+        } else {
+            highscore[i][0] = uusiNimi(nimi);
+        }
+        highscore[i][1] = aika;
+        muutoksiako = true;
     }
 
     /**
@@ -119,11 +123,7 @@ public class HighScore {
     }
 
     public boolean eiLiianPitkaTaiLyhyt(String nimi) {
-        if (!(nimi.equals("")) && nimi.length() <= 30) {
-            return true;
-        }
-
-        return false;
+        return !(nimi.equals("")) && nimi.length() <= 30;
     }
 
     public String uusiNimi(String nimi) {

@@ -1,4 +1,4 @@
-package seasweeper.gui;
+package seasweeper.logiikka;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
+import seasweeper.gui.Ikkuna;
 
 /**
  *
@@ -13,7 +14,7 @@ import javax.swing.Timer;
  */
 public class Kello {
 
-    private final Ikkuna ikkuna;
+    private final YlinLogiikka ylinlogiikka;
     private long alkuaika;
     private boolean ekako;
     private int aikaSekunneissa;
@@ -21,10 +22,10 @@ public class Kello {
 
     /**
      *
-     * @param ikkuna
+     * @param ylinlogiikka
      */
-    public Kello(Ikkuna ikkuna) {
-        this.ikkuna = ikkuna;
+    public Kello(YlinLogiikka ylinlogiikka) {
+        this.ylinlogiikka = ylinlogiikka;
         this.aikaSekunneissa = 0;
     }
 
@@ -37,7 +38,7 @@ public class Kello {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     aikaSekunneissa++;
-                    ikkuna.paivitaAika(aika());
+                    ylinlogiikka.paivitaAika(aika());
                 } catch (IOException ex) {
                     Logger.getLogger(Kello.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -52,29 +53,31 @@ public class Kello {
      * @return
      */
     public String aika() {
-        int intMinuutit = aikaSekunneissa / 60;
-        boolean taysi = false;
         String stringMinuutit;
         String stringSekunnit;
-        if (intMinuutit < 10) {
-            stringMinuutit = "0" + intMinuutit;
-        } else if (intMinuutit > 60) {
+        
+        if (aikaSekunneissa / 60 > 60)   {
             stringMinuutit = "60";
-            taysi = true;
         } else {
-            stringMinuutit = Integer.toString(intMinuutit);
+            stringMinuutit = aikaSiistija(aikaSekunneissa / 60);
         }
-        int intSekunnit = aikaSekunneissa % 60;
-        if (taysi) {
+
+        if (stringMinuutit.equals("60")) {
             stringSekunnit = "00";
-        } else if (intSekunnit < 10) {
-            stringSekunnit = "0" + intSekunnit;
         } else {
-            stringSekunnit = Integer.toString(intSekunnit);
+            stringSekunnit = aikaSiistija(aikaSekunneissa % 60);
         }
         return stringMinuutit + ":" + stringSekunnit;
     }
-    
+
+    public String aikaSiistija(int puolikas) {
+        if (puolikas < 10) {
+            return "0" + puolikas;
+        } else {
+            return Integer.toString(puolikas);
+        }
+    }
+
     /**
      *
      * @return
@@ -83,7 +86,7 @@ public class Kello {
         ajastin.stop();
         return aika();
     }
-    
+
     /**
      *
      */

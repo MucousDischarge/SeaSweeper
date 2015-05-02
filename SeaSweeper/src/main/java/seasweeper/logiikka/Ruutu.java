@@ -3,10 +3,10 @@ package seasweeper.logiikka;
 import javax.swing.JButton;
 
 /**
- * K
  * Ruutu tietää ominaisuutensa, ja on osa ruudukkoa eli loogista pelilautaa
  */
 public class Ruutu {
+    private final JButton nappi;
     private boolean onkoMiina;
     private boolean onkoRaivattu;
     private boolean onkoLippu;
@@ -16,16 +16,14 @@ public class Ruutu {
      * @param nappi
      */
     public Ruutu(JButton nappi) {
+        this.nappi = nappi;
         this.onkoMiina = false;
         this.onkoRaivattu = false;
         this.onkoLippu = false;
     }
     
-    /**
-     *
-     */
-    public void laitaMiina() {
-        this.onkoMiina = true;
+    public Boolean onkoNappi(Object object) {
+        return this.nappi == object;
     }
     
     /**
@@ -46,17 +44,24 @@ public class Ruutu {
     
     /**
      *
-     */
-    public void onRaivattu() {
-        onkoRaivattu = true;
-    }
-    
-    /**
-     *
      * @return
      */
     public boolean onkoLippu() {
         return onkoLippu;
+    }
+    
+    /**
+     *
+     */
+    public void laitaMiina() {
+        this.onkoMiina = true;
+    }
+    
+    /**
+     *
+     */
+    public void onRaivattu() {
+        onkoRaivattu = true;
     }
     
     /**

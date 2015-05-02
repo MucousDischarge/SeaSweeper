@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import seasweeper.logiikka.YlempiLogiikka;
+import seasweeper.logiikka.YlinLogiikka;
 
 /**
  *
@@ -14,15 +14,14 @@ import seasweeper.logiikka.YlempiLogiikka;
  */
 public class Menukuuntelija implements ActionListener {
 
-    private final YlempiLogiikka ylempilogiikka;
-    private Ikkuna ikkuna;
+    private final YlinLogiikka ylinlogiikka;
 
     /**
      *
-     * @param ylempilogiikka
+     * @param ylinlogiikka
      */
-    public Menukuuntelija(YlempiLogiikka ylempilogiikka) {
-        this.ylempilogiikka = ylempilogiikka;
+    public Menukuuntelija(YlinLogiikka ylinlogiikka) {
+        this.ylinlogiikka = ylinlogiikka;
     }
 
     /**
@@ -43,10 +42,10 @@ public class Menukuuntelija implements ActionListener {
                 ongelma(16, 30);
                 break;
             case "HighScore":
-                ylempilogiikka.highscoreIkkuna();
+                ylinlogiikka.highscoreIkkuna();
                 break;
             default:
-                ylempilogiikka.resetUusiRuudukko();
+                ylinlogiikka.resetUusiRuudukko();
                 break;
         }
 
@@ -60,9 +59,8 @@ public class Menukuuntelija implements ActionListener {
      * @throws URISyntaxException
      */
     public void ikkunanLuonti(int a, int b) throws IOException, URISyntaxException {
-        this.ikkuna = ylempilogiikka.getIkkuna();
-        ikkuna.getFraami().dispose();
-        ylempilogiikka.uusiIkkuna(true, a, b);
+        ylinlogiikka.ikkunaDispose();
+        ylinlogiikka.uusiIkkuna(a, b);
     }
 
     /**
