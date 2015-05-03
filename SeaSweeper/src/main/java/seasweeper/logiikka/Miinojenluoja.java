@@ -39,7 +39,7 @@ public class Miinojenluoja {
     /**
      * While-loopin sisällä miinojen generoimiseen satunnaisia sijainti antava metodi.
      */
-    public void vaihdaXjaY() {
+    private void vaihdaXjaY() {
         switch (miinojenmaara) {
             case 10:
                 miinaY = satunnainenLukuValilta(0, 7);
@@ -64,7 +64,7 @@ public class Miinojenluoja {
      * @param maksimi Halutun välin maksimiluku
      * @return Satunnainen luku halutulta väliltä.
      */
-    public static int satunnainenLukuValilta(int minimi, int maksimi) {
+    private static int satunnainenLukuValilta(int minimi, int maksimi) {
 
         Random randomi = new Random();
 
@@ -82,15 +82,5 @@ public class Miinojenluoja {
     public void setRuudukko(Ruutu[][] ruudukko, int miinojenmaara) {
         this.ruudukko = ruudukko;
         this.miinojenmaara = miinojenmaara;
-    }
-
-    // TESTEJÄ VARTEN OLEVAT METODIT
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public Ruutu[][] getRuudukko() {
-        return ruudukko;
     }
 }

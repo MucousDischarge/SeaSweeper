@@ -48,7 +48,7 @@ public class Raivaaja {
      * @param luku Käytetään tarkistamaan onko ruutu kelvollinen rekursioraivaukselle.
      * @param x Ruudun läheiset ruudut, joihin mahdollisesti leviää.
      */
-    public void rekursioRaivaus(int luku, int[][] x) {
+    private void rekursioRaivaus(int luku, int[][] x) {
         if (luku == 0) {
             for (int i = 0; i < 8; i++) {
                 if (leviaakoSinne(x[i][0], x[i][1])) {
@@ -65,7 +65,7 @@ public class Raivaaja {
      * @param b Leviämiskohteena olevan ruudun leveyssijainti.
      * @return Onko kelvollinen leviamiselle.
      */
-    public boolean leviaakoSinne(int a, int b) {
+    private boolean leviaakoSinne(int a, int b) {
         return tarkista(a, b) && !(ruudukko[a][b].onkoRaivattu());
     }
 
@@ -76,7 +76,7 @@ public class Raivaaja {
      * @param b Raivattavan ruudun leveyssijainti.
      * @return Palautetaan lista.
      */
-    public int[][] luoLista(int a, int b) {
+    private int[][] luoLista(int a, int b) {
         int[][] lista = new int[8][2];
 
         lista[0][0] = a;
@@ -106,7 +106,7 @@ public class Raivaaja {
      * @param x Ruudun läheisten ruutujen lista.
      * @return Palautetaan läheisten miinojen määrä.
      */
-    public int laskeLuku(int[][] x) {
+    private int laskeLuku(int[][] x) {
         int luku = 0;
 
         for (int i = 0; i < 8; i++) {
@@ -126,7 +126,7 @@ public class Raivaaja {
      * @param b Leveyssijainti.
      * @return Onko pelilaudan osa vai ei.
      */
-    public boolean tarkista(int a, int b) {
+    private boolean tarkista(int a, int b) {
         return a <= k - 1 && a >= 0 && b <= l - 1 && b >= 0;
     }
 

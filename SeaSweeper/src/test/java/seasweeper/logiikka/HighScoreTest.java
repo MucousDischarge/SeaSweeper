@@ -29,44 +29,26 @@ public class HighScoreTest {
     public void testLisaa() throws Exception {
     }
 
-    /**
-     * Test of lisaaSiistija method, of class HighScore.
-     */
     @Test
     public void testLisaaSiistija() {
     }
-
-    /**
-     * Test of lue method, of class HighScore.
-     */
+    
     @Test
     public void testLue() throws Exception {
     }
 
-    /**
-     * Test of kirjoita method, of class HighScore.
-     */
     @Test
     public void testKirjoita() throws Exception {
     }
 
-    /**
-     * Test of kokoaTaulu method, of class HighScore.
-     */
     @Test
     public void testKokoaTaulu() {
     }
 
-    /**
-     * Test of eiLiianPitkaTaiLyhyt method, of class HighScore.
-     */
     @Test
     public void testEiLiianPitkaTaiLyhyt() {
     }
 
-    /**
-     * Test of uusiNimi method, of class HighScore.
-     */
     @Test
     public void testUusiNimi() {
     }

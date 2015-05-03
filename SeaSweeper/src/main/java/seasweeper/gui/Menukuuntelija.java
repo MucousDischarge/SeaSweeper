@@ -84,6 +84,4 @@ public class Menukuuntelija implements ActionListener {
             Logger.getLogger(Menukuuntelija.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    // TESTEJÄ VARTEN OLEVAT METODIT
 }

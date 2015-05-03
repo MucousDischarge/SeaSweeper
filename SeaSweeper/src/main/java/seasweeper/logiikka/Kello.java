@@ -54,7 +54,7 @@ public class Kello {
      * 
      * @return String-pätkä ajasta.
      */
-    public String aika() {
+    private String aika() {
         String stringMinuutit;
         String stringSekunnit;
         
@@ -78,7 +78,7 @@ public class Kello {
      * @param puolikas Toinen osa aikaa.
      * @return Ajan puolikas, jossa on aina kaksi numeroa.
      */
-    public String aikaSiistija(int puolikas) {
+    private String aikaSiistija(int puolikas) {
         if (puolikas < 10) {
             return "0" + puolikas;
         } else {

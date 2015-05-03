@@ -81,7 +81,7 @@ public class HighScore {
      * @param nimi Uusi nimi. 
      * @param aika Uusi aika.
      */
-    public void lisaaSiistija(int i, String nimi, String aika) {
+    private void lisaaSiistija(int i, String nimi, String aika) {
         if (eiLiianPitkaTaiLyhyt(nimi)) {
             highscore[i][0] = nimi;
         } else {
@@ -116,7 +116,7 @@ public class HighScore {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void kirjoita() throws FileNotFoundException, IOException {
+    private void kirjoita() throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(tiedosto.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(kokoaTaulu());
@@ -142,7 +142,7 @@ public class HighScore {
      * @param nimi Annettu nimi.
      * @return Onko vai ei sopiva nimi.
      */
-    public boolean eiLiianPitkaTaiLyhyt(String nimi) {
+    private boolean eiLiianPitkaTaiLyhyt(String nimi) {
         return !(nimi.equals("")) && nimi.length() <= 30;
     }
 
@@ -152,7 +152,7 @@ public class HighScore {
      * @param nimi Annettu nimi.
      * @return Muokattu nimi.
      */
-    public String uusiNimi(String nimi) {
+    private String uusiNimi(String nimi) {
         if (nimi.equals("")) {
             return "anon";
         } else {

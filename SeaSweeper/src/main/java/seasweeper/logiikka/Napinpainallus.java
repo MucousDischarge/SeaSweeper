@@ -62,7 +62,7 @@ public class Napinpainallus {
      * @param a Klikatun napin korkeussijainti.
      * @param b Klikatun napin leveyssijainti.
      */
-    public void vasenKlikkaus(int a, int b) {
+    private void vasenKlikkaus(int a, int b) {
         ensimmainenKlikkaus(a, b);
 
         if (ruudukko[a][b].onkoMiina()) {
@@ -83,7 +83,7 @@ public class Napinpainallus {
      * @param a Klikatun napin korkeussijainti.
      * @param b Klikatun napin leveyssijainti.
      */
-    public void ensimmainenKlikkaus(int a, int b) {
+    private void ensimmainenKlikkaus(int a, int b) {
         if (onkoEnsimmainenKlikkaus) {
             if (k != 8 ) {
                 ylinlogiikka.startKello();
@@ -100,7 +100,7 @@ public class Napinpainallus {
      * @param a Klikatun napin korkeussijainti.
      * @param b Klikatun napin leveyssijainti.
      */
-    public void oikeaKlikkaus(int a, int b) {
+    private void oikeaKlikkaus(int a, int b) {
         if (!(ruudukko[a][b].onkoRaivattu())) {
             if (ruudukko[a][b].onkoLippu()) {
                 ruudukko[a][b].kuva("tummavesi");
@@ -117,7 +117,7 @@ public class Napinpainallus {
      * 
      * @throws IOException
      */
-    public void tarkistetaanVoitettiinko() throws IOException {
+    private void tarkistetaanVoitettiinko() throws IOException {
         if (voitontarkastaja.voitettiinko()) {
             ylinlogiikka.voitit();
             this.pelipaattynyt = true;
@@ -169,41 +169,12 @@ public class Napinpainallus {
         raivattujenmaara++;
     }
 
-    // TESTEJÄ VARTEN OLEVAT METODIT
-
     /**
-     * Testimetodi.
+     * Erään harvinaisen ongelman ratkaisemiseen tarkoitettu tarkistus.
      * 
-     * @return
+     * @return Onko lautaa klikattu vielä.
      */
         public boolean getOnkoEnsimmainenKlikkaus() {
         return onkoEnsimmainenKlikkaus;
-    }
-
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public int getK() {
-        return k;
-    }
-
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public int getL() {
-        return l;
-    }
-
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public boolean getPeliPaattynyt() {
-        return pelipaattynyt;
     }
 }

@@ -75,7 +75,7 @@ public class Ikkuna {
     /**
      * Asetetaan fraami perusasetukset.
      */
-    public final void fraamiPerusasetukset() {
+    private void fraamiPerusasetukset() {
         jfraami.setSize((l * 22), (k * 25));
         jfraami.setTitle("SeaSweeper");
         jfraami.setLocationRelativeTo(null);
@@ -87,7 +87,7 @@ public class Ikkuna {
     /**
      * Asetetaan fraamiin menuvalikko.
      */
-    public final void asetaMenu() {
+    private void asetaMenu() {
         JMenuBar valikko = new JMenuBar();
         asetaVaikeusMenu(valikko);
         asetaMuutMenuItemit(valikko);
@@ -98,7 +98,7 @@ public class Ikkuna {
      * 
      * @param valikko Menuvalikko, johon asetetaan vaikeusvalinta.
      */
-    public void asetaVaikeusMenu(JMenuBar valikko) {
+    private void asetaVaikeusMenu(JMenuBar valikko) {
         JMenu vaikeusvalinta = new JMenu("Vaikeus");
         valikko.add(vaikeusvalinta);
 
@@ -119,7 +119,7 @@ public class Ikkuna {
      * 
      * @param valikko Menuvalikko, johon halutut toiminnot asetetaan.
      */
-    public void asetaMuutMenuItemit(JMenuBar valikko) {
+    private void asetaMuutMenuItemit(JMenuBar valikko) {
         JMenuItem reset = new JMenuItem("Reset");
         valikko.add(reset);
         reset.addActionListener(menukuuntelija);
@@ -242,42 +242,5 @@ public class Ikkuna {
      */
     public void highscore() {
         popup.highscore();
-    }
-
-    // TESTEJÄ VARTEN OLEVAT METODIT
-
-    /**
-     * Testimetodi
-     * 
-     * @return
-     */
-    public int getK() {
-        return k;
-    }
-
-    /**
-     * Testimetodi.
-     * @return
-     */
-    public int getL() {
-        return l;
-    }
-    
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public JFrame getFraami() {
-        return jfraami;
-    }
-    
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-    public JButton[][] getNapisto() {
-        return this.napisto;
     }
 }

@@ -23,7 +23,6 @@ public class MiinojenluojaTest {
     public MiinojenluojaTest() throws IOException, URISyntaxException {
         this.miinojenluoja = new Miinojenluoja();
         this.ylinlogiikka = new YlinLogiikka();
-        this.ruutu = new Ruutu(new JButton(), ylinlogiikka.getIkkuna());
     }
     
     /**
@@ -39,11 +38,20 @@ public class MiinojenluojaTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    
-    /**
-     *
-     */
+
     @Test
-    public void testaaRuudukko() {
+    public void testLuoMiinat() {
+        int a = 0;
+        int b = 0;
+        Miinojenluoja instance = new Miinojenluoja();
+        instance.luoMiinat(a, b);
+    }
+
+    @Test
+    public void testSetRuudukko() {
+        Ruutu[][] ruudukko = null;
+        int miinojenmaara = 0;
+        Miinojenluoja instance = new Miinojenluoja();
+        instance.setRuudukko(ruudukko, miinojenmaara);
     }
 }

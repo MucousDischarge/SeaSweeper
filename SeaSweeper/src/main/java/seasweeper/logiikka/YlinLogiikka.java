@@ -18,7 +18,7 @@ public final class YlinLogiikka {
     private final HighScore keskitasotaulu;
     private final HighScore vaikeataulu;
     private final Kello kello;
-    private Ikkuna ikkuna;
+    private final Ikkuna ikkuna;
     private Ruutu[][] ruudukko;
     private int k;
     private int l;
@@ -36,7 +36,7 @@ public final class YlinLogiikka {
         this.keskitasotaulu = new HighScore(false);
         this.vaikeataulu = new HighScore(true);
         this.kello = new Kello(this);
-        uusiIkkuna(true, 16, 16);
+        this.ikkuna = uusiIkkuna(true, 16, 16);
     }
 
     /**
@@ -47,33 +47,37 @@ public final class YlinLogiikka {
      * @param ekako Tarkistetaan onko ensimmäinen kutsukerta.
      * @param a Pelilaudan korkeus.
      * @param b Pelilaudan leveys.
+     * @return 
      * @throws IOException
      * @throws URISyntaxException
      */
-    public void uusiIkkuna(boolean ekako, int a, int b) throws IOException, URISyntaxException {
+    public Ikkuna uusiIkkuna(boolean ekako, int a, int b) throws IOException, URISyntaxException {
+        Ikkuna akkuna;
+        if (ekako) {
+            akkuna = new Ikkuna(menukuuntelija, lautakuuntelija, a, b, keskitasotaulu, vaikeataulu, kello);
+        } else {
+            if (k != 8) {
+                ikkuna.nollaaAika();
+            }
+            ikkuna.newFraami(a, b);
+            akkuna = ikkuna;
+        }
         k = a;
         l = b;
-        if (ekako) {
-            ikkuna = new Ikkuna(menukuuntelija, lautakuuntelija, k, l, keskitasotaulu, vaikeataulu, kello);
-        } else {
-            ikkuna.newFraami(k, l);
-        }
-        uusiRuudukko(k, l);
-        ikkuna.visible();
+        uusiRuudukko(akkuna);
+        akkuna.visible();
+        return akkuna;
     }
 
     /**
      * Piirretään uusi ruudukko ruuduista ja jbuttoneista.
      * 
-     * @param a Pelilaudan korkeus.
-     * @param b Pelilaudan leveys.
      */
-    public void uusiRuudukko(int a, int b) {
-        this.ruudukko = new Ruutu[a][b];
-
-        for (int i = 0; i < a; i++) {
-            for (int j = 0; j < b; j++) {
-                this.ruudukko[i][j] = new Ruutu(ikkuna.luoNappi(i, j), ikkuna);
+    private void uusiRuudukko(Ikkuna akkuna) {
+        this.ruudukko = new Ruutu[k][l];
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < l; j++) {
+                this.ruudukko[i][j] = new Ruutu(akkuna.luoNappi(i, j), akkuna);
             }
         }
         napinpainallus.setArvot(ruudukko, k, l);
@@ -89,7 +93,7 @@ public final class YlinLogiikka {
                 ikkuna.nollaaAika();
             }
 
-            uusiRuudukko(k, l);
+            uusiRuudukko(ikkuna);
             ikkuna.piirraUudelleen();
         }
     }
@@ -145,17 +149,5 @@ public final class YlinLogiikka {
      */
     public void paivitaAika(String aika) throws IOException {
         ikkuna.paivitaAika(aika);
-    }
-
-    // TESTEJÄ VARTEN OLEVAT METODIT
-    
-    /**
-     * Testimetodi.
-     * 
-     * @return
-     */
-        
-    public Ikkuna getIkkuna() {
-        return ikkuna;
     }
 }

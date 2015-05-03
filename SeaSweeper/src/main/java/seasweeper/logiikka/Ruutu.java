@@ -103,6 +103,4 @@ public class Ruutu {
     public void kuva(String kuva) {
         ikkuna.kuva(this.nappi, kuva);
     }
-    
-    // TESTEJÄ VARTEN OLEVAT METODIT
 }
