@@ -103,4 +103,8 @@ Loin Javadocit.
 * 3 tuntia käytetty.
 
 ###03.04.2015
-Koitin saada testejä tehtyä unisena, mutta kiinnitin lähinnä huomiota ohjelman rakenteeseen, ja muokkailin sitä turhuuksiin asti... Loin Fraami- ja Käynnistäjä-luokat. Vietin pitkän tovin asennellessa Eclipseä ja siihen Randoopia. Netbeansin Randoop ei halunnut toimia. Loin pohjan lopullisesta luokkakaaviosta. Jostain syystä uuden JFramen luonti on hidastunut, vaikka ei juuri mitään tehty kuin laitettu vain tiedot omaan luokkaansa?
+Koitin saada testejä tehtyä unisena, mutta kiinnitin lähinnä huomiota ohjelman rakenteeseen, ja muokkailin sitä turhuuksiin asti... Loin Fraami-luokan, joka yksinkertaisesti luo ja määrittelee fraamin. Pieni lisäys mainiin auttoi huomattavasti testien kanssa. Ennen ylimmän logiikan konstruktorissa oli pelin käynnistys, mutta luokka sisältää paljon yhteyksiä, ja sitä piti usein kutsua testeissä. Tämä johtii tulvaan uusia ikkunoita. Nyt main luo ylimmän logiikan ja kutsuu tämän metodia, joka aloittaa pelin. Vietin pitkän tovin asennellessa Eclipseä ja siihen Randoopia. Netbeansin Randoop ei halunnut toimia. Loin pohjan lopullisesta luokkakaaviosta. Jostain syystä uuden JFramen luonti on hidastunut, vaikka ei juuri mitään tehty kuin laitettu vain tiedot omaan luokkaansa?
+
+Kokeilin .jaria, ja ei se tietenkään toiminut (olen todella yllättynyt jos jokin ikinä toimii heti). Sanoo, ettei löydä mainia. Oikeassa kansiossa ollaan, kutsuen oikealla käskyllä ja kokonaisella tiedostonimellä.
+
+* 8 tuntia käytetty.
