@@ -64,7 +64,7 @@ public class Menukuuntelija implements ActionListener {
      */
     public void ikkunanLuonti(int a, int b) throws IOException, URISyntaxException {
         ylinlogiikka.ikkunaDispose();
-        ylinlogiikka.uusiIkkuna(false, a, b);
+        ylinlogiikka.uusiFraami(false, a, b);
     }
 
     /**

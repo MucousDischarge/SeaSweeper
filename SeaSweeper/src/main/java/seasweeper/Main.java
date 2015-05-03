@@ -18,6 +18,7 @@ public class Main {
      * @throws URISyntaxException
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        YlinLogiikka peli = new YlinLogiikka();
+        YlinLogiikka ylinlogiikka = new YlinLogiikka();
+        ylinlogiikka.uusiFraami(true, 16, 16);
     }
 }

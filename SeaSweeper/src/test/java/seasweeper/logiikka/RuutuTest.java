@@ -21,7 +21,7 @@ public class RuutuTest {
      */
     public RuutuTest() throws IOException, URISyntaxException {
         this.ylinlogiikka = new YlinLogiikka();
-        this.ruutu = new Ruutu(new JButton(), ylinlogiikka.uusiIkkuna(true, 16, 16));
+        this.ruutu = new Ruutu(new JButton(), null);
     }
     
     /**

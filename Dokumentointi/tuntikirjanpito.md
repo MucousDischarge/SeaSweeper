@@ -101,3 +101,6 @@ Selkeytin ohjelmaa, ja jaoin toimintoja pienempiin osiin.
 Loin Javadocit.
 
 * 3 tuntia käytetty.
+
+###03.04.2015
+Koitin saada testejä tehtyä unisena, mutta kiinnitin lähinnä huomiota ohjelman rakenteeseen, ja muokkailin sitä turhuuksiin asti... Loin Fraami- ja Käynnistäjä-luokat. Vietin pitkän tovin asennellessa Eclipseä ja siihen Randoopia. Netbeansin Randoop ei halunnut toimia. Loin pohjan lopullisesta luokkakaaviosta. Jostain syystä uuden JFramen luonti on hidastunut, vaikka ei juuri mitään tehty kuin laitettu vain tiedot omaan luokkaansa?

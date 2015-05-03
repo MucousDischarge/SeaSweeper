@@ -27,7 +27,6 @@ public class IkkunaTest {
      */
     public IkkunaTest() throws IOException, URISyntaxException {
         this.ylinlogiikka = new YlinLogiikka();
-        ikkuna = ylinlogiikka.uusiIkkuna(true, 16, 16);
     }
     
     /**

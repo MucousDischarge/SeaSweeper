@@ -1,17 +1,22 @@
 package seasweeper.gui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import seasweeper.logiikka.YlinLogiikka;
 
 /**
  *
  * @author ez
  */
 public class LautakuuntelijaTest {
+    private YlinLogiikka ylinlogiikka;
 
-    public LautakuuntelijaTest() {
+    public LautakuuntelijaTest() throws IOException, URISyntaxException {
+        this.ylinlogiikka = new YlinLogiikka();
     }
 
     @BeforeClass

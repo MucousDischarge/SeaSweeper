@@ -67,9 +67,9 @@ public class Napinpainallus {
 
         if (ruudukko[a][b].onkoMiina()) {
             voitontarkastaja.havittiin();
+            this.pelipaattynyt = true;
             ylinlogiikka.rajahti();
             //kaikki miinat paljastuvat ruudulla
-            this.pelipaattynyt = true;
         } else {
             raivaaja.raivaus(a, b);
             //ruudun sisältö paljastetaan, ja tyhjän tapauksessa leviää
@@ -119,8 +119,8 @@ public class Napinpainallus {
      */
     private void tarkistetaanVoitettiinko() throws IOException {
         if (voitontarkastaja.voitettiinko()) {
-            ylinlogiikka.voitit();
             this.pelipaattynyt = true;
+            ylinlogiikka.voitit();
         }
     }
     

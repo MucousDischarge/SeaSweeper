@@ -24,8 +24,7 @@ public class Ikkuna {
     private final HighScore keskitasotaulu;
     private final HighScore vaikeataulu;
     private final Popup popup;
-    private int k;
-    private int l;
+    private Fraami fraami;
     private JFrame jfraami;
     private JButton napisto[][];
     private JMenuItem aika;
@@ -36,105 +35,72 @@ public class Ikkuna {
      * 
      * @param menukuuntelija Ylimmän logiikan luoma Menukuuntelija.
      * @param lautakuuntelija Ylimmän logiikan luoma Lautakuuntelija.
-     * @param k Ylemmän logiikan tämänhetkinen laudan korkeus.
-     * @param l Ylemmän logiikan tämänhetkinen laudan leveys.
      * @param keskitasotaulu Ylimmän logiikan luoma keskitasoarvoinen HighScore.
      * @param vaikeataulu Ylimmän logiikan luoma vaikeatasoinen HighScore.
      * @param kello Ylimmän logiikan luoma Kello.
      * @throws IOException
      * @throws URISyntaxException
      */
-    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, int k, int l, HighScore keskitasotaulu, HighScore vaikeataulu, Kello kello) throws IOException, URISyntaxException {
+    public Ikkuna(Menukuuntelija menukuuntelija, Lautakuuntelija lautakuuntelija, HighScore keskitasotaulu, HighScore vaikeataulu, Kello kello) throws IOException, URISyntaxException {
         this.menukuuntelija = menukuuntelija;
         this.lautakuuntelija = lautakuuntelija;
         this.kuvaluokka = new Kuvaluokka();
         this.kello = kello;
         this.keskitasotaulu = keskitasotaulu;
         this.vaikeataulu = vaikeataulu;
-        this.popup = new Popup(kello, keskitasotaulu, vaikeataulu, kuvaluokka, l);
-        newFraami(k, l);
+        this.popup = new Popup(kello, keskitasotaulu, vaikeataulu, kuvaluokka);
+        this.fraami = new Fraami(this);
     }
     
     /**
-     * Jatkuvien uusien ikkunaluokkien luomisen sijaan luodaan tarvittaessa
-     * vain uusi fraami.
+     * Asennetaan fraami.
+     * 
+     * @param a Laudan korkeus.
+     * @param b Laudan leveys.
+     */
+    public void setFraami(int a, int b) {
+        this.jfraami = uusiFraami(a, b);
+    }
+    
+    /**
+     * Haetaan fraami fraamiluokasta.
+     * 
+     * @param k Laudan korkeus.
+     * @param l Laudan leveys.
+     * @return Palautetaan uunituore fraami.
+     */
+    public JFrame uusiFraami(int k, int l) {
+        return fraami.getFraami(k, l);
+    }
+    
+    /**
+     * Asetetaan popupin arvot.
+     * 
+     * @param jfraami 
+     * @param l
+     */
+    public void setPopup(JFrame jfraami, int l) {
+        popup.setArvot(jfraami, l);
+    }
+    
+    /**
+     * Annetaan menukuuntelija fraamiluokalle.
+     * 
+     * @return Menukuuntelija.
+     */
+    public Menukuuntelija getMenukuuntelija() {
+        return menukuuntelija;
+    }
+    
+    /**
+     * Luodaan napisto.
      * 
      * @param k Laudan korkeus.
      * @param l Laudan leveys.
      */
-    public void newFraami(int k, int l) {
-        this.k = k;
-        this.l = l;
+    public void napisto(int k, int l) {
         this.napisto = new JButton[k][l];
-        this.jfraami = new JFrame();
-        popup.setArvot(this.jfraami, l);
-        fraamiPerusasetukset();
-        asetaMenu();
     }
-    
-    /**
-     * Asetetaan fraami perusasetukset.
-     */
-    private void fraamiPerusasetukset() {
-        jfraami.setSize((l * 22), (k * 25));
-        jfraami.setTitle("SeaSweeper");
-        jfraami.setLocationRelativeTo(null);
-        jfraami.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jfraami.setResizable(false);
-        jfraami.setLayout(new GridLayout(k, l));
-    }
-    
-    /**
-     * Asetetaan fraamiin menuvalikko.
-     */
-    private void asetaMenu() {
-        JMenuBar valikko = new JMenuBar();
-        asetaVaikeusMenu(valikko);
-        asetaMuutMenuItemit(valikko);
-    }
-    
-    /**
-     * Asetetaan fraamin menuvalikkoon vaikeusvalintavalikko.
-     * 
-     * @param valikko Menuvalikko, johon asetetaan vaikeusvalinta.
-     */
-    private void asetaVaikeusMenu(JMenuBar valikko) {
-        JMenu vaikeusvalinta = new JMenu("Vaikeus");
-        valikko.add(vaikeusvalinta);
-
-        JMenuItem helppo = new JMenuItem("Helppo");
-        vaikeusvalinta.add(helppo);
-        JMenuItem keskitaso = new JMenuItem("Keskitaso");
-        vaikeusvalinta.add(keskitaso);
-        JMenuItem vaikea = new JMenuItem("Vaikea");
-        vaikeusvalinta.add(vaikea);
-
-        helppo.addActionListener(menukuuntelija);
-        keskitaso.addActionListener(menukuuntelija);
-        vaikea.addActionListener(menukuuntelija);
-    }
-    
-    /**
-     * Asetetaan menuvalikkoon muut halutut toiminnot.
-     * 
-     * @param valikko Menuvalikko, johon halutut toiminnot asetetaan.
-     */
-    private void asetaMuutMenuItemit(JMenuBar valikko) {
-        JMenuItem reset = new JMenuItem("Reset");
-        valikko.add(reset);
-        reset.addActionListener(menukuuntelija);
-
-        aika = new JMenuItem("00:00");
-        highscore = new JMenuItem("HighScore");
-
-        if (k != 8) {
-            valikko.add(aika);
-            highscore.addActionListener(menukuuntelija);
-            valikko.add(highscore);
-        }
-
-        jfraami.setJMenuBar(valikko);
-    } 
 
     /**
      * Luodaan JButton, johon asetetaan kuuntelija ja aluksi tummavesikuva.
@@ -154,8 +120,10 @@ public class Ikkuna {
     /**
      * Uusien ruudukkojen luomisen yhteydessä kutsutaan tämä metodi, jossa
      * poistetaan fraamilta kaikki vanhat JButtonit.
+     * @param k
+     * @param l
      */
-    public void poistaNapit() {
+    public void poistaNapit(int k, int l) {
         for (int a = 0; a < k; a++) {
             for (int b = 0; b < l; b++) {
                 jfraami.remove(this.napisto[a][b]);
@@ -203,7 +171,7 @@ public class Ikkuna {
      * @throws IOException
      */
     public void paivitaAika(String uusiAika) throws IOException {
-        aika.setText(uusiAika);
+        fraami.getAikaMenu().setText(uusiAika);
     }
 
     /**
@@ -218,7 +186,7 @@ public class Ikkuna {
      */
     public void nollaaAika() {
         kello.nollaaAika();
-        aika.setText("00:00");
+        fraami.getAikaMenu().setText("00:00");
     }
 
     /**
